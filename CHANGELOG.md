@@ -9,4 +9,4 @@
 
 # 0.0.0
 ## Add
-- Initialized codebase with Node.Js, React, Redux, Material-UI, Vite, and ESlint.
+- Initialized codebase with Node.js, React, Redux, Material-UI, Vite, and ESlint.
