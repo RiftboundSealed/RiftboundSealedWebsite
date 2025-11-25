@@ -2,9 +2,8 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { SetDto } from '@/types/set';
-import type { RootState } from '../store/store';
 
-const setsAdapter = createEntityAdapter<SetDto>();
+export const setsAdapter = createEntityAdapter<SetDto>();
 const initialState = setsAdapter.getInitialState();
 
 const setsSlice = createSlice({
@@ -29,12 +28,3 @@ const setsSlice = createSlice({
 export const { setsToggled, setsCleared } = setsSlice.actions;
 
 export default setsSlice.reducer;
-
-// Selectors
-const setsState = (state: RootState) => state.sets;
-
-export const {
-  selectAll: selectAllSetEntries,
-  selectById: selectSetEntryById,
-  selectEntities: selectSetEntities,
-} = setsAdapter.getSelectors(setsState);

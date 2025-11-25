@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import cardsReducer from '../slices/cardSlice';
+import deckReducer from '../slices/deckSlice';
 import exampleReducer from '../slices/exampleSlice';
 import poolReducer from '../slices/poolSlice';
 import setsReducer from '../slices/setSlice';
@@ -11,6 +12,7 @@ export const store = configureStore({
     sets: setsReducer,
     cards: cardsReducer,
     pool: poolReducer,
+    deck: deckReducer,
   },
 });
 
