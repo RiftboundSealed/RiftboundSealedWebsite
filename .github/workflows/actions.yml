@@ -101,7 +101,7 @@ jobs:
             exit 1
           fi
 
-          for h in "Breaking Change" "Add" "Remove" "Fix"; do
+          for h in "Breaking Change" "Add" "Remove" "Internal"; do
             if ! grep -q "^## $h" CHANGELOG.md; then
               echo "Missing '## $h' section under Template"
               exit 1
