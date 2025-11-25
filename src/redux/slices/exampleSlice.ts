@@ -1,3 +1,4 @@
+// DEPRECATED: Remove after example components are deleted.
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -32,7 +33,8 @@ export const exampleSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount, setText } = exampleSlice.actions;
+export const { increment, decrement, incrementByAmount, setText } =
+  exampleSlice.actions;
 
 // Selectors
 export const selectValue = (state: RootState) => state.example.value;
