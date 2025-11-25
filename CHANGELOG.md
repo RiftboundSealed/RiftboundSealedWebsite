@@ -2,10 +2,14 @@
 ## Breaking Change
 ## Add
 ## Remove
-## Fix
+## Internal
+- Established a core Redux state to the application
+- Deprecated many of the examples and marked them for removal
+- Changed semantic versioning from 'Fix' -> 'Internal' to make clear that a minor update is only when new features are added
 
 # 0.1.0
-## Add
+## Internal
+- (NOTE: This was supposed to be internal because no new features were added. Let this slide for now, but take note in the future)
 - Add GitHub Actions CI workflow with multi-stage checks (version/changelog validation, linting, type-checking, and building)
 - Introduce CHANGELOG.md with template structure for tracking project changes
 - Add PR template with Jira integration and standardized sections

@@ -2,8 +2,12 @@
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
+// 0) Constants
 const CHANGELOG_PATH = 'CHANGELOG.md';
-
+const BREAKING_CHANGE = 'Breaking Change';
+const ADD = 'Add';
+const REMOVE = 'Remove';
+const INTERNAL = 'Internal';
 const file = fs.readFileSync(CHANGELOG_PATH, 'utf8');
 
 // 1) Split into template block + rest (version history)
@@ -41,10 +45,10 @@ function extractBullets(template, heading) {
   return body.split(/\r?\n/).filter((line) => line.trim().startsWith('- '));
 }
 
-const breakingBullets = extractBullets(templateBlock, 'Breaking Change');
-const addBullets = extractBullets(templateBlock, 'Add');
-const removeBullets = extractBullets(templateBlock, 'Remove');
-const fixBullets = extractBullets(templateBlock, 'Fix');
+const breakingBullets = extractBullets(templateBlock, BREAKING_CHANGE);
+const addBullets = extractBullets(templateBlock, ADD);
+const removeBullets = extractBullets(templateBlock, REMOVE);
+const internalBullets = extractBullets(templateBlock, INTERNAL);
 
 // 2) Decide bump level
 let bump = null; // 'major' | 'minor' | 'patch' | null
@@ -53,7 +57,7 @@ if (breakingBullets.length > 0) {
   bump = 'major';
 } else if (addBullets.length > 0) {
   bump = 'minor';
-} else if (removeBullets.length > 0 || fixBullets.length > 0) {
+} else if (removeBullets.length > 0 || internalBullets.length > 0) {
   bump = 'patch';
 }
 
@@ -100,30 +104,30 @@ try {
 // 5) New empty template
 const newTemplateBlock = [
   '# Template',
-  '## Breaking Change',
-  '## Add',
-  '## Remove',
-  '## Fix',
+  `## ${BREAKING_CHANGE}`,
+  `## ${ADD}`,
+  `## ${REMOVE}`,
+  `## ${INTERNAL}`,
 ].join('\n');
 
 // 6) New version block built from bullets (newest at top)
 let newVersionBlock = `# ${newVersion}\n`;
 
 if (breakingBullets.length > 0) {
-  newVersionBlock += '## Breaking Change\n';
+  newVersionBlock += `## ${BREAKING_CHANGE}\n`;
   newVersionBlock += breakingBullets.join('\n') + '\n';
 }
 if (addBullets.length > 0) {
-  newVersionBlock += '## Add\n';
+  newVersionBlock += `## ${ADD}\n`;
   newVersionBlock += addBullets.join('\n') + '\n';
 }
 if (removeBullets.length > 0) {
-  newVersionBlock += '## Remove\n';
+  newVersionBlock += `## ${REMOVE}\n`;
   newVersionBlock += removeBullets.join('\n') + '\n';
 }
-if (fixBullets.length > 0) {
-  newVersionBlock += '## Fix\n';
-  newVersionBlock += fixBullets.join('\n') + '\n';
+if (internalBullets.length > 0) {
+  newVersionBlock += `## ${INTERNAL}\n`;
+  newVersionBlock += internalBullets.join('\n') + '\n';
 }
 
 const newFileContents = [
