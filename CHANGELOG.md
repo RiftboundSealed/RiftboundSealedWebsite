@@ -3,6 +3,9 @@
 ## Add
 ## Remove
 ## Internal
+
+# 0.1.1
+## Internal
 - Established a core Redux state to the application
 - Deprecated many of the examples and marked them for removal
 - Changed semantic versioning from 'Fix' -> 'Internal' to make clear that a minor update is only when new features are added
