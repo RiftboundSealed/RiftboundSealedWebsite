@@ -1,10 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import exampleReducer from '../slices/exampleSlice';
+import cardsReducer from '@/redux/slices/cardSlice';
+import deckReducer from '@/redux/slices/deckSlice';
+import exampleReducer from '@/redux/slices/exampleSlice';
+import poolReducer from '@/redux/slices/poolSlice';
+import setsReducer from '@/redux/slices/setSlice';
 
 export const store = configureStore({
   reducer: {
-    example: exampleReducer,
+    example: exampleReducer, // Remove after example is deleted
+    sets: setsReducer,
+    cards: cardsReducer,
+    pool: poolReducer,
+    deck: deckReducer,
   },
 });
 

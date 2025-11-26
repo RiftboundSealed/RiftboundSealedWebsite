@@ -8,7 +8,7 @@ const CardList: React.FC = () => {
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom>
-        Card Library
+        Card Library (REMOVE ONCE EXAMPLES ARE GONE)
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {mockCards.map((card) => (

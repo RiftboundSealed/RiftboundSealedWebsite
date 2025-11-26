@@ -1,3 +1,4 @@
+// DEPRECATE: Remove this file once the example is removed.
 import type { User } from '../types';
 
 export const mockUsers: User[] = [

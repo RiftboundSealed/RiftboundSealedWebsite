@@ -1,3 +1,4 @@
+// DEPRECATE THE FILE: Was only used in examples. Remove once examples are updated.
 // Common types used throughout the application
 
 export interface User {

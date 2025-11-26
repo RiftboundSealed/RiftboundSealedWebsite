@@ -34,7 +34,7 @@ export default defineConfig([
     settings: {
       // Make eslint-plugin-import understand TS path aliases like "@/…"
       'import/resolver': {
-        typescript: { project: './tsconfig.json' },
+        typescript: { project: './tsconfig.app.json' },
         node: { extensions: ['.ts', '.js'] },
       },
     },
