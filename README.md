@@ -59,9 +59,9 @@ Presentational components that focus on UI rendering. They are typically statele
 Smart components that connect to Redux state and handle business logic. They compose presentational components.
 
 ### Redux Structure
-- **store.ts**: Redux store setup that illustrates the core state
-- **hooks.ts**: Used to dispatch actions on the state
-- ***/**: Redux data types organized in "ducks" pattern that contains slices (holding the state, actions, and reducers), selectors, and thunks.
+- **store.ts**: Redux store setup that illustrates the core state.
+- **hooks.ts**: Exports typed versions of React Redux's `useDispatch` and `useSelector` hooks for use throughout the app with proper TypeScript typing.
+- ***/**: Feature-based folders following the 'ducks' pattern, each containing a slice (state, actions, and reducers), selectors, and optionally thunks for that feature.
 
 ### Mock Data
 Sample data used during development to simulate API responses and test UI components.
