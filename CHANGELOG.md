@@ -3,6 +3,7 @@
 ## Add
 ## Remove
 ## Internal
+- Reorganized Redux file structure to "ducks" pattern
 
 # 0.1.1
 ## Internal
