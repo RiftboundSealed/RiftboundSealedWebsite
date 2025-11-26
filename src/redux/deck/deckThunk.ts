@@ -1,10 +1,10 @@
 import { nanoid } from '@reduxjs/toolkit';
 
-import { selectCardEntryById } from '@/redux/selectors/cardSelectors';
-import { selectCardTypeCountInDeck } from '@/redux/selectors/deckSelectors';
-import { deckAddRejected, deckEntryAdded } from '@/redux/slices/deckSlice';
-import { poolEntryAddedToDeck } from '@/redux/slices/poolSlice';
-import type { RootState, AppDispatch } from '@/redux/store/store';
+import { selectCardEntryById } from '@/redux/cards/cardsSelectors';
+import { selectCardTypeCountInDeck } from '@/redux/deck/deckSelectors';
+import { deckAddRejected, deckEntryAdded } from '@/redux/deck/deckSlice';
+import { poolEntryAddedToDeck } from '@/redux/pool/poolSlice';
+import type { RootState, AppDispatch } from '@/redux/store';
 
 export const tryAddCardToDeck =
   (cardId: string, poolId: string | null) =>

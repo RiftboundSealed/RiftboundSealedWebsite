@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.1.2
+## Internal
+- Reorganized Redux file structure to "ducks" pattern
+
 # 0.1.1
 ## Internal
 - Established a core Redux state to the application

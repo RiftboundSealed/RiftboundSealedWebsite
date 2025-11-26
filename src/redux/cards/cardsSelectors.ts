@@ -1,5 +1,5 @@
-import { cardsAdapter } from '@/redux/slices/cardSlice';
-import type { RootState } from '@/redux/store/store';
+import { cardsAdapter } from '@/redux/cards/cardsSlice';
+import type { RootState } from '@/redux/store';
 
 const selectCardsState = (state: RootState) => state.cards;
 

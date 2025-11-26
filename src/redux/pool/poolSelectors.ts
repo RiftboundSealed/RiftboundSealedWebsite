@@ -3,9 +3,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import {
   selectCardEntities,
   selectCardEntryById,
-} from '@/redux/selectors/cardSelectors';
-import { poolAdapter } from '@/redux/slices/poolSlice';
-import type { RootState } from '@/redux/store/store';
+} from '@/redux/cards/cardsSelectors';
+import { poolAdapter } from '@/redux/pool/poolSlice';
+import type { RootState } from '@/redux/store';
 
 const selectPoolState = (state: RootState) => state.pool;
 

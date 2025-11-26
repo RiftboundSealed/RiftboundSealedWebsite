@@ -1,8 +1,12 @@
 import { Button, Typography, Box } from '@mui/material';
 import React from 'react';
 
-import { increment, decrement, selectValue } from '../redux/slices/exampleSlice';
-import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
+import {
+  increment,
+  decrement,
+  selectValue,
+} from '../redux/example/exampleSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const Counter: React.FC = () => {
   const count = useAppSelector(selectValue);

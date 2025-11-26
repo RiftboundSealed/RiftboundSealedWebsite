@@ -3,9 +3,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import {
   selectCardEntities,
   selectCardEntryById,
-} from '@/redux/selectors/cardSelectors';
-import { deckAdapter } from '@/redux/slices/deckSlice';
-import type { RootState } from '@/redux/store/store';
+} from '@/redux/cards/cardsSelectors';
+import { deckAdapter } from '@/redux/deck/deckSlice';
+import type { RootState } from '@/redux/store';
 import type { CardType } from '@/types/card';
 
 const selectDeckState = (state: RootState) => state.deck;
