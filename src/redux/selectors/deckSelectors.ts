@@ -19,7 +19,9 @@ export const {
 export const selectAllCardsInDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],
   (deckEntries, cardEntities) =>
-    deckEntries.map((deckEntry) => cardEntities[deckEntry.id]).filter(Boolean),
+    deckEntries
+      .map((deckEntry) => cardEntities[deckEntry.cardId])
+      .filter(Boolean),
 );
 
 export const selectCardByDeckId = (state: RootState, deckId: string) => {
@@ -37,7 +39,7 @@ export const selectCardTypeCountInDeck = createSelector(
   ],
   (deckEntries, cardEntities, cardType) =>
     deckEntries.reduce((count, deckEntry) => {
-      const card = cardEntities[deckEntry.id];
+      const card = cardEntities[deckEntry.cardId];
       if (card && card.type === cardType) {
         return count + 1;
       }

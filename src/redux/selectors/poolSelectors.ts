@@ -24,7 +24,7 @@ export const selectAllCardsInPool = createSelector(
 );
 
 /**
- * So that the UI can display the cards not yet added into the pool.
+ * So that the UI can display the cards not yet added to the deck (cards remaining in pool).
  * It will also serve as the sideboard.
  */
 export const selectAllCardsRemainingInPool = createSelector(

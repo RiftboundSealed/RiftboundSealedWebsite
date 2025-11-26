@@ -3,6 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { selectCardEntryById } from '../selectors/cardSelectors';
 import { selectCardTypeCountInDeck } from '../selectors/deckSelectors';
 import { deckAddRejected, deckEntryAdded } from '../slices/deckSlice';
+import { poolEntryAddedToDeck } from '../slices/poolSlice';
 import type { RootState, AppDispatch } from '../store/store';
 
 export const tryAddCardToDeck =
@@ -53,4 +54,7 @@ export const tryAddCardToDeck =
 
     // Allowed -> Add to deck
     dispatch(deckEntryAdded({ id: nanoid(), cardId: card.id, poolId }));
+    if (poolId) {
+      dispatch(poolEntryAddedToDeck({ id: poolId! }));
+    }
   };
