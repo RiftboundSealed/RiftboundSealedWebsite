@@ -56,7 +56,7 @@ export default defineConfig([
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
           pathGroups: [
-            { pattern: '@/**/**', group: 'parent', position: 'before' },
+            { pattern: '@/**', group: 'parent', position: 'before' },
           ],
           pathGroupsExcludedImportTypes: ['builtin', 'external'],
           distinctGroup: false,
