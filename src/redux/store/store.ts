@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import cardsReducer from '../slices/cardSlice';
-import deckReducer from '../slices/deckSlice';
-import exampleReducer from '../slices/exampleSlice';
-import poolReducer from '../slices/poolSlice';
-import setsReducer from '../slices/setSlice';
+import cardsReducer from '@/redux/slices/cardSlice';
+import deckReducer from '@/redux/slices/deckSlice';
+import exampleReducer from '@/redux/slices/exampleSlice';
+import poolReducer from '@/redux/slices/poolSlice';
+import setsReducer from '@/redux/slices/setSlice';
 
 export const store = configureStore({
   reducer: {
