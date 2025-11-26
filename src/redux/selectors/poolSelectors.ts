@@ -18,7 +18,9 @@ export const {
 export const selectAllCardsInPool = createSelector(
   [selectAllPoolEntries, selectCardEntities],
   (poolEntries, cardEntities) =>
-    poolEntries.map((poolEntry) => cardEntities[poolEntry.cardId]),
+    poolEntries
+      .map((poolEntry) => cardEntities[poolEntry.cardId])
+      .filter(Boolean),
 );
 
 /**
@@ -30,7 +32,8 @@ export const selectAllCardsRemainingInPool = createSelector(
   (poolEntries, cardEntities) =>
     poolEntries
       .filter((poolEntry) => !poolEntry.addedToDeck)
-      .map((poolEntry) => cardEntities[poolEntry.cardId]),
+      .map((poolEntry) => cardEntities[poolEntry.cardId])
+      .filter(Boolean),
 );
 
 export const selectCardByPoolId = (state: RootState, poolId: string) => {

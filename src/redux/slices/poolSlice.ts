@@ -10,7 +10,7 @@ const poolSlice = createSlice({
   name: 'pool',
   initialState,
   reducers: {
-    poolEntryLoaded(state, action: PayloadAction<PoolEntity[]>) {
+    poolEntriesLoaded(state, action: PayloadAction<PoolEntity[]>) {
       poolAdapter.upsertMany(state, action.payload);
     },
     poolEntryAddedToDeck(state, action: PayloadAction<{ id: string }>) {
@@ -34,7 +34,7 @@ const poolSlice = createSlice({
 });
 
 export const {
-  poolEntryLoaded,
+  poolEntriesLoaded,
   poolEntryAddedToDeck,
   poolEntryRemovedFromDeck,
   poolCleared,

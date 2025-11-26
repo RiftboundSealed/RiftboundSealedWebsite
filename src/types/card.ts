@@ -9,7 +9,7 @@ export type CardType =
   | 'Rune'
   | 'Signature Spell'
   | 'Token';
-export type Domain = 'Body' | 'Mind' | 'Chaos' | 'Body' | 'Fury' | 'Order';
+export type Domain = 'Fury' | 'Calm' | 'Mind' | 'Body' | 'Order' | 'Chaos';
 
 export type CardDto = {
   readonly id: string;

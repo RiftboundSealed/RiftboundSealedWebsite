@@ -19,7 +19,7 @@ export const {
 export const selectAllCardsInDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],
   (deckEntries, cardEntities) =>
-    deckEntries.map((deckEntry) => cardEntities[deckEntry.id]),
+    deckEntries.map((deckEntry) => cardEntities[deckEntry.id]).filter(Boolean),
 );
 
 export const selectCardByDeckId = (state: RootState, deckId: string) => {
