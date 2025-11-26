@@ -1,5 +1,5 @@
-import { setsAdapter } from '../slices/setSlice';
-import type { RootState } from '../store/store';
+import { setsAdapter } from '@/redux/slices/setSlice';
+import type { RootState } from '@/redux/store/store';
 
 const setsState = (state: RootState) => state.sets;
 

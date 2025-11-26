@@ -34,7 +34,7 @@ export default defineConfig([
     settings: {
       // Make eslint-plugin-import understand TS path aliases like "@/…"
       'import/resolver': {
-        typescript: { project: './tsconfig.json' },
+        typescript: { project: './tsconfig.app.json' },
         node: { extensions: ['.ts', '.js'] },
       },
     },
@@ -56,7 +56,7 @@ export default defineConfig([
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
           pathGroups: [
-            { pattern: '@/*/*', group: 'parent', position: 'before' },
+            { pattern: '@/**/**', group: 'parent', position: 'before' },
           ],
           pathGroupsExcludedImportTypes: ['builtin', 'external'],
           distinctGroup: false,
