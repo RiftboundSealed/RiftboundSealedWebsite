@@ -1,13 +1,13 @@
 import { Container, Typography, Box, Paper, Button } from '@mui/material';
 import { type JSX } from 'react';
 
-import './ConstructPage.css';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
-import { useHasAccess } from './useConstructPage';
+import './ConstructPage.css';
+import useConstructPage from './useConstructPage';
 
 const ConstructPage = (): JSX.Element => {
-  const hasAccess = useHasAccess();
+  const { hasAccess } = useConstructPage();
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">

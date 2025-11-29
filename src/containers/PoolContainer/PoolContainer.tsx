@@ -4,7 +4,7 @@ import { type JSX } from 'react';
 const PoolContainer = (): JSX.Element => {
   return (
     <Typography variant="h6" gutterBottom>
-      Pool that contain the cards from unpacking.
+      Pool that contains the cards from unpacking.
     </Typography>
   );
 };

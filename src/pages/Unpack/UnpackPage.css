@@ -7,7 +7,7 @@
 .unpack-grid {
   display: grid;
   /* Two columns, each at least 250px wide but trying to be 50% of the grid width */
-  grid-template-columns: repeat(2, minmax(250px, 50%));
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
 
   /* Three rows: 30% / 60% / 10% of container height, each with a minimum */
   grid-template-rows:

@@ -1,15 +1,15 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
+import useUnpackPage from 'pages/Unpack/useUnpackPage';
 import { type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import Guardrail from '@/components/Guardrail/Guardrail';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
-import { useHasAccess } from './useUnpackPage';
 
 import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {
-  const hasAccess = useHasAccess();
+  const { hasAccess } = useUnpackPage();
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
