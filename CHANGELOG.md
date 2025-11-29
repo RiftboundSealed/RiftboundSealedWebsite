@@ -1,6 +1,8 @@
 # Template
 ## Breaking Change
 ## Add
+- Added React Router v7 with BrowserRouter setup and route definitions
+- Implemented Guardrail component for state-based route access control
 ## Remove
 ## Internal
 
