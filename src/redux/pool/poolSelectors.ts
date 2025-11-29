@@ -15,6 +15,10 @@ export const {
   selectEntities: selectPoolEntities,
 } = poolAdapter.getSelectors(selectPoolState);
 
+export const selectHasPoolData = (state: RootState): boolean => {
+  return state.pool.ids.length > 0;
+};
+
 export const selectAllCardsInPool = createSelector(
   [selectAllPoolEntries, selectCardEntities],
   (poolEntries, cardEntities) =>

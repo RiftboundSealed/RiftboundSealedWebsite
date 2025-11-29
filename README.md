@@ -58,6 +58,9 @@ Presentational components that focus on UI rendering. They are typically statele
 ### Containers
 Smart components that connect to Redux state and handle business logic. They compose presentational components.
 
+### Pages
+Highest level component that is mapped to a specific route.
+
 ### Redux Structure
 - **store.ts**: Redux store setup that illustrates the core state.
 - **hooks.ts**: Exports typed versions of React Redux's `useDispatch` and `useSelector` hooks for use throughout the app with proper TypeScript typing.
@@ -103,7 +106,7 @@ At least one bullet is required when updating the changelog. Add one or more bul
 - **Breaking Change** – backwards-incompatible changes (e.g. remove/rename public API)
 - **Add** – new features, new endpoints, new options
 - **Remove** – removed non-breaking behavior, deprecations, cleanup
-- **Fix** – bug fixes, refactors that don’t change behavior
+- **Internal** – bug fixes, refactors that don’t change behavior
 
 Once that's done, the Github Action will automatically update the CHANGELOG and will bump the version based on the specified changes.
 

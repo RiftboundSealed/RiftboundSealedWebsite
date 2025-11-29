@@ -4,6 +4,11 @@
 ## Remove
 ## Internal
 
+# 0.2.0
+## Add
+- Added React Router v7 with BrowserRouter setup and route definitions
+- Implemented Guardrail component for state-based route access control
+
 # 0.1.2
 ## Internal
 - Reorganized Redux file structure to "ducks" pattern

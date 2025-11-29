@@ -8,3 +8,7 @@ export const {
   selectById: selectSetEntryById,
   selectEntities: selectSetEntities,
 } = setsAdapter.getSelectors(setsState);
+
+export const selectHasSetData = (state: RootState): boolean => {
+  return state.sets.ids.length > 0;
+};

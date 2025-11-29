@@ -1,0 +1,40 @@
+.construct-deck-container {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  box-sizing: border-box;
+}
+
+/* 2 columns, split evenly */
+.construct-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    2,
+    minmax(320px, 1fr)
+  ); /* even split once wide enough */
+  grid-template-rows:
+    minmax(260px, 1fr) /* main row with pool + deck */
+    auto; /* buttons row */
+  gap: 16px;
+  min-height: 60vh;
+}
+
+/* Shared styling for sections */
+.construct-deck-section {
+  padding: 16px;
+}
+
+/* Buttons live in row 2, column 2 (bottom-right) */
+.construct-deck-buttons-cell {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 0;
+}
+
+/* Inner row so you can tweak spacing independently if needed */
+.construct-deck-buttons-row {
+  display: flex;
+  gap: 16px;
+}

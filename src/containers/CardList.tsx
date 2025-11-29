@@ -1,3 +1,4 @@
+// DEPRECATE: This file is only for demonstration purposes and should be removed once real data and components are in place.
 import { Container, Typography, Box } from '@mui/material';
 import React from 'react';
 
