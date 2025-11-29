@@ -1,0 +1,37 @@
+.unpack-page {
+  padding: 24px; /* 3 * 8px */
+  box-sizing: border-box;
+  min-height: 100vh; /* so row percentages have something meaningful to work with */
+}
+
+.unpack-grid {
+  display: grid;
+  /* Two columns, each at least 250px wide but trying to be 50% of the grid width */
+  grid-template-columns: repeat(2, minmax(250px, 50%));
+
+  /* Three rows: 30% / 60% / 10% of container height, each with a minimum */
+  grid-template-rows:
+    minmax(150px, 30%) /* row 1: packs */
+    minmax(250px, 60%) /* row 2: pool + unpacked */
+    minmax(80px, 10%); /* row 3: buttons */
+
+  gap: 16px; /* was 2 * 8px */
+}
+
+.unpack-section {
+  padding: 16px; /* was p: 2 */
+}
+
+/* Row 1: packs spans both columns */
+.unpack-packs {
+  grid-column: 1 / 3;
+}
+
+/* Row 3: buttons span both columns */
+.unpack-buttons-row {
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 8px;
+}

@@ -17,6 +17,9 @@ export const {
 } = deckAdapter.getSelectors(selectDeckState);
 
 export const selectDeckError = (state: RootState) => state.deck.error;
+export const selectHasDeckData = (state: RootState): boolean => {
+  return state.deck.ids.length > 0;
+};
 
 export const selectAllCardsInDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],

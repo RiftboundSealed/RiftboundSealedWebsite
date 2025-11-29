@@ -8,3 +8,7 @@ export const {
   selectById: selectCardEntryById,
   selectEntities: selectCardEntities,
 } = cardsAdapter.getSelectors(selectCardsState);
+
+export const selectHasCardData = (state: RootState): boolean => {
+  return state.cards.ids.length > 0;
+};
