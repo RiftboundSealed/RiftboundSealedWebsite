@@ -1,11 +1,10 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
-import useUnpackPage from 'pages/Unpack/useUnpackPage';
 import { type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import Guardrail from '@/components/Guardrail/Guardrail';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
-
+import useUnpackPage from './useUnpackPage';
 import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {

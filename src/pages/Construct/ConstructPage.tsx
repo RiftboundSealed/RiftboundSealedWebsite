@@ -3,8 +3,8 @@ import { type JSX } from 'react';
 
 import Guardrail from '@/components/Guardrail/Guardrail';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
-import './ConstructPage.css';
 import useConstructPage from './useConstructPage';
+import './ConstructPage.css';
 
 const ConstructPage = (): JSX.Element => {
   const { hasAccess } = useConstructPage();
