@@ -10,34 +10,34 @@ const poolSlice = createSlice({
   name: 'pool',
   initialState,
   reducers: {
-    poolEntriesLoaded(state, action: PayloadAction<PoolEntity[]>) {
+    addPoolEntries(state, action: PayloadAction<PoolEntity[]>) {
       poolAdapter.upsertMany(state, action.payload);
     },
-    poolEntryAddedToDeck(state, action: PayloadAction<{ id: string }>) {
+    addPoolEntryToDeck(state, action: PayloadAction<{ id: string }>) {
       const { id } = action.payload;
       const entry = state.entities[id];
       if (entry) {
         entry.addedToDeck = true;
       }
     },
-    poolEntryRemovedFromDeck(state, action: PayloadAction<{ id: string }>) {
+    removePoolEntryFromDeck(state, action: PayloadAction<{ id: string }>) {
       const { id } = action.payload;
       const entry = state.entities[id];
       if (entry) {
         entry.addedToDeck = false;
       }
     },
-    poolCleared(state) {
+    clearPool(state) {
       poolAdapter.removeAll(state);
     },
   },
 });
 
 export const {
-  poolEntriesLoaded,
-  poolEntryAddedToDeck,
-  poolEntryRemovedFromDeck,
-  poolCleared,
+  addPoolEntries,
+  addPoolEntryToDeck,
+  removePoolEntryFromDeck,
+  clearPool,
 } = poolSlice.actions;
 
 export default poolSlice.reducer;

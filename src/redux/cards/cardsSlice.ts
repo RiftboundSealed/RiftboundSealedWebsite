@@ -10,15 +10,15 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    cardsUpserted(state, action: PayloadAction<CardDto[]>) {
+    upsertCards(state, action: PayloadAction<CardDto[]>) {
       cardsAdapter.upsertMany(state, action.payload);
     },
-    cardsCleared(state) {
+    clearCards(state) {
       cardsAdapter.removeAll(state);
     },
   },
 });
 
-export const { cardsUpserted, cardsCleared } = cardsSlice.actions;
+export const { upsertCards, clearCards } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

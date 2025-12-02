@@ -7,6 +7,8 @@
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -31,6 +33,7 @@
       "@/components/*": ["components/*"],
       "@/containers/*": ["containers/*"],
       "@/redux/*": ["redux/*"],
+      "@/services/*": ["services/*"],
       "@/types/*": ["types/*"]
     }
   },

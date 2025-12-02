@@ -1,25 +1,12 @@
-.select-set-container {
-  /* py: 4 → 4 * 8px = 32px */
-  padding-top: 32px;
-  padding-bottom: 32px;
-  /* Container already centers content with maxWidth,
-     but we can be explicit if you like: */
-  box-sizing: border-box;
-}
-
-.select-set-paper {
-  /* p: 4 → 32px all around */
-  padding: 32px;
-}
-
 /* Box with my: 4 → margin-top & margin-bottom 32px */
 .select-set-counter-section {
+  display: grid;
   margin-top: 32px;
-  margin-bottom: 32px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* textAlign="center", mt: 6 → 48px */
 .select-set-button-row {
   text-align: center;
-  margin-top: 48px;
 }

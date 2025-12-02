@@ -11,7 +11,7 @@ const ConstructPage = (): JSX.Element => {
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
-      <Container className="construct-deck-container">
+      <Container className="construct-page">
         <Box className="construct-deck-grid">
           {/* Row 1, Col 1: Pool of cards */}
           <Paper className="construct-deck-section construct-deck-pool">
@@ -27,12 +27,12 @@ const ConstructPage = (): JSX.Element => {
 
           {/* Row 2, Col 2: buttons only in the right column */}
           <Box className="construct-deck-buttons-cell">
-            <div className="construct-deck-buttons-row">
+            <Box className="construct-deck-buttons-row">
               <Button variant="contained">Export Pool</Button>
               <Button variant="contained" color="primary">
                 Export Deck
               </Button>
-            </div>
+            </Box>
           </Box>
         </Box>
       </Container>

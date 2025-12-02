@@ -1,0 +1,14 @@
+[
+  {
+    "id": "origins",
+    "name": "Origins",
+    "setImageUrl": "https://uvsgames.com/wp-content/uploads/2025/09/Riftbound_Keyart_SocialShare__1_.jpg",
+    "packImageUrl": "https://raw.githubusercontent.com/alliisonlowe/riftbound-assets/refs/heads/main/cards/products/origins_ahri_pack.png"
+  },
+  {
+    "id": "spiritforged",
+    "name": "Spiritforged",
+    "setImageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0c1193017065450e14c227e203a305fcacb9469a-1920x1080.jpg?w=1200&h=630&fm=webp&fit=crop&crop=center",
+    "packImageUrl": "https://tools.toywiz.com/_images/_webp/_products/lg/riftboundspiritforgedboosterpack.webp"
+  }
+]
