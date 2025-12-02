@@ -11,7 +11,7 @@ const HomePage = (): JSX.Element => {
   // Run only once when the page mounts
   useEffect(() => {
     handleResetState();
-  });
+  }, [handleResetState]);
 
   return (
     <Container className="home-page">

@@ -10,6 +10,6 @@ export const fetchSetsData = async (): Promise<SetDto[]> => {
 };
 
 export const fetchSetDataById = async (id: string): Promise<SetDto | null> => {
-  const getSetData = mockSets.find((set) => set.id === id);
-  return getSetData ? (getSetData as SetDto) : null;
+  const foundSet = mockSets.find((set) => set.id === id);
+  return foundSet ? (foundSet as SetDto) : null;
 };

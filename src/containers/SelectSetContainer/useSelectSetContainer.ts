@@ -5,15 +5,14 @@ import { fetchSetDataById } from '@/services/sets/setsApi';
 const useSelectSetContainer = () => {
   const dispatch = useAppDispatch();
 
-  const handleBeginSealedDeck = (selectedSetId: string | null) => {
+  const handleBeginSealedDeck = async (selectedSetId: string | null) => {
     if (!selectedSetId) return;
-    fetchSetDataById(selectedSetId).then((set) => {
-      if (set) {
-        dispatch(addSets([set]));
-      } else {
-        console.error(`Set with id ${selectedSetId} not found.`);
-      }
-    });
+    const set = await fetchSetDataById(selectedSetId);
+    if (set) {
+      dispatch(addSets([set]));
+    } else {
+      console.error(`Set with id ${selectedSetId} not found.`);
+    }
   };
 
   return { handleBeginSealedDeck };

@@ -16,8 +16,12 @@ const SelectSetContainer = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
-      const data = await fetchSetsData();
-      setSets(data);
+      try {
+        const data = await fetchSetsData();
+        setSets(data);
+      } catch (error) {
+        console.error('Error fetching sets data:', error);
+      }
     })();
   }, []);
 

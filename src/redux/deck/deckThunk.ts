@@ -2,7 +2,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { selectCardEntryById } from '@/redux/cards/cardsSelectors';
 import { selectCardTypeCountInDeck } from '@/redux/deck/deckSelectors';
-import { addDeckRejected, addDeckEntry } from '@/redux/deck/deckSlice';
+import { addDeckErrorMessage, addDeckEntry } from '@/redux/deck/deckSlice';
 import { addPoolEntryToDeck } from '@/redux/pool/poolSlice';
 import type { RootState, AppDispatch } from '@/redux/store';
 
@@ -14,7 +14,9 @@ export const tryAddCardToDeck =
     if (!card) {
       console.error(`Card with ID ${cardId} not found in card state.`);
       dispatch(
-        addDeckRejected({ message: 'Card not found. Reach out to support.' }),
+        addDeckErrorMessage({
+          message: 'Card not found. Reach out to support.',
+        }),
       );
       return;
     }
@@ -23,7 +25,7 @@ export const tryAddCardToDeck =
     const legendCount = selectCardTypeCountInDeck(state, 'Legend');
     if (card.type === 'Legend' && legendCount >= 1) {
       dispatch(
-        addDeckRejected({
+        addDeckErrorMessage({
           message: 'You can only have 1 Legend in your deck.',
         }),
       );
@@ -34,7 +36,7 @@ export const tryAddCardToDeck =
     const runeCount = selectCardTypeCountInDeck(state, 'Rune');
     if (card.type === 'Rune' && runeCount >= 12) {
       dispatch(
-        addDeckRejected({
+        addDeckErrorMessage({
           message: 'You can only have 12 Runes in your deck.',
         }),
       );
@@ -45,7 +47,7 @@ export const tryAddCardToDeck =
     const battlefieldCount = selectCardTypeCountInDeck(state, 'Battlefield');
     if (card.type === 'Battlefield' && battlefieldCount >= 3) {
       dispatch(
-        addDeckRejected({
+        addDeckErrorMessage({
           message: 'You can only have 3 Battlefields in your deck.',
         }),
       );
