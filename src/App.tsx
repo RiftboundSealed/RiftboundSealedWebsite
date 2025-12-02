@@ -27,6 +27,26 @@ const theme = createTheme({
       main: '#dc004e',
     },
   },
+
+  // custom breakpoints
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200, // you can leave this
+      xl: 1600, // <- make xl 1600px
+    },
+  },
+
+  // make all <Container /> default to this width
+  components: {
+    MuiContainer: {
+      defaultProps: {
+        maxWidth: 'xl', // <- use the 1600px breakpoint
+      },
+    },
+  },
 });
 
 const App = () => {

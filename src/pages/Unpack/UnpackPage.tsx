@@ -1,14 +1,22 @@
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
-import { type JSX } from 'react';
+import { useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import Guardrail from '@/components/Guardrail/Guardrail';
+import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
 import useUnpackPage from './useUnpackPage';
+
 import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {
-  const { hasAccess } = useUnpackPage();
+  const [unopenedPacks, setUnopenedPacks] = useState<number>(6);
+  const { hasAccess, useSelectedSet } = useUnpackPage();
+  const selectedSet = useSelectedSet();
+
+  const handleUnopenedPackMouseClick = () => {
+    setUnopenedPacks((prev) => Math.max(0, prev - 1));
+  };
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -16,9 +24,13 @@ const UnpackPage = (): JSX.Element => {
         <Box className="unpack-grid">
           {/* Row 1: packs (spans both columns) */}
           <Paper className="unpack-section unpack-packs">
-            <Typography variant="h6" gutterBottom>
-              PacksComponent
-            </Typography>
+            {unopenedPacks > 0 ? (
+              <UnopenedPacksPanel
+                unopenedPacksCount={unopenedPacks}
+                packImageUrl={selectedSet?.packImageUrl}
+                onClick={handleUnopenedPackMouseClick}
+              />
+            ) : null}
           </Paper>
 
           {/* Row 2, col 1: pool of cards */}
