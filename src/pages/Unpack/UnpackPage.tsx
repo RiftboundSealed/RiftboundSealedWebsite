@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import { type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
@@ -12,7 +12,7 @@ const UnpackPage = (): JSX.Element => {
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
-      <Box className="unpack-page">
+      <Container className="unpack-page">
         <Box className="unpack-grid">
           {/* Row 1: packs (spans both columns) */}
           <Paper className="unpack-section unpack-packs">
@@ -34,19 +34,21 @@ const UnpackPage = (): JSX.Element => {
           </Paper>
 
           {/* Row 3: buttons (span both columns) */}
-          <Box className="unpack-buttons-row">
-            <Button variant="contained">Export</Button>
-            <Button
-              variant="contained"
-              color="primary"
-              component={RouterLink}
-              to="/construct"
-            >
-              Construct
-            </Button>
+          <Box className="unpack-buttons-cell">
+            <Box className="unpack-buttons-row">
+              <Button variant="contained">Export</Button>
+              <Button
+                variant="contained"
+                color="primary"
+                component={RouterLink}
+                to="/construct"
+              >
+                Construct
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </Container>
     </Guardrail>
   );
 };

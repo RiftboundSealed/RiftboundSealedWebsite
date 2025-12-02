@@ -16,33 +16,33 @@ const deckSlice = createSlice({
   name: 'deck',
   initialState,
   reducers: {
-    deckCleared(state) {
+    clearDeck(state) {
       deckAdapter.removeAll(state);
       state.error = null;
     },
-    deckEntryAdded(state, action: PayloadAction<DeckEntity>) {
+    addDeckEntry(state, action: PayloadAction<DeckEntity>) {
       deckAdapter.addOne(state, action.payload);
       state.error = null;
     },
-    deckEntryRemoved(state, action: PayloadAction<{ id: string }>) {
+    removeDeckEntry(state, action: PayloadAction<{ id: string }>) {
       deckAdapter.removeOne(state, action.payload.id);
       state.error = null;
     },
-    deckAddRejected(state, action: PayloadAction<{ message: string }>) {
+    addDeckErrorMessage(state, action: PayloadAction<{ message: string }>) {
       state.error = action.payload.message;
     },
-    deckErrorCleared(state) {
+    clearDeckErrorMessage(state) {
       state.error = null;
     },
   },
 });
 
 export const {
-  deckCleared,
-  deckEntryAdded,
-  deckEntryRemoved,
-  deckAddRejected,
-  deckErrorCleared,
+  clearDeck,
+  addDeckEntry,
+  removeDeckEntry,
+  addDeckErrorMessage,
+  clearDeckErrorMessage,
 } = deckSlice.actions;
 
 export default deckSlice.reducer;

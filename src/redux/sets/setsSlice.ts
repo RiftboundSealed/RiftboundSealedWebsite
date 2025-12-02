@@ -10,21 +10,15 @@ const setsSlice = createSlice({
   name: 'sets',
   initialState,
   reducers: {
-    setsToggled(state, action: PayloadAction<SetDto>) {
-      const { id } = action.payload;
-      const exists = state.ids.includes(id);
-      if (exists) {
-        setsAdapter.removeOne(state, id);
-      } else {
-        setsAdapter.addOne(state, action.payload);
-      }
+    addSets(state, action: PayloadAction<SetDto[]>) {
+      setsAdapter.addMany(state, action.payload);
     },
-    setsCleared(state) {
+    clearSets(state) {
       setsAdapter.removeAll(state);
     },
   },
 });
 
-export const { setsToggled, setsCleared } = setsSlice.actions;
+export const { addSets, clearSets } = setsSlice.actions;
 
 export default setsSlice.reducer;

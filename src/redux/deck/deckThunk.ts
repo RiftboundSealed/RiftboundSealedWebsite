@@ -2,8 +2,8 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { selectCardEntryById } from '@/redux/cards/cardsSelectors';
 import { selectCardTypeCountInDeck } from '@/redux/deck/deckSelectors';
-import { deckAddRejected, deckEntryAdded } from '@/redux/deck/deckSlice';
-import { poolEntryAddedToDeck } from '@/redux/pool/poolSlice';
+import { addDeckErrorMessage, addDeckEntry } from '@/redux/deck/deckSlice';
+import { addPoolEntryToDeck } from '@/redux/pool/poolSlice';
 import type { RootState, AppDispatch } from '@/redux/store';
 
 export const tryAddCardToDeck =
@@ -14,7 +14,9 @@ export const tryAddCardToDeck =
     if (!card) {
       console.error(`Card with ID ${cardId} not found in card state.`);
       dispatch(
-        deckAddRejected({ message: 'Card not found. Reach out to support.' }),
+        addDeckErrorMessage({
+          message: 'Card not found. Reach out to support.',
+        }),
       );
       return;
     }
@@ -23,7 +25,7 @@ export const tryAddCardToDeck =
     const legendCount = selectCardTypeCountInDeck(state, 'Legend');
     if (card.type === 'Legend' && legendCount >= 1) {
       dispatch(
-        deckAddRejected({
+        addDeckErrorMessage({
           message: 'You can only have 1 Legend in your deck.',
         }),
       );
@@ -34,7 +36,7 @@ export const tryAddCardToDeck =
     const runeCount = selectCardTypeCountInDeck(state, 'Rune');
     if (card.type === 'Rune' && runeCount >= 12) {
       dispatch(
-        deckAddRejected({
+        addDeckErrorMessage({
           message: 'You can only have 12 Runes in your deck.',
         }),
       );
@@ -45,7 +47,7 @@ export const tryAddCardToDeck =
     const battlefieldCount = selectCardTypeCountInDeck(state, 'Battlefield');
     if (card.type === 'Battlefield' && battlefieldCount >= 3) {
       dispatch(
-        deckAddRejected({
+        addDeckErrorMessage({
           message: 'You can only have 3 Battlefields in your deck.',
         }),
       );
@@ -53,8 +55,8 @@ export const tryAddCardToDeck =
     }
 
     // Allowed -> Add to deck
-    dispatch(deckEntryAdded({ id: nanoid(), cardId: card.id, poolId }));
+    dispatch(addDeckEntry({ id: nanoid(), cardId: card.id, poolId }));
     if (poolId) {
-      dispatch(poolEntryAddedToDeck({ id: poolId }));
+      dispatch(addPoolEntryToDeck({ id: poolId }));
     }
   };
