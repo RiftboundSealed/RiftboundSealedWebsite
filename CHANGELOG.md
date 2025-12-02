@@ -1,8 +1,12 @@
 # Template
 ## Breaking Change
 ## Add
-- Added set selection UI on the home page with visual cards for each available set
 ## Remove
+## Internal
+
+# 0.3.0
+## Add
+- Added set selection UI on the home page with visual cards for each available set
 ## Internal
 - Introduced a services layer with mock data for sets, preparing for future API integration
 - Changed Redux action names across all slices to follow a consistent verb-noun pattern
