@@ -67,6 +67,7 @@ export default defineConfig([
       // ─── Style & Formatting
       'eol-last': ['error', 'always'],
       'func-style': ['error', 'expression', { allowArrowFunctions: true }],
+      'no-console': ['error', { allow: ['warn', 'error'] }],
     },
   },
 ]);
