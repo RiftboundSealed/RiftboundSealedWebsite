@@ -4,7 +4,7 @@ import './UnopenedPacksPanel.css';
 
 interface UnopenedPacksPanelProps {
   unopenedPacksCount: number;
-  packImageUrl: string;
+  packImageUrl: string | null;
   onClick?: () => void;
 }
 
@@ -29,13 +29,13 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
       }`}
       style={{ width: stackWidth, height: PACK_HEIGHT }}
       onClick={onClick}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : -1}
+      role={'button'}
+      tabIndex={0}
     >
       {Array.from({ length: count }, (_, index) => (
         <img
           key={index}
-          src={packImageUrl}
+          src={packImageUrl ?? undefined}
           alt="Unopened pack"
           className="unopened-packs-panel__image"
           style={{

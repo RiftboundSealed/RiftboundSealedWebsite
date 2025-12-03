@@ -6,14 +6,16 @@
 
 .unpack-grid {
   display: grid;
-  /* Two columns, each at least 250px wide but trying to be 50% of the grid width */
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  /* Two columns, with packs being 25% and opened cards being 75% */
+  grid-template-columns:
+    minmax(0, 25%) /* col 1: packs */
+    minmax(0, 75%); /* col 2: opened cards */
 
   /* Three rows: 30% / 60% / 10% of container height, each with a minimum */
   grid-template-rows:
-    minmax(0, auto) /* row 1: packs */
-    minmax(300px, auto) /* row 2: pool + unpacked */
-    minmax(80px, auto); /* row 3: buttons */
+    minmax(0, auto) /* row 1: packs + opened */
+    minmax(80px, auto) /* row 2: buttons */
+    minmax(0, auto); /* row 3: pool */
 
   gap: 16px; /* was 2 * 8px */
 }
@@ -22,22 +24,21 @@
   padding: 16px; /* was p: 2 */
 }
 
-/* Row 1: packs spans both columns */
-.unpack-packs {
-  grid-column: 1 / 3;
+/* Row 2: buttons span both columns */
+.unpack-buttons-row {
+  display: flex;
+  gap: 16px;
 }
 
 .unpack-buttons-cell {
   grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-row: 2 / 3;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 8px 0;
 }
 
-/* Row 3: buttons span both columns */
-.unpack-buttons-row {
-  display: flex;
-  gap: 16px;
+/* Row 3: packs spans both columns */
+.unpack-pool {
+  grid-column: 1 / 3;
 }

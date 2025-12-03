@@ -9,10 +9,10 @@ const useUnpackPage = () => {
   const hasSetData = useAppSelector(selectHasSetData);
   const hasAccess = hasSetData;
 
-  // useSelectedSet
-  const useSelectedSet = () => useAppSelector(selectAllSetEntries)[0] || null;
+  // selectedSet
+  const selectedSet = useAppSelector(selectAllSetEntries)[0] || null;
 
-  return { hasAccess, useSelectedSet };
+  return { hasAccess, selectedSet };
 };
 
 export default useUnpackPage;
