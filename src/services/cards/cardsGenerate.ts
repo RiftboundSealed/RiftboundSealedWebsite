@@ -49,7 +49,7 @@ export const unpackCards = async (setId: string): Promise<CardDto[]> => {
       pSignature + pOvernumbered + pAlternateArt + pTwoEpics + pOneEpic
     )
       type = 'One Epic';
-    console.log(`Roll - ${roll.toFixed(6)}: ${type}`);
+    //console.log(`Roll - ${roll.toFixed(6)}: ${type}`);
     return type as PackHitType;
   })();
 
