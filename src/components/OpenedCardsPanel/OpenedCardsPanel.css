@@ -1,0 +1,18 @@
+.opened-cards-panel {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns */
+}
+
+.opened-cards-panel__cell {
+  padding: 4px; /* 8px padding around each image */
+  display: flex; /* flex to center the image */
+  align-items: center; /* vertical center */
+  justify-content: center; /* horizontal center */
+}
+
+.opened-cards-panel__image {
+  width: 150px; /* exact width */
+  height: 240px; /* exact height */
+  object-fit: contain; /* keep aspect ratio, fit within box */
+  display: block;
+}
