@@ -1,12 +1,18 @@
-import { useSelector } from 'react-redux';
-
-import { selectHasSetData } from '@/redux/sets/setsSelectors';
+import { useAppSelector } from '@/redux/hooks';
+import {
+  selectAllSetEntries,
+  selectHasSetData,
+} from '@/redux/sets/setsSelectors';
 
 const useUnpackPage = () => {
-  const hasSetData = useSelector(selectHasSetData);
+  // hasAccess
+  const hasSetData = useAppSelector(selectHasSetData);
   const hasAccess = hasSetData;
 
-  return { hasAccess };
+  // selectedSet
+  const selectedSet = useAppSelector(selectAllSetEntries)[0] || null;
+
+  return { hasAccess, selectedSet };
 };
 
 export default useUnpackPage;

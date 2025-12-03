@@ -1,0 +1,23 @@
+.unopened-packs-panel {
+  position: relative;
+  display: block;
+  margin: 0 auto; /* center the entire panel horizontally */
+}
+
+.unopened-packs-panel--clickable {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.unopened-packs-panel__image {
+  position: absolute;
+  width: 120px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  top: 0;
+  left: 0;
+}
