@@ -10,6 +10,7 @@
 - Created an OpenedCardsPanel component to display the 13 unpacked cards in a grid layout
 ## Internal
 - Extends CardDto type definition to support nullable fields for cards that may lack certain properties
+- Added `no-console` rule to ESLint
 
 # 0.4.0
 ## Add
