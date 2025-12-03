@@ -15,7 +15,7 @@ type PackHitType =
  * Unpacks 13 cards from a specified set using logic from
  * [Collectability in Riftbound Origins article](https://riftbound.leagueoflegends.com/en-us/news/announcements/collectability-in-riftbound-origins/)
  *
- * @param setId
+ * @param setId - The ID of the set to unpack cards from
  */
 export const unpackCards = async (setId: string): Promise<CardDto[]> => {
   const cards = await fetchCardsData();
@@ -101,7 +101,10 @@ export const unpackCards = async (setId: string): Promise<CardDto[]> => {
     commonCards.length === 0 ||
     uncommonCards.length === 0 ||
     rareCards.length === 0 ||
-    epicCards.length === 0
+    epicCards.length === 0 ||
+    alternateArtCards.length === 0 ||
+    overnumberCards.length === 0 ||
+    signatureCards.length === 0
   ) {
     throw new Error(
       `Pack generation failed: missing cards for one or more required rarities in set "${setId}".` +
@@ -115,18 +118,21 @@ export const unpackCards = async (setId: string): Promise<CardDto[]> => {
    * Rolls a card from the provided list, ensuring it hasn't already been selected
    */
   const rollCard = (cardsList: CardDto[]): CardDto => {
-    let cardRolled: CardDto | null = null;
-    while (!cardRolled) {
-      cardRolled = cardsList[random.int(0, cardsList.length - 1)];
-      if (
-        cardsToReturn
-          .map((c) => c.collectorNumber)
-          .includes(cardRolled.collectorNumber)
-      ) {
-        cardRolled = null;
-      }
+    // Filter out cards with null/undefined collectorNumber or already selected
+    const usedCollectorNumbers = new Set(
+      cardsToReturn.map((c) => c.collectorNumber),
+    );
+    const availableCards = cardsList.filter(
+      (card) =>
+        card.collectorNumber != null &&
+        !usedCollectorNumbers.has(card.collectorNumber),
+    );
+    if (availableCards.length === 0) {
+      throw new Error(
+        `Pack generation failed: not enough unique cards available to select from the provided list.`,
+      );
     }
-    return cardRolled;
+    return availableCards[random.int(0, availableCards.length - 1)];
   };
   // [1-7] 7 commons slots
   for (let i = 0; i < 7; i++) {

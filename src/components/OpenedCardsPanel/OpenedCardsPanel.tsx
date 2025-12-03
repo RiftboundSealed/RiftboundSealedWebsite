@@ -3,7 +3,7 @@ import React from 'react';
 import './OpenedCardsPanel.css';
 
 interface OpenedCardsPanelProps {
-  cardImageUrls: string[];
+  cardImageUrls: { id: string; imageUrl: string }[];
 }
 
 const OpenedCardsPanel: React.FC<OpenedCardsPanelProps> = ({
@@ -11,10 +11,13 @@ const OpenedCardsPanel: React.FC<OpenedCardsPanelProps> = ({
 }) => {
   return (
     <div className="opened-cards-panel">
-      {cardImageUrls.map((url, index) => (
-        <div className="opened-cards-panel__cell" key={`opened-card-${index}`}>
+      {cardImageUrls.map(({ id, imageUrl }, index) => (
+        <div
+          className="opened-cards-panel__cell"
+          key={`opened-card-${index}-${id}`}
+        >
           <img
-            src={url}
+            src={imageUrl}
             alt={`Opened card ${index + 1}`}
             className="opened-cards-panel__image"
           />

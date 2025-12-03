@@ -47,7 +47,10 @@ const UnpackPage = (): JSX.Element => {
           {/* Row 1, col 2: unveiled cards */}
           <Paper className="unpack-section unpack-opened-cards">
             <OpenedCardsPanel
-              cardImageUrls={unpackedCards.map((card) => card.thumbnailUrl)}
+              cardImageUrls={unpackedCards.map((card) => ({
+                id: card.id,
+                imageUrl: card.thumbnailUrl,
+              }))}
             />
           </Paper>
 

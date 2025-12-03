@@ -4,7 +4,7 @@
 }
 
 .opened-cards-panel__cell {
-  padding: 4px; /* 8px padding around each image */
+  padding: 4px; /* padding around each image */
   display: flex; /* flex to center the image */
   align-items: center; /* vertical center */
   justify-content: center; /* horizontal center */
