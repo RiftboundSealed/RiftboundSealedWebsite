@@ -13,19 +13,19 @@ export type Domain = 'Fury' | 'Calm' | 'Mind' | 'Body' | 'Order' | 'Chaos';
 
 export type CardDto = {
   readonly id: string;
-  readonly collectorNumber: number;
+  readonly collectorNumber: number | null;
   readonly set: string;
   readonly name: string;
-  readonly description: string;
+  readonly description: string | null;
   readonly type: CardType;
   readonly rarity: Rarity;
   readonly domain: Domain[];
   readonly energy: number | null;
-  readonly might: number | null;
   readonly power: number | null;
+  readonly might: number | null;
   readonly keywords: string[];
   readonly tags: string[];
-  readonly flavorText: string;
+  readonly flavorText: string | null;
   readonly artist: string;
   readonly thumbnailUrl: string;
   readonly fullUrl: string;

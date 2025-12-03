@@ -1,10 +1,13 @@
-import { Box, Button, Container, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Paper } from '@mui/material';
 import { useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import Guardrail from '@/components/Guardrail/Guardrail';
+import OpenedCardsPanel from '@/components/OpenedCardsPanel/OpenedCardsPanel';
 import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
+import { unpackCards } from '@/services/cards/cardsGenerate';
+import type { CardDto } from '@/types/card';
 import useUnpackPage from './useUnpackPage';
 
 import './UnpackPage.css';
@@ -14,10 +17,18 @@ const UnpackPage = (): JSX.Element => {
   const [numOfUnopenedPacks, setNumOfUnopenedPacks] = useState<number>(
     INITIAL_UNOPENED_PACKS_COUNT,
   );
+  const [unpackedCards, setUnpackedCards] = useState<CardDto[]>([]);
   const { hasAccess, selectedSet } = useUnpackPage();
 
-  const handlePackClick = () => {
-    setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
+  const handlePackClick = async () => {
+    try {
+      if (numOfUnopenedPacks > 0 && selectedSet?.id) {
+        setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
+        setUnpackedCards(await unpackCards(selectedSet?.id));
+      }
+    } catch (error) {
+      console.error('Error unpacking cards:', error);
+    }
   };
 
   return (
@@ -34,10 +45,13 @@ const UnpackPage = (): JSX.Element => {
           </Paper>
 
           {/* Row 1, col 2: unveiled cards */}
-          <Paper className="unpack-section unpack-unpacked">
-            <Typography variant="h6" gutterBottom>
-              OpenedCardsPanel
-            </Typography>
+          <Paper className="unpack-section unpack-opened-cards">
+            <OpenedCardsPanel
+              cardImageUrls={unpackedCards.map((card) => ({
+                id: card.id,
+                imageUrl: card.thumbnailUrl,
+              }))}
+            />
           </Paper>
 
           {/* Row 2: buttons (span both columns) */}
