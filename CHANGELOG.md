@@ -1,8 +1,12 @@
 # Template
 ## Breaking Change
 ## Add
-- Created new UnopenedPacksPanel component with overlapping pack visualization
 ## Remove
+## Internal
+
+# 0.4.0
+## Add
+- Created new UnopenedPacksPanel component with overlapping pack visualization
 ## Internal
 - Updated theme breakpoints to use an XL breakpoint at 1600px for better large-screen support
 
