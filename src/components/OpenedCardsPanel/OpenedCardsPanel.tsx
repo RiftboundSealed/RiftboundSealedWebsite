@@ -12,7 +12,7 @@ const OpenedCardsPanel: React.FC<OpenedCardsPanelProps> = ({
   return (
     <div className="opened-cards-panel">
       {cardImageUrls.map((url, index) => (
-        <div className="opened-cards-panel__cell" key={`${url}-${index}`}>
+        <div className="opened-cards-panel__cell" key={`opened-card-${index}`}>
           <img
             src={url}
             alt={`Opened card ${index + 1}`}

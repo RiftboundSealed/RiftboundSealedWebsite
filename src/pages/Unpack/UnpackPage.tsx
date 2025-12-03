@@ -21,8 +21,14 @@ const UnpackPage = (): JSX.Element => {
   const { hasAccess, selectedSet } = useUnpackPage();
 
   const handlePackClick = async () => {
-    setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
-    setUnpackedCards(await unpackCards(selectedSet?.id));
+    try {
+      if (numOfUnopenedPacks > 0 && selectedSet?.id) {
+        setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
+        setUnpackedCards(await unpackCards(selectedSet?.id));
+      }
+    } catch (error) {
+      console.error('Error unpacking cards:', error);
+    }
   };
 
   return (
