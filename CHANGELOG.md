@@ -1,9 +1,13 @@
 # Template
 ## Breaking Change
 ## Add
+## Remove
+## Internal
+
+# 0.5.0
+## Add
 - Added card pack generation logic with rarity-based probabilities
 - Created an OpenedCardsPanel component to display the 13 unpacked cards in a grid layout
-## Remove
 ## Internal
 - Extends CardDto type definition to support nullable fields for cards that may lack certain properties
 
