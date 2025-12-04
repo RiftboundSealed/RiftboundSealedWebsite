@@ -1,6 +1,11 @@
 # Template
 ## Breaking Change
 ## Add
+## Remove
+## Internal
+
+# 0.6.0
+## Add
 - Added ExportCardsTextDialog component to export card pools as formatted text
 ## Remove
 - Removed deprecated example Redux slice
