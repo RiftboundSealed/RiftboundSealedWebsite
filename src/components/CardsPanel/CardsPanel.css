@@ -1,18 +1,20 @@
 .opened-cards-panel {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 columns */
+  width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
 }
 
 .opened-cards-panel__cell {
-  padding: 4px; /* padding around each image */
   display: flex; /* flex to center the image */
   align-items: center; /* vertical center */
   justify-content: center; /* horizontal center */
 }
 
 .opened-cards-panel__image {
-  width: 150px; /* exact width */
-  height: 240px; /* exact height */
+  width: 200px; /* exact width */
+  height: 280px; /* exact height */
   object-fit: contain; /* keep aspect ratio, fit within box */
   display: block;
 }
