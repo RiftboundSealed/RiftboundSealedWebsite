@@ -1,9 +1,10 @@
-import { Box, Button, Container, Paper } from '@mui/material';
+import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import { useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
+import CardsPanel from '@/components/CardsPanel/CardsPanel';
+import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
 import Guardrail from '@/components/Guardrail/Guardrail';
-import OpenedCardsPanel from '@/components/OpenedCardsPanel/OpenedCardsPanel';
 import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';
 import { unpackCards } from '@/services/cards/cardsGenerate';
@@ -13,23 +14,31 @@ import useUnpackPage from './useUnpackPage';
 import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {
+  // State
   const INITIAL_UNOPENED_PACKS_COUNT = 6;
   const [numOfUnopenedPacks, setNumOfUnopenedPacks] = useState<number>(
     INITIAL_UNOPENED_PACKS_COUNT,
   );
   const [unpackedCards, setUnpackedCards] = useState<CardDto[]>([]);
-  const { hasAccess, selectedSet } = useUnpackPage();
+  const [exportDialogOpen, setExportDialogOpen] = useState<boolean>(false);
+  const { hasAccess, selectedSet, addCardsToPool, cardsInPool } =
+    useUnpackPage();
 
+  // Handle functions
   const handlePackClick = async () => {
     try {
       if (numOfUnopenedPacks > 0 && selectedSet?.id) {
         setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
-        setUnpackedCards(await unpackCards(selectedSet?.id));
+        const cardsUnpacked = await unpackCards(selectedSet?.id);
+        setUnpackedCards(cardsUnpacked);
+        addCardsToPool(cardsUnpacked);
       }
     } catch (error) {
       console.error('Error unpacking cards:', error);
     }
   };
+  const handleOpenExportDialog = () => setExportDialogOpen(true);
+  const handleCloseExportDialog = () => setExportDialogOpen(false);
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -46,12 +55,18 @@ const UnpackPage = (): JSX.Element => {
 
           {/* Row 1, col 2: unveiled cards */}
           <Paper className="unpack-section unpack-opened-cards">
-            <OpenedCardsPanel
-              cardImageUrls={unpackedCards.map((card) => ({
-                id: card.id,
-                imageUrl: card.thumbnailUrl,
-              }))}
-            />
+            {unpackedCards.length > 0 ? (
+              <CardsPanel
+                cardImageUrls={unpackedCards.map((card) => ({
+                  id: card.id,
+                  imageUrl: card.thumbnailUrl,
+                }))}
+              />
+            ) : (
+              <Typography variant="h4" align="center">
+                Unpacked cards go here
+              </Typography>
+            )}
           </Paper>
 
           {/* Row 2: buttons (span both columns) */}
@@ -61,6 +76,7 @@ const UnpackPage = (): JSX.Element => {
                 variant="contained"
                 color="primary"
                 disabled={numOfUnopenedPacks > 0}
+                onClick={handleOpenExportDialog}
               >
                 Export Pool
               </Button>
@@ -82,6 +98,16 @@ const UnpackPage = (): JSX.Element => {
           </Paper>
         </Box>
       </Container>
+      {/* Export Dialog */}
+      <ExportCardsTextDialog
+        open={exportDialogOpen}
+        onClose={handleCloseExportDialog}
+        cardNames={cardsInPool.map((card) => ({
+          id: card.id,
+          name: card.name,
+        }))}
+        title="Export Pool as Text"
+      />
     </Guardrail>
   );
 };

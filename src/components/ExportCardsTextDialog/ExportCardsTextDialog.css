@@ -1,0 +1,11 @@
+/* Slightly constrain the dialog to a medium size */
+.export-cards-dialog__paper {
+  max-width: 600px;
+}
+
+/* Make the text box look more like a code/export area */
+.export-cards-dialog__textbox .MuiInputBase-input {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  white-space: pre;
+}
