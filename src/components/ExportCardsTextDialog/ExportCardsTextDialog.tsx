@@ -34,7 +34,7 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
   // Build the export text:
   // - de-duplicate by id
   // - sort by id
-  // - format "id name" per line
+  // - format "count name" per line
   const exportText = useMemo(() => {
     // Map of id -> { name, count }
     const byId = new Map<string, { name: string; count: number }>();
@@ -97,6 +97,7 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
           <TextField
             className="export-cards-dialog__textbox"
             value={exportText}
+            aria-label="Exported card list"
             multiline
             minRows={10}
             maxRows={16}

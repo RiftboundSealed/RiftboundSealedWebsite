@@ -15,13 +15,18 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
   sortById = false,
 }) => {
   // Sort cardImageUrls if sortById is true
-  cardImageUrls = sortById
-    ? [...cardImageUrls].sort((a, b) => a.id.localeCompare(b.id))
+  const displayCards = sortById
+    ? [...cardImageUrls].sort((a, b) =>
+        a.id.localeCompare(b.id, undefined, {
+          numeric: true,
+          sensitivity: 'base',
+        }),
+      )
     : cardImageUrls;
 
   return (
     <Box className="opened-cards-panel" style={{ gap: `${gap}px` }}>
-      {cardImageUrls.map(({ id, imageUrl }, index) => (
+      {displayCards.map(({ id, imageUrl }, index) => (
         <div
           className="opened-cards-panel__cell"
           key={`opened-card-${index}-${id}`}

@@ -1,8 +1,12 @@
 # Template
 ## Breaking Change
 ## Add
+- Added ExportCardsTextDialog component to export card pools as formatted text
 ## Remove
+- Removed deprecated example Redux slice
 ## Internal
+- Refactored OpenedCardsPanel into a more flexible CardsPanel component
+- Integrated pool state management with the unpacking workflow
 
 # 0.5.0
 ## Add

@@ -3,7 +3,7 @@ import { useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import CardsPanel from '@/components/CardsPanel/CardsPanel';
-import ExportCardsTextDialog from '@/components/ExportCardsList/ExportCardsTextDialog';
+import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
 import PoolContainer from '@/containers/PoolContainer/PoolContainer';

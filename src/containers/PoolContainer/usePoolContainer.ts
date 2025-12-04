@@ -2,7 +2,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { selectAllCardsRemainingInPool } from '@/redux/pool/poolSelectors';
 
 const usePoolContainer = () => {
-  //cardsInPool
+  // cardsInPool
   const cardsInPool = useAppSelector(selectAllCardsRemainingInPool);
 
   return { cardsInPool };
