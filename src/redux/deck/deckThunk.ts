@@ -54,6 +54,38 @@ export const tryAddCardToDeck =
       return;
     }
 
+    // Check if adding more than 25 main deck cards (excluding Runes)
+    const unitCount = selectCardTypeCountInDeck(state, 'Unit');
+    const championUnitCount = selectCardTypeCountInDeck(state, 'Champion Unit');
+    const spellCount = selectCardTypeCountInDeck(state, 'Spell');
+    const signatureSpellCount = selectCardTypeCountInDeck(
+      state,
+      'Signature Spell',
+    );
+    const gearCount = selectCardTypeCountInDeck(state, 'Gear');
+    const mainDeckCount =
+      unitCount +
+      championUnitCount +
+      spellCount +
+      signatureSpellCount +
+      gearCount;
+    if (
+      card.type === 'Unit' ||
+      card.type === 'Champion Unit' ||
+      card.type === 'Spell' ||
+      card.type === 'Signature Spell' ||
+      card.type === 'Gear'
+    ) {
+      if (mainDeckCount >= 25) {
+        dispatch(
+          addDeckErrorMessage({
+            message: 'Main deck can only have 25 cards (excluding Runes).',
+          }),
+        );
+        return;
+      }
+    }
+
     // Allowed -> Add to deck
     dispatch(addDeckEntry({ id: nanoid(), cardId: card.id, poolId }));
     if (poolId) {
