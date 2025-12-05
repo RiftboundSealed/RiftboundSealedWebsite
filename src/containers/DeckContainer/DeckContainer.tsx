@@ -101,7 +101,7 @@ const DeckContainer = (): JSX.Element => {
           {/* Card rows */}
           {section.cards.map((card) => (
             <div
-              key={card.id}
+              key={card.deckId}
               className="deck-container__row deck-container__card-row"
               style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
             >
@@ -129,7 +129,7 @@ const DeckContainer = (): JSX.Element => {
                 variant="body1"
                 className="deck-container__cell deck-container__cell--name"
               >
-                {card.name}
+                {card.name ?? 'CARD ERROR'}
               </Typography>
 
               {/* Energy cost */}
@@ -153,7 +153,7 @@ const DeckContainer = (): JSX.Element => {
                 variant="body2"
                 className="deck-container__cell deck-container__cell--domain"
               >
-                {card.domain.join(', ')}
+                {card.domain?.join(', ') ?? '-'}
               </Typography>
             </div>
           ))}

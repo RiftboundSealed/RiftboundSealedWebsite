@@ -4,7 +4,7 @@ import { type JSX } from 'react';
 import CardsPanel from '@/components/CardsPanel/CardsPanel';
 import usePoolStaticContainer from './usePoolStaticContainer';
 
-const PoolConstructContainer = (): JSX.Element => {
+const PoolStaticContainer = (): JSX.Element => {
   // State / Hooks
   const { allCardsInPool } = usePoolStaticContainer();
 
@@ -29,4 +29,4 @@ const PoolConstructContainer = (): JSX.Element => {
   );
 };
 
-export default PoolConstructContainer;
+export default PoolStaticContainer;

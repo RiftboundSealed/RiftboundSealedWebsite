@@ -25,12 +25,13 @@ export const selectAllCardsInDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],
   (deckEntries, cardEntities) =>
     deckEntries
-      .map((deckEntry) => ({
-        ...cardEntities[deckEntry.cardId],
-        deckId: deckEntry.id,
-        poolId: deckEntry.poolId,
-      }))
-      .filter(Boolean),
+      .map((deckEntry) => {
+        const card = cardEntities[deckEntry.cardId];
+        return card
+          ? { ...card, deckId: deckEntry.id, poolId: deckEntry.poolId }
+          : null;
+      })
+      .filter((c) => c !== null),
 );
 
 export const selectCardByDeckId = (state: RootState, deckId: string) => {

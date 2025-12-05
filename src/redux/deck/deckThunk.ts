@@ -5,6 +5,7 @@ import { selectCardTypeCountInDeck } from '@/redux/deck/deckSelectors';
 import { addDeckErrorMessage, addDeckEntry } from '@/redux/deck/deckSlice';
 import { addPoolEntryToDeck } from '@/redux/pool/poolSlice';
 import type { RootState, AppDispatch } from '@/redux/store';
+import type { CardType } from '@/types/card';
 
 export const tryAddCardToDeck =
   (cardId: string, poolId: string | null) =>
@@ -55,27 +56,22 @@ export const tryAddCardToDeck =
     }
 
     // Check if adding more than 25 main deck cards (excluding Runes)
-    const unitCount = selectCardTypeCountInDeck(state, 'Unit');
-    const championUnitCount = selectCardTypeCountInDeck(state, 'Champion Unit');
-    const spellCount = selectCardTypeCountInDeck(state, 'Spell');
-    const signatureSpellCount = selectCardTypeCountInDeck(
-      state,
+    const MAIN_DECK_CARD_TYPES: CardType[] = [
+      'Unit',
+      'Champion Unit',
+      'Spell',
       'Signature Spell',
+      'Gear',
+    ];
+    const isMainDeckCardType = (cardType: CardType): boolean => {
+      return MAIN_DECK_CARD_TYPES.includes(cardType);
+    };
+    // Calculate main deck count using the helper
+    const mainDeckCount = MAIN_DECK_CARD_TYPES.reduce(
+      (acc, type) => acc + selectCardTypeCountInDeck(state, type),
+      0,
     );
-    const gearCount = selectCardTypeCountInDeck(state, 'Gear');
-    const mainDeckCount =
-      unitCount +
-      championUnitCount +
-      spellCount +
-      signatureSpellCount +
-      gearCount;
-    if (
-      card.type === 'Unit' ||
-      card.type === 'Champion Unit' ||
-      card.type === 'Spell' ||
-      card.type === 'Signature Spell' ||
-      card.type === 'Gear'
-    ) {
+    if (isMainDeckCardType(card.type)) {
       if (mainDeckCount >= 25) {
         dispatch(
           addDeckErrorMessage({

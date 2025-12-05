@@ -1,8 +1,11 @@
 # Template
 ## Breaking Change
 ## Add
+- Created new containers: `PoolStaticContainer` (display-only), `PoolConstructContainer` (clickable), `DeckContainer` (deck list with removal)
+- Added deck construction validation logic for main deck size limits (25 cards excluding Runes)
 ## Remove
 ## Internal
+- Refactored pool and deck selectors to include entity IDs (poolId, deckId) for proper tracking
 
 # 0.6.0
 ## Add

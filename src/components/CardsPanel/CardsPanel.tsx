@@ -29,7 +29,7 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
   sortByCardId = false,
   onCardClick,
 }) => {
-  // Sort cardImageUrls if sortById is true
+  // Sort cardImageUrls if sortByCardId is true
   const displayCards = sortByCardId
     ? [...cardImageUrls].sort((a, b) => a.cardId.localeCompare(b.cardId))
     : cardImageUrls;
@@ -49,11 +49,12 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
           key={`opened-card-${index}-${card.id}`}
           onClick={() => onCardClick?.(card)}
           role="button"
+          aria-label={card.name}
         >
           <img
             style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
             src={card.imageUrl}
-            alt={`Opened card ${index + 1}`}
+            alt={card.name}
             className="opened-cards-panel__image"
           />
         </div>
