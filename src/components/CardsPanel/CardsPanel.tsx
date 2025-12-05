@@ -3,36 +3,56 @@ import React from 'react';
 
 import './CardsPanel.css';
 
+export interface CardPanelData {
+  id: string; // Most likely the pool ID, but can be any ID
+  cardId: string;
+  imageUrl: string;
+  name: string;
+}
+
 interface CardsPanelProps {
-  cardImageUrls: { id: string; imageUrl: string }[];
+  cardImageUrls: CardPanelData[];
+  cardWidth?: number;
+  cardHeight?: number;
+  maxHeight?: number;
   gap?: number;
-  sortById?: boolean;
+  sortByCardId?: boolean;
+  onCardClick?: (card: CardPanelData) => void;
 }
 
 const CardsPanel: React.FC<CardsPanelProps> = ({
   cardImageUrls,
-  gap = 12,
-  sortById = false,
+  cardWidth = 175,
+  cardHeight = 245,
+  maxHeight = 600,
+  gap = 8,
+  sortByCardId = false,
+  onCardClick,
 }) => {
   // Sort cardImageUrls if sortById is true
-  const displayCards = sortById
-    ? [...cardImageUrls].sort((a, b) =>
-        a.id.localeCompare(b.id, undefined, {
-          numeric: true,
-          sensitivity: 'base',
-        }),
-      )
+  const displayCards = sortByCardId
+    ? [...cardImageUrls].sort((a, b) => a.cardId.localeCompare(b.cardId))
     : cardImageUrls;
 
   return (
-    <Box className="opened-cards-panel" style={{ gap: `${gap}px` }}>
-      {displayCards.map(({ id, imageUrl }, index) => (
+    <Box
+      className="opened-cards-panel"
+      style={{
+        gap: `${gap}px`,
+        gridTemplateColumns: `repeat(auto-fill, minmax(${cardWidth}px, auto))`,
+        maxHeight: `${maxHeight}px`,
+      }}
+    >
+      {displayCards.map((card, index) => (
         <div
           className="opened-cards-panel__cell"
-          key={`opened-card-${index}-${id}`}
+          key={`opened-card-${index}-${card.id}`}
+          onClick={() => onCardClick?.(card)}
+          role="button"
         >
           <img
-            src={imageUrl}
+            style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
+            src={card.imageUrl}
             alt={`Opened card ${index + 1}`}
             className="opened-cards-panel__image"
           />

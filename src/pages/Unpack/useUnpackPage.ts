@@ -1,6 +1,8 @@
+import { nanoid } from '@reduxjs/toolkit';
+
 import { upsertCards } from '@/redux/cards/cardsSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { selectAllCardsRemainingInPool } from '@/redux/pool/poolSelectors';
+import { selectAllCardsInPool } from '@/redux/pool/poolSelectors';
 import { addPoolEntries } from '@/redux/pool/poolSlice';
 import {
   selectAllSetEntries,
@@ -24,7 +26,7 @@ const useUnpackPage = () => {
     dispatch(
       addPoolEntries(
         cards.map((card) => ({
-          id: crypto.randomUUID(),
+          id: nanoid(),
           cardId: card.id,
           addedToDeck: false,
         })),
@@ -32,10 +34,10 @@ const useUnpackPage = () => {
     );
   };
 
-  // cardsInPool
-  const cardsInPool = useAppSelector(selectAllCardsRemainingInPool);
+  // allCardsInPool
+  const allCardsInPool = useAppSelector(selectAllCardsInPool);
 
-  return { hasAccess, selectedSet, addCardsToPool, cardsInPool };
+  return { hasAccess, selectedSet, addCardsToPool, allCardsInPool };
 };
 
 export default useUnpackPage;

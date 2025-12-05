@@ -25,7 +25,11 @@ export const selectAllCardsInDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],
   (deckEntries, cardEntities) =>
     deckEntries
-      .map((deckEntry) => cardEntities[deckEntry.cardId])
+      .map((deckEntry) => ({
+        ...cardEntities[deckEntry.cardId],
+        deckId: deckEntry.id,
+        poolId: deckEntry.poolId,
+      }))
       .filter(Boolean),
 );
 
