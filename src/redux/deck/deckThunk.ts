@@ -5,6 +5,7 @@ import { selectCardTypeCountInDeck } from '@/redux/deck/deckSelectors';
 import { addDeckErrorMessage, addDeckEntry } from '@/redux/deck/deckSlice';
 import { addPoolEntryToDeck } from '@/redux/pool/poolSlice';
 import type { RootState, AppDispatch } from '@/redux/store';
+import type { CardType } from '@/types/card';
 
 export const tryAddCardToDeck =
   (cardId: string, poolId: string | null) =>
@@ -52,6 +53,33 @@ export const tryAddCardToDeck =
         }),
       );
       return;
+    }
+
+    // Check if adding more than 25 main deck cards (excluding Runes)
+    const MAIN_DECK_CARD_TYPES: CardType[] = [
+      'Unit',
+      'Champion Unit',
+      'Spell',
+      'Signature Spell',
+      'Gear',
+    ];
+    const isMainDeckCardType = (cardType: CardType): boolean => {
+      return MAIN_DECK_CARD_TYPES.includes(cardType);
+    };
+    // Calculate main deck count using the helper
+    const mainDeckCount = MAIN_DECK_CARD_TYPES.reduce(
+      (acc, type) => acc + selectCardTypeCountInDeck(state, type),
+      0,
+    );
+    if (isMainDeckCardType(card.type)) {
+      if (mainDeckCount >= 25) {
+        dispatch(
+          addDeckErrorMessage({
+            message: 'Main deck can only have 25 cards (excluding Runes).',
+          }),
+        );
+        return;
+      }
     }
 
     // Allowed -> Add to deck

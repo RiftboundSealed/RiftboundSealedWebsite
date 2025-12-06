@@ -7,13 +7,12 @@
 /* 2 columns, split evenly */
 .construct-deck-grid {
   display: grid;
-  grid-template-columns: repeat(
-    2,
-    minmax(320px, 1fr)
-  ); /* even split once wide enough */
+  grid-template-columns:
+    70% /** col 1: Pool */
+    30%; /* col 2: Deck */
   grid-template-rows:
-    minmax(260px, 1fr) /* main row with pool + deck */
-    auto; /* buttons row */
+    auto /* row 1: buttons row */
+    auto; /* row 2: pool + deck */
   gap: 16px;
   min-height: 60vh;
 }
@@ -23,10 +22,10 @@
   padding: 16px;
 }
 
-/* Buttons live in row 2, column 2 (bottom-right) */
+/* Buttons live in row 1, column 2 (bottom-right) */
 .construct-deck-buttons-cell {
   grid-column: 2 / 3;
-  grid-row: 2 / 3;
+  grid-row: 0 / 2;
   display: flex;
   justify-content: flex-end;
   align-items: center;

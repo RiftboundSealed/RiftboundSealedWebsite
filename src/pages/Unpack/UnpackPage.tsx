@@ -6,7 +6,7 @@ import CardsPanel from '@/components/CardsPanel/CardsPanel';
 import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
-import PoolContainer from '@/containers/PoolContainer/PoolContainer';
+import PoolStaticContainer from '@/containers/PoolStaticContainer/PoolStaticContainer';
 import { unpackCards } from '@/services/cards/cardsGenerate';
 import type { CardDto } from '@/types/card';
 import useUnpackPage from './useUnpackPage';
@@ -14,14 +14,17 @@ import useUnpackPage from './useUnpackPage';
 import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {
-  // State
+  // Constants
   const INITIAL_UNOPENED_PACKS_COUNT = 6;
+  const PACK_PANEL_HEIGHT = 450;
+
+  // State / Hooks
   const [numOfUnopenedPacks, setNumOfUnopenedPacks] = useState<number>(
     INITIAL_UNOPENED_PACKS_COUNT,
   );
   const [unpackedCards, setUnpackedCards] = useState<CardDto[]>([]);
   const [exportDialogOpen, setExportDialogOpen] = useState<boolean>(false);
-  const { hasAccess, selectedSet, addCardsToPool, cardsInPool } =
+  const { hasAccess, selectedSet, addCardsToPool, allCardsInPool } =
     useUnpackPage();
 
   // Handle functions
@@ -43,7 +46,20 @@ const UnpackPage = (): JSX.Element => {
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
       <Container className="unpack-page">
-        <Box className="unpack-grid">
+        <Box
+          className="unpack-grid"
+          style={{
+            // 3 rows:
+            // 1) packs & opened cards
+            // 2) buttons (span both columns)
+            // 3) pool of cards (span both columns)
+            gridTemplateRows: `
+              minmax(${PACK_PANEL_HEIGHT}px, auto)
+              minmax(80px, auto)
+              minmax(0, auto)
+            `,
+          }}
+        >
           {/* Row 1, col 1: packs*/}
           <Paper className="unpack-section unpack-packs">
             <UnopenedPacksPanel
@@ -59,8 +75,12 @@ const UnpackPage = (): JSX.Element => {
               <CardsPanel
                 cardImageUrls={unpackedCards.map((card) => ({
                   id: card.id,
+                  cardId: card.id,
                   imageUrl: card.thumbnailUrl,
+                  name: card.name,
                 }))}
+                cardWidth={150}
+                cardHeight={210}
               />
             ) : (
               <Typography variant="h4" align="center">
@@ -94,7 +114,7 @@ const UnpackPage = (): JSX.Element => {
 
           {/* Row 3: pool of cards (span both columns) */}
           <Paper className="unpack-section unpack-pool">
-            <PoolContainer />
+            <PoolStaticContainer />
           </Paper>
         </Box>
       </Container>
@@ -102,7 +122,7 @@ const UnpackPage = (): JSX.Element => {
       <ExportCardsTextDialog
         open={exportDialogOpen}
         onClose={handleCloseExportDialog}
-        cardNames={cardsInPool.map((card) => ({
+        cardNames={allCardsInPool.map((card) => ({
           id: card.id,
           name: card.name,
         }))}

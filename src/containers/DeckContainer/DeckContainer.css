@@ -1,0 +1,83 @@
+.deck-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+/* Base row: static height */
+.deck-container__row {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+/* Error row (single column) */
+.deck-container__row--error {
+  justify-content: flex-start;
+}
+
+/* Status rows (Legend / Main Deck) */
+.deck-container__row--status {
+  font-weight: 500;
+}
+
+/* Highlighted green when condition is satisfied */
+.deck-container__row--ok {
+  background-color: rgba(76, 175, 80, 0.15); /* light green */
+}
+
+/* Section wrapper */
+.deck-container__section {
+  margin-top: 8px;
+}
+
+/* Section header row */
+.deck-container__section-header {
+  font-weight: 600;
+}
+
+/* Card rows use a simple grid for columns */
+.deck-container__card-row {
+  display: grid;
+  grid-template-columns: 0.25fr 4fr 0.35fr 0.35fr 1.5fr; /* trash | name | energy | power | domain */
+  column-gap: 4px;
+  align-items: center;
+}
+
+/* Shared cell styles */
+.deck-container__cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deck-container__cell--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck-container__remove-button {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.deck-container__remove-text {
+  padding-bottom: 6px;
+}
+
+.deck-container__cell--name {
+  padding-left: 2px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+}
+
+/* Optional: style if you still use an empty state somewhere */
+.deck-container__empty-message {
+  padding: 8px;
+  font-style: italic;
+}

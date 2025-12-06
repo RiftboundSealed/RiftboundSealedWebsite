@@ -4,6 +4,13 @@
 ## Remove
 ## Internal
 
+# 0.7.0
+## Add
+- Created new containers: `PoolStaticContainer` (display-only), `PoolConstructContainer` (clickable), `DeckContainer` (deck list with removal)
+- Added deck construction validation logic for main deck size limits (25 cards excluding Runes)
+## Internal
+- Refactored pool and deck selectors to include entity IDs (poolId, deckId) for proper tracking
+
 # 0.6.0
 ## Add
 - Added ExportCardsTextDialog component to export card pools as formatted text
