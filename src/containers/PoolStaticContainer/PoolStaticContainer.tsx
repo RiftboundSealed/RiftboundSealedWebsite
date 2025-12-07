@@ -5,7 +5,9 @@ import CardsPanel from '@/components/CardsPanel/CardsPanel';
 import usePoolStaticContainer from './usePoolStaticContainer';
 
 const PoolStaticContainer = (): JSX.Element => {
-  // State / Hooks
+  // State
+
+  // Hooks
   const { allCardsInPool } = usePoolStaticContainer();
 
   return (

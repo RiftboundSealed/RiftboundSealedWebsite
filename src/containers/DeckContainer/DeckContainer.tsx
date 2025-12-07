@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { type JSX } from 'react';
 
+import RemoveButton from '@/components/RemoveButton/RemoveButton';
 import useDeckContainer from './useDeckContainer';
 
 import './DeckContainer.css';
@@ -13,7 +14,8 @@ const DeckContainer = (): JSX.Element => {
   const RUNE_DECK_SIZE = 12;
 
   // Hooks
-  const { cardsInDeck, deckErrorMessage, removeFromDeck } = useDeckContainer();
+  const { cardsInDeck, deckErrorMessage, handleRemoveFromDeck } =
+    useDeckContainer();
 
   // Sort the cards
   const displayCards = [...cardsInDeck].sort((a, b) =>
@@ -34,6 +36,19 @@ const DeckContainer = (): JSX.Element => {
     (card) => card.type === 'Battlefield',
   );
   const runeCards = displayCards.filter((card) => card.type === 'Rune');
+  // Reduce rune cards to a map that is cardId -> deckId[]
+  const runeMap = runeCards.reduce<Map<string, string[]>>(
+    (map, { id: cardId, deckId }) => {
+      const arr = map.get(cardId);
+      if (arr) {
+        arr.push(deckId);
+      } else {
+        map.set(cardId, [deckId]);
+      }
+      return map;
+    },
+    new Map(),
+  );
 
   // Statuses & Sections
   const mainDeckCount =
@@ -43,7 +58,6 @@ const DeckContainer = (): JSX.Element => {
     gearCards.length;
   const runeCount = runeCards.length;
   const sections = [
-    { key: 'rune', title: 'Runes', cards: runeCards },
     { key: 'legend', title: 'Legend', cards: legendCards },
     { key: 'champion-unit', title: 'Champion Units', cards: championUnitCards },
     { key: 'unit', title: 'Units', cards: unitCards },
@@ -75,28 +89,63 @@ const DeckContainer = (): JSX.Element => {
         </Typography>
       </div>
 
+      {/* Row 3: Rune deck */}
+      <div
+        className={`deck-container__row deck-container__row--status ${
+          runeCount === RUNE_DECK_SIZE ? 'deck-container__row--ok' : ''
+        }`}
+      >
+        <Typography variant="h5">
+          Runes: {runeCount} / {RUNE_DECK_SIZE}
+        </Typography>
+      </div>
+      {/* Rune cards */}
+      {[...runeMap.entries()].map(([cardId, deckIds]) => {
+        const rune = runeCards.find((c) => c.id === cardId);
+
+        return (
+          <div
+            key={cardId}
+            className="deck-container__row deck-container__rune-row"
+            style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
+          >
+            {/* Remove button */}
+            <div className="deck-container__cell deck-container__cell--icon">
+              <RemoveButton
+                onRemoveFromDeckClick={() =>
+                  handleRemoveFromDeck(deckIds[0], null)
+                }
+              />
+            </div>
+
+            {/* Card name */}
+            <Typography
+              variant="body1"
+              className="deck-container__cell deck-container__cell--name"
+            >
+              {`${deckIds.length}x ${rune?.name ?? 'RUNE ERROR'}`}
+            </Typography>
+
+            {/* Domain */}
+            <Typography
+              variant="body2"
+              className="deck-container__cell deck-container__cell--domain"
+            >
+              {rune?.domain?.join(', ') ?? '-'}
+            </Typography>
+          </div>
+        );
+      })}
+
       {/* Sections by card type */}
       {sections.map((section) => (
         <div key={section.key} className="deck-container__section">
           {/* Section header */}
-          {section.key === 'rune' ? (
-            // Show rune count/status in this section header instead
-            <div
-              className={`deck-container__row deck-container__row--status ${
-                runeCount === RUNE_DECK_SIZE ? 'deck-container__row--ok' : ''
-              }`}
-            >
-              <Typography variant="h5">
-                Runes: {runeCount} / {RUNE_DECK_SIZE}
-              </Typography>
-            </div>
-          ) : (
-            <div className="deck-container__row deck-container__section-header">
-              <Typography variant="h5">
-                {section.title}: {section.cards.length}
-              </Typography>
-            </div>
-          )}
+          <div className="deck-container__row deck-container__section-header">
+            <Typography variant="h5">
+              {section.title}: {section.cards.length}
+            </Typography>
+          </div>
 
           {/* Card rows */}
           {section.cards.map((card) => (
@@ -107,21 +156,11 @@ const DeckContainer = (): JSX.Element => {
             >
               {/* Remove button */}
               <div className="deck-container__cell deck-container__cell--icon">
-                <Button
-                  size="small"
-                  color="error"
-                  variant="text"
-                  className="deck-container__remove-button"
-                  onClick={() => removeFromDeck(card.deckId, card.poolId)}
-                  style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
-                >
-                  <Typography
-                    variant="h3"
-                    className="deck-container__remove-text"
-                  >
-                    -
-                  </Typography>
-                </Button>
+                <RemoveButton
+                  onRemoveFromDeckClick={() =>
+                    handleRemoveFromDeck(card.deckId, card.poolId)
+                  }
+                />
               </div>
 
               {/* Card name */}

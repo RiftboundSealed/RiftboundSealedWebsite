@@ -13,13 +13,16 @@
   grid-template-rows:
     auto /* row 1: buttons row */
     auto; /* row 2: pool + deck */
-  gap: 16px;
+  gap: 4px;
   min-height: 60vh;
 }
 
-/* Shared styling for sections */
-.construct-deck-section {
-  padding: 16px;
+.construct-deck-runes-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  width: 100%;
 }
 
 /* Buttons live in row 1, column 2 (bottom-right) */
@@ -35,5 +38,10 @@
 /* Inner row so you can tweak spacing independently if needed */
 .construct-deck-buttons-row {
   display: flex;
-  gap: 16px;
+  gap: 8px;
+}
+
+/* Shared styling for sections */
+.construct-deck-section {
+  padding: 8px;
 }
