@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { type JSX } from 'react';
 
+import RemoveButton from '@/components/RemoveButton/RemoveButton';
 import useDeckContainer from './useDeckContainer';
 
 import './DeckContainer.css';
@@ -65,24 +66,6 @@ const DeckContainer = (): JSX.Element => {
     { key: 'battlefield', title: 'Battlefields', cards: battlefieldCards },
   ];
 
-  // Local component
-  const RemoveButton = (deckId: string, poolId: string | null) => (
-    <div className="deck-container__cell deck-container__cell--icon">
-      <Button
-        size="small"
-        color="error"
-        variant="text"
-        className="deck-container__remove-button"
-        onClick={() => handleRemoveFromDeck(deckId, poolId)}
-        style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
-      >
-        <Typography variant="h3" className="deck-container__remove-text">
-          -
-        </Typography>
-      </Button>
-    </div>
-  );
-
   return (
     <Box
       className="deck-container"
@@ -127,7 +110,13 @@ const DeckContainer = (): JSX.Element => {
             style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
           >
             {/* Remove button */}
-            {RemoveButton(deckIds[0], null)}
+            <div className="deck-container__cell deck-container__cell--icon">
+              <RemoveButton
+                onRemoveFromDeckClick={() =>
+                  handleRemoveFromDeck(deckIds[0], null)
+                }
+              />
+            </div>
 
             {/* Card name */}
             <Typography
@@ -166,7 +155,13 @@ const DeckContainer = (): JSX.Element => {
               style={{ maxHeight: `${ROW_MAX_HEIGHT_PX}px` }}
             >
               {/* Remove button */}
-              {RemoveButton(card.deckId, card.poolId)}
+              <div className="deck-container__cell deck-container__cell--icon">
+                <RemoveButton
+                  onRemoveFromDeckClick={() =>
+                    handleRemoveFromDeck(card.deckId, card.poolId)
+                  }
+                />
+              </div>
 
               {/* Card name */}
               <Typography

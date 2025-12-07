@@ -1,8 +1,12 @@
 # Template
 ## Breaking Change
 ## Add
+- Added `RuneContainer` container with visual rune selection UI displaying all six domain types (Fury, Calm, Mind, Body, Order, Chaos)
+- Added `RemoveButton` presentational component for displaying a negative symbol icon
+- Modified deck display to aggregate duplicate runes and show counts (e.g., "3x Fury Rune")
 ## Remove
 ## Internal
+- Refactored event handler naming in hooks to use `handle` prefix consistently (e.g., `addCardsToPool` → `handleAddCardsToPool`)
 
 # 0.7.0
 ## Add

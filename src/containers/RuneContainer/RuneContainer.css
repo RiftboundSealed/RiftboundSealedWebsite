@@ -1,7 +1,7 @@
 .rune-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 6 columns */
+  grid-template-columns: repeat(7, 1fr);
   gap: 8px;
   justify-content: center; /* center the whole grid horizontally */
   align-items: center; /* center rows vertically within the container */

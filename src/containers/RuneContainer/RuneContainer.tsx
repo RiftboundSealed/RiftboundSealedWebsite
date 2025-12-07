@@ -57,7 +57,7 @@ const RuneContainer = (): JSX.Element => {
   const runes: RuneConfig[] = runeCardsData.map((card) => ({
     id: card.id,
     label: card.name,
-    src: determineImage(card.domain[0]),
+    src: determineImage(card.domain[0] ?? 'Fury'),
   }));
 
   return (
