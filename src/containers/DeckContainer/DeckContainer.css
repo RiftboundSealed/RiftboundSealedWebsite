@@ -38,6 +38,13 @@
   font-weight: 600;
 }
 
+.deck-container__rune-row {
+  display: grid;
+  grid-template-columns: 0.25fr 4.7fr 1.5fr; /* trash | name | energy | power | domain */
+  column-gap: 4px;
+  align-items: center;
+}
+
 /* Card rows use a simple grid for columns */
 .deck-container__card-row {
   display: grid;

@@ -18,23 +18,25 @@ const UnpackPage = (): JSX.Element => {
   const INITIAL_UNOPENED_PACKS_COUNT = 6;
   const PACK_PANEL_HEIGHT = 450;
 
-  // State / Hooks
+  // State
   const [numOfUnopenedPacks, setNumOfUnopenedPacks] = useState<number>(
     INITIAL_UNOPENED_PACKS_COUNT,
   );
   const [unpackedCards, setUnpackedCards] = useState<CardDto[]>([]);
   const [exportDialogOpen, setExportDialogOpen] = useState<boolean>(false);
-  const { hasAccess, selectedSet, addCardsToPool, allCardsInPool } =
+
+  // Hooks
+  const { hasAccess, selectedSet, allCardsInPool, handleAddCardsToPool } =
     useUnpackPage();
 
-  // Handle functions
+  // Locals
   const handlePackClick = async () => {
     try {
       if (numOfUnopenedPacks > 0 && selectedSet?.id) {
         setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
         const cardsUnpacked = await unpackCards(selectedSet?.id);
         setUnpackedCards(cardsUnpacked);
-        addCardsToPool(cardsUnpacked);
+        handleAddCardsToPool(cardsUnpacked);
       }
     } catch (error) {
       console.error('Error unpacking cards:', error);

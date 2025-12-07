@@ -5,6 +5,10 @@
 import type { CardDto, CardType, Domain, Rarity } from '@/types/card';
 import mockCards from '../../mockData/cards.json';
 
+/**
+ * Type definition for mock card data structure
+ * Will be removed once real API is integrated
+ */
 type MockCard = {
   id: string;
   number: string | null;
@@ -35,6 +39,11 @@ type MockCard = {
   modifiedOn: string;
 };
 
+/**
+ * Fetches card data. Currently uses mock data.
+ * In the future, this function will fetch data from an API.
+ * Considering the cards to be fetched by set.
+ */
 export const fetchCardsData = async (): Promise<CardDto[]> => {
   return mockCards.map((card: MockCard) => {
     const isMainDeckCard =

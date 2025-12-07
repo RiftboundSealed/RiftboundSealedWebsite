@@ -16,14 +16,14 @@ const useDeckContainer = () => {
   const deckErrorMessage = useAppSelector(selectDeckError);
 
   // removeFromDeck handler
-  const removeFromDeck = (deckId: string, poolId: string | null) => {
+  const handleRemoveFromDeck = (deckId: string, poolId: string | null) => {
     dispatch(removeDeckEntry({ id: deckId }));
     if (poolId) {
       dispatch(removePoolEntryFromDeck({ id: poolId }));
     }
   };
 
-  return { cardsInDeck, deckErrorMessage, removeFromDeck };
+  return { cardsInDeck, deckErrorMessage, handleRemoveFromDeck };
 };
 
 export default useDeckContainer;

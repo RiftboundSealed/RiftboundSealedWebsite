@@ -1,0 +1,45 @@
+.rune-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 6 columns */
+  gap: 8px;
+  justify-content: center; /* center the whole grid horizontally */
+  align-items: center; /* center rows vertically within the container */
+}
+
+/* Label cell in the first column */
+.rune-container__label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 48px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Each rune cell is exactly 48x48 and centers its contents */
+.rune-container__cell {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Optional: simple focus/hover styling */
+.rune-container__cell:hover,
+.rune-container__cell:focus-visible {
+  outline: 2px solid #1976d2;
+  border-radius: 4px;
+}
+
+/* The rune image itself */
+.rune-container__image {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
