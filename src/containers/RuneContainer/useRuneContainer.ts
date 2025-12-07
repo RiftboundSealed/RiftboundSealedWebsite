@@ -15,7 +15,9 @@ const useRuneContainer = () => {
   // handleAddRuneCardsToState
   const handleAddRuneCardsToState = useCallback(async () => {
     const cardsData = await fetchCardsData();
-    const runeCards = cardsData.filter((card) => card.type === 'Rune');
+    const runeCards = cardsData.filter(
+      (card) => card.type === 'Rune' && !card.isAlternateArt,
+    );
     dispatch(upsertCards(runeCards));
   }, [dispatch]);
 
