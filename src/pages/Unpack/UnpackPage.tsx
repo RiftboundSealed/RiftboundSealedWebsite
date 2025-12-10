@@ -124,7 +124,7 @@ const UnpackPage = (): JSX.Element => {
       <ExportCardsTextDialog
         open={exportDialogOpen}
         onClose={handleCloseExportDialog}
-        cardNames={allCardsInPool.map((card) => ({
+        cardsMainDeck={allCardsInPool.map((card) => ({
           id: card.id,
           name: card.name,
         }))}

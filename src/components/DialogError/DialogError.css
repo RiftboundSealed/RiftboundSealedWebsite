@@ -1,0 +1,11 @@
+/* Slightly constrain the dialog to a medium size */
+.dialog-error__paper {
+  max-width: 600px;
+}
+
+/* Make the text box look more like a code/export area */
+.dialog-error__textbox .MuiInputBase-input {
+  font-family: 'Arial', monospace;
+  font-size: 0.9rem;
+  white-space: pre;
+}

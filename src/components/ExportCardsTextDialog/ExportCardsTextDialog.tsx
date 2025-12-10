@@ -12,15 +12,22 @@ import React, { useMemo, useState } from 'react';
 
 import './ExportCardsTextDialog.css';
 
+type CardData = {
+  id: string;
+  name: string;
+};
+
 interface ExportCardsTextDialogProps {
-  cardNames: { id: string; name: string }[];
+  cardsMainDeck: CardData[];
+  cardsSideboard?: CardData[];
   open: boolean;
   title?: string;
   onClose: () => void;
 }
 
 const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
-  cardNames,
+  cardsMainDeck,
+  cardsSideboard = [],
   open,
   title = 'Export Cards as Text',
   onClose,
@@ -36,26 +43,33 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
   // - sort by id
   // - format "count name" per line
   const exportText = useMemo(() => {
-    // Map of id -> { name, count }
-    const byId = new Map<string, { name: string; count: number }>();
+    const sortedList = (cards: CardData[]) => {
+      // Map of id -> { name, count }
+      const byId = new Map<string, { name: string; count: number }>();
 
-    for (const { id, name } of cardNames) {
-      const existing = byId.get(id);
-      if (existing) {
-        existing.count += 1;
-      } else {
-        byId.set(id, { name, count: 1 });
+      for (const { id, name } of cards) {
+        const existing = byId.get(id);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          byId.set(id, { name, count: 1 });
+        }
       }
-    }
+      const sortedEntries = Array.from(byId.entries()).sort(([idA], [idB]) =>
+        idA.localeCompare(idB),
+      );
 
-    const sortedEntries = Array.from(byId.entries()).sort(([idA], [idB]) =>
-      idA.localeCompare(idB, undefined, { numeric: true, sensitivity: 'base' }),
-    );
+      return sortedEntries
+        .map(([, { name, count }]) => `${count} ${name}`)
+        .join('\n');
+    };
 
-    return sortedEntries
-      .map(([, { name, count }]) => `${count} ${name}`)
-      .join('\n');
-  }, [cardNames]);
+    return `${sortedList(cardsMainDeck)}${
+      cardsSideboard.length > 0
+        ? `\n\nSideboard:\n${sortedList(cardsSideboard)}`
+        : ''
+    }`;
+  }, [cardsMainDeck, cardsSideboard]);
 
   const handleCopy = async () => {
     try {
