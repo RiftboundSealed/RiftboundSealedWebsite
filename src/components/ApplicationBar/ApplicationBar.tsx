@@ -36,7 +36,13 @@ const ApplicationBar: React.FC<AppBarProps> = ({
             textColor="inherit"
             indicatorColor="secondary"
           >
-            <Tab label="Home" component={RouterLink} to="/" />
+            <Tab
+              label="Home"
+              component={RouterLink}
+              to="/"
+              value={0}
+              aria-label="Navigate to home page"
+            />
           </Tabs>
         </Toolbar>
       </Container>

@@ -1,8 +1,11 @@
 # Template
 ## Breaking Change
 ## Add
+- Extracted AppBar implementation into a reusable `ApplicationBar` component with configurable props
 ## Remove
 ## Internal
+- Standardized page layout spacing by adding `disableGutters` to all Container components and applying consistent padding-top: 16px
+- Removed deprecated mock data files (users.ts, cards.ts), example components (CardList, CardItem), and type definitions that were only used for examples 
 
 # 0.9.0
 ## Add
