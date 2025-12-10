@@ -1,7 +1,4 @@
-import {
-  selectAllCardsInDeck,
-  selectDeckError,
-} from '@/redux/deck/deckSelectors';
+import { selectAllCardsInDeck } from '@/redux/deck/deckSelectors';
 import { removeDeckEntry } from '@/redux/deck/deckSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { removePoolEntryFromDeck } from '@/redux/pool/poolSlice';
@@ -12,9 +9,6 @@ const useDeckContainer = () => {
   // cardsInDeck
   const cardsInDeck = useAppSelector(selectAllCardsInDeck);
 
-  // deckErrorMessage
-  const deckErrorMessage = useAppSelector(selectDeckError);
-
   // removeFromDeck handler
   const handleRemoveFromDeck = (deckId: string, poolId: string | null) => {
     dispatch(removeDeckEntry({ id: deckId }));
@@ -23,7 +17,7 @@ const useDeckContainer = () => {
     }
   };
 
-  return { cardsInDeck, deckErrorMessage, handleRemoveFromDeck };
+  return { cardsInDeck, handleRemoveFromDeck };
 };
 
 export default useDeckContainer;

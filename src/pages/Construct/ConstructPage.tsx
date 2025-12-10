@@ -1,6 +1,8 @@
 import { Container, Box, Paper, Button } from '@mui/material';
-import { type JSX } from 'react';
+import { useState, type JSX } from 'react';
 
+import DialogError from '@/components/DialogError/DialogError';
+import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import DeckContainer from '@/containers/DeckContainer/DeckContainer';
 import PoolConstructContainer from '@/containers/PoolConstructContainer/PoolConstructContainer';
@@ -10,8 +12,38 @@ import useConstructPage from './useConstructPage';
 import './ConstructPage.css';
 
 const ConstructPage = (): JSX.Element => {
+  // State
+  const [exportCardsDialogOpen, setExportCardsDialogOpen] =
+    useState<boolean>(false);
+  const [dialogErrorOpen, setDialogErrorOpen] = useState<boolean>(false);
+  const [exportType, setExportType] = useState<'pool' | 'deck'>('pool');
+
   // Hooks
-  const { hasAccess } = useConstructPage();
+  const {
+    hasAccess,
+    allCardsInPool,
+    allCardsInDeck,
+    cardsRemainingInPool,
+    deckErrorMessage,
+    isDeckLegal,
+  } = useConstructPage();
+
+  // Locals
+  const onClickButtonExportPool = () => {
+    setExportType('pool');
+    setExportCardsDialogOpen(true);
+  };
+  const onClickButtonExportDeck = () => {
+    const isLegal = isDeckLegal();
+    if (isLegal) {
+      setExportType('deck');
+      setExportCardsDialogOpen(true);
+    } else {
+      setDialogErrorOpen(true);
+    }
+  };
+  const onCloseExportDialog = () => setExportCardsDialogOpen(false);
+  const onCloseErrorDialog = () => setDialogErrorOpen(false);
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -24,8 +56,18 @@ const ConstructPage = (): JSX.Element => {
           {/* Row 1, Col 2: buttons only in the right column */}
           <Box className="construct-deck-buttons-cell">
             <Box className="construct-deck-buttons-row">
-              <Button variant="contained">Export Pool</Button>
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onClickButtonExportPool}
+              >
+                Export Pool
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={onClickButtonExportDeck}
+              >
                 Export Deck
               </Button>
             </Box>
@@ -42,6 +84,40 @@ const ConstructPage = (): JSX.Element => {
           </Paper>
         </Box>
       </Container>
+      {/* Export Dialog */}
+      <ExportCardsTextDialog
+        open={exportCardsDialogOpen}
+        onClose={onCloseExportDialog}
+        cardsMainDeck={
+          exportType === 'pool'
+            ? allCardsInPool.map((card) => ({
+                id: card.id,
+                name: card.name,
+              }))
+            : allCardsInDeck.map((card) => ({
+                id: card.id,
+                name: card.name,
+              }))
+        }
+        cardsSideboard={
+          exportType === 'deck'
+            ? cardsRemainingInPool.map((card) => ({
+                id: card.id,
+                name: card.name,
+              }))
+            : []
+        }
+        title={
+          exportType === 'pool' ? 'Export Pool as Text' : 'Export Deck as Text'
+        }
+      />
+      {/* Dialog Error for illegal deck */}
+      <DialogError
+        value={deckErrorMessage || ''}
+        open={dialogErrorOpen}
+        onClose={onCloseErrorDialog}
+        title={'Illegal Deck'}
+      />
     </Guardrail>
   );
 };

@@ -14,8 +14,7 @@ const DeckContainer = (): JSX.Element => {
   const RUNE_DECK_SIZE = 12;
 
   // Hooks
-  const { cardsInDeck, deckErrorMessage, handleRemoveFromDeck } =
-    useDeckContainer();
+  const { cardsInDeck, handleRemoveFromDeck } = useDeckContainer();
 
   // Sort the cards
   const displayCards = [...cardsInDeck].sort((a, b) =>
@@ -71,17 +70,14 @@ const DeckContainer = (): JSX.Element => {
       className="deck-container"
       style={{ maxHeight: `${CONTAINER_MAX_HEIGHT_PX}px` }}
     >
-      {/* Row 1: Error */}
-      <div className="deck-container__row deck-container__row--error">
-        <Typography variant="body1" color="error">
-          {deckErrorMessage}
-        </Typography>
-      </div>
-
-      {/* Row 2: Main deck status */}
+      {/* Row: Main deck status */}
       <div
         className={`deck-container__row deck-container__row--status ${
-          mainDeckCount === MAIN_DECK_SIZE ? 'deck-container__row--ok' : ''
+          mainDeckCount === MAIN_DECK_SIZE
+            ? 'deck-container__row--ok'
+            : mainDeckCount > MAIN_DECK_SIZE
+              ? 'deck-container__row--error'
+              : ''
         }`}
       >
         <Typography variant="h5">
@@ -89,17 +85,21 @@ const DeckContainer = (): JSX.Element => {
         </Typography>
       </div>
 
-      {/* Row 3: Rune deck */}
+      {/* Row: Rune deck */}
       <div
         className={`deck-container__row deck-container__row--status ${
-          runeCount === RUNE_DECK_SIZE ? 'deck-container__row--ok' : ''
+          runeCount === RUNE_DECK_SIZE
+            ? 'deck-container__row--ok'
+            : runeCount > RUNE_DECK_SIZE
+              ? 'deck-container__row--error'
+              : ''
         }`}
       >
         <Typography variant="h5">
           Runes: {runeCount} / {RUNE_DECK_SIZE}
         </Typography>
       </div>
-      {/* Rune cards */}
+      {/* Row: Rune cards */}
       {[...runeMap.entries()].map(([cardId, deckIds]) => {
         const rune = runeCards.find((c) => c.id === cardId);
 

@@ -28,6 +28,11 @@
   background-color: rgba(76, 175, 80, 0.15); /* light green */
 }
 
+/* Highlighted red when condition is violated */
+.deck-container__row--error {
+  background-color: rgba(244, 67, 54, 0.15); /* light red */
+}
+
 /* Section wrapper */
 .deck-container__section {
   margin-top: 8px;

@@ -1,12 +1,20 @@
 import { selectHasCardData } from '@/redux/cards/cardsSelectors';
-import { useAppSelector } from '@/redux/hooks';
+import {
+  selectAllCardsInDeck,
+  selectDeckError,
+} from '@/redux/deck/deckSelectors';
+import { checkLegalDeck } from '@/redux/deck/deckThunk';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
   selectAllCardsInPool,
+  selectAllCardsRemainingInPool,
   selectHasPoolData,
 } from '@/redux/pool/poolSelectors';
 import { selectHasSetData } from '@/redux/sets/setsSelectors';
 
 const useConstructPage = () => {
+  const dispatch = useAppDispatch();
+
   // hasAccess
   const hasSetData = useAppSelector(selectHasSetData);
   const hasCardData = useAppSelector(selectHasCardData);
@@ -16,7 +24,26 @@ const useConstructPage = () => {
   // allCardsInPool
   const allCardsInPool = useAppSelector(selectAllCardsInPool);
 
-  return { hasAccess, allCardsInPool };
+  // allCardsInDeck
+  const allCardsInDeck = useAppSelector(selectAllCardsInDeck);
+
+  // cardsRemainingInPool
+  const cardsRemainingInPool = useAppSelector(selectAllCardsRemainingInPool);
+
+  // deckErrorMessage
+  const deckErrorMessage = useAppSelector(selectDeckError);
+
+  // isDeckLegal
+  const isDeckLegal = () => dispatch(checkLegalDeck());
+
+  return {
+    hasAccess,
+    allCardsInPool,
+    allCardsInDeck,
+    cardsRemainingInPool,
+    deckErrorMessage,
+    isDeckLegal,
+  };
 };
 
 export default useConstructPage;

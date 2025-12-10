@@ -1,12 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import { MAIN_DECK_CARD_TYPES } from '@/consts/card';
 import {
   selectCardEntities,
   selectCardEntryById,
 } from '@/redux/cards/cardsSelectors';
 import { deckAdapter } from '@/redux/deck/deckSlice';
 import type { RootState } from '@/redux/store';
-import type { CardType } from '@/types/card';
+import type { CardType, Domain } from '@/types/card';
 
 const selectDeckState = (state: RootState) => state.deck;
 
@@ -34,6 +35,17 @@ export const selectAllCardsInDeck = createSelector(
       .filter((c) => c !== null),
 );
 
+export const selectLegendsInDeck = createSelector(
+  [selectAllCardsInDeck],
+  (cardsInDeck) => cardsInDeck.filter((card) => card.type === 'Legend'),
+);
+
+export const selectSignatureSpellsInDeck = createSelector(
+  [selectAllCardsInDeck],
+  (cardsInDeck) =>
+    cardsInDeck.filter((card) => card.type === 'Signature Spell'),
+);
+
 export const selectCardByDeckId = (state: RootState, deckId: string) => {
   const deckEntity = selectDeckEntryById(state, deckId);
   if (!deckEntity) return null;
@@ -55,4 +67,42 @@ export const selectCardTypeCountInDeck = createSelector(
       }
       return count;
     }, 0),
+);
+
+export const selectDomainTypesInMainDeck = createSelector(
+  [selectAllDeckEntries, selectCardEntities],
+  (deckEntries, cardEntities) => {
+    return Array.from(
+      new Set<Domain>(
+        deckEntries
+          .map((deckEntry) => {
+            const card = cardEntities[deckEntry.cardId];
+            return card || null;
+          })
+          .filter((d) => d !== null)
+          .filter((card) => MAIN_DECK_CARD_TYPES.includes(card.type))
+          .map((card) => card.domain)
+          .flat(),
+      ),
+    );
+  },
+);
+
+export const selectDomainTypesInRuneDeck = createSelector(
+  [selectAllDeckEntries, selectCardEntities],
+  (deckEntries, cardEntities) => {
+    return Array.from(
+      new Set<Domain>(
+        deckEntries
+          .map((deckEntry) => {
+            const card = cardEntities[deckEntry.cardId];
+            return card || null;
+          })
+          .filter((d) => d !== null)
+          .filter((card) => card.type === 'Rune')
+          .map((card) => card.domain)
+          .flat(),
+      ),
+    );
+  },
 );
