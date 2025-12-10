@@ -4,6 +4,13 @@
 ## Remove
 ## Internal
 
+# 0.10.0
+## Add
+- Extracted AppBar implementation into a reusable `ApplicationBar` component with configurable props
+## Internal
+- Standardized page layout spacing by adding `disableGutters` to all Container components and applying consistent padding-top: 16px
+- Removed deprecated mock data files (users.ts, cards.ts), example components (CardList, CardItem), and type definitions that were only used for examples
+
 # 0.9.0
 ## Add
 - Implemented `checkLegalDeck` thunk that validates deck composition against game rules (25 main deck cards, 12 runes, domain restrictions, legend/battlefield limits)

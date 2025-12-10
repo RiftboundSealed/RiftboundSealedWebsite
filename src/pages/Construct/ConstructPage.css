@@ -1,6 +1,5 @@
 .construct-page {
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 16px;
   box-sizing: border-box;
 }
 
@@ -35,7 +34,7 @@
   padding: 8px 0;
 }
 
-/* Inner row so you can tweak spacing independently if needed */
+/* Inner row so that spacing can be tweaked independently if needed */
 .construct-deck-buttons-row {
   display: flex;
   gap: 8px;
