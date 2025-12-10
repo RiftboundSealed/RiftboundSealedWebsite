@@ -25,7 +25,7 @@ const ConstructPage = (): JSX.Element => {
     allCardsInDeck,
     cardsRemainingInPool,
     deckErrorMessage,
-    handleCheckLegalDeck,
+    isDeckLegal,
   } = useConstructPage();
 
   // Locals
@@ -34,8 +34,8 @@ const ConstructPage = (): JSX.Element => {
     setExportCardsDialogOpen(true);
   };
   const onClickButtonExportDeck = () => {
-    handleCheckLegalDeck();
-    if (!deckErrorMessage) {
+    const isLegal = isDeckLegal();
+    if (isLegal) {
       setExportType('deck');
       setExportCardsDialogOpen(true);
     } else {

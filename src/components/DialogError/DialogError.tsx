@@ -38,7 +38,7 @@ const DialogError: React.FC<DialogErrorProps> = ({
             fullWidth
             variant="outlined"
             slotProps={{
-              htmlInput: { readonly: true },
+              htmlInput: { readOnly: true },
             }}
           />
         </DialogContent>

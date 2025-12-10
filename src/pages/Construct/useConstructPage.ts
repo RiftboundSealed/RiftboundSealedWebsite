@@ -33,8 +33,8 @@ const useConstructPage = () => {
   // deckErrorMessage
   const deckErrorMessage = useAppSelector(selectDeckError);
 
-  // handleCheckLegalDeck
-  const handleCheckLegalDeck = () => dispatch(checkLegalDeck());
+  // isDeckLegal
+  const isDeckLegal = () => dispatch(checkLegalDeck());
 
   return {
     hasAccess,
@@ -42,7 +42,7 @@ const useConstructPage = () => {
     allCardsInDeck,
     cardsRemainingInPool,
     deckErrorMessage,
-    handleCheckLegalDeck,
+    isDeckLegal,
   };
 };
 

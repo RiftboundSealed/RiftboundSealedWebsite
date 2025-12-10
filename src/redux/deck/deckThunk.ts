@@ -44,9 +44,10 @@ export const tryAddCardToDeck =
  * If illegal, dispatches error messages to the deck state.
  */
 export const checkLegalDeck =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {
+  () =>
+  (dispatch: AppDispatch, getState: () => RootState): boolean => {
     const state = getState();
-    const errors = [];
+    const errors: string[] = [];
 
     // Check if the deck has exactly 25 main deck cards (excluding Runes)
     const mainDeckCount = MAIN_DECK_CARD_TYPES.reduce(
@@ -85,7 +86,7 @@ export const checkLegalDeck =
     const domainIdentities = selectDomainTypesInMainDeck(state);
     if (domainIdentities.length > 3) {
       errors.push(
-        `- Main deck can only have up to 3 domain identities [Current: ${domainIdentities.join(', ')}].`,
+        `- Main deck can only have up to 3 domains [Current: ${domainIdentities.join(', ')}].`,
       );
     }
 
@@ -93,7 +94,7 @@ export const checkLegalDeck =
     const runeDomains = selectDomainTypesInRuneDeck(state);
     if (runeDomains.length > 3) {
       errors.push(
-        `- You can only have up to 3 domains [Current: ${runeDomains.join(', ')}] in your Rune deck.`,
+        `- Rune deck can only have up to 3 domains [Current: ${runeDomains.join(', ')}].`,
       );
     }
 
@@ -146,9 +147,12 @@ export const checkLegalDeck =
     if (errors.length > 0) {
       dispatch(
         addDeckErrorMessage({
-          message: errors.join(' '),
+          message: errors.join('\n'),
         }),
       );
+      return false;
+    } else {
+      dispatch(clearDeckErrorMessage());
+      return true;
     }
-    dispatch(clearDeckErrorMessage());
   };
