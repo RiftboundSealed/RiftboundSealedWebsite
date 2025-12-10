@@ -47,7 +47,7 @@ const UnpackPage = (): JSX.Element => {
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
-      <Container className="unpack-page">
+      <Container className="unpack-page" disableGutters>
         <Box
           className="unpack-grid"
           style={{

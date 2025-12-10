@@ -78,9 +78,3 @@
   text-overflow: unset;
   word-break: break-word;
 }
-
-/* Optional: style if you still use an empty state somewhere */
-.deck-container__empty-message {
-  padding: 8px;
-  font-style: italic;
-}

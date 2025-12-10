@@ -1,5 +1,5 @@
 .unpack-page {
-  padding: 24px; /* 3 * 8px */
+  padding-top: 16px;
   box-sizing: border-box;
   min-height: 100vh; /* so row percentages have something meaningful to work with */
 }

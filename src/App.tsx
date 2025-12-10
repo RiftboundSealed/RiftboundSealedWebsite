@@ -1,18 +1,8 @@
-import {
-  CssBaseline,
-  ThemeProvider,
-  createTheme,
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Tabs,
-  Tab,
-} from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme, Box } from '@mui/material';
 import React from 'react';
 import { Routes, Route } from 'react-router';
 
-import CardList from './containers/CardList';
+import ApplicationBar from '@/components/ApplicationBar/ApplicationBar';
 import ConstructPage from './pages/Construct/ConstructPage';
 import HomePage from './pages/Home/HomePage';
 import UnpackPage from './pages/Unpack/UnpackPage';
@@ -34,7 +24,7 @@ const theme = createTheme({
       xs: 0,
       sm: 600,
       md: 900,
-      lg: 1200, // you can leave this
+      lg: 1200,
       xl: 1600, // <- make xl 1600px
     },
   },
@@ -58,26 +48,14 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Riftbound Sealed
-          </Typography>
-        </Toolbar>
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          textColor="inherit"
-          indicatorColor="secondary"
-        >
-          <Tab label="Home" />
-          <Tab label="Cards" />
-        </Tabs>
-      </AppBar>
+      <ApplicationBar
+        title="Riftbound Sealed"
+        tabValue={tabValue}
+        onTabChange={handleTabChange}
+      />
       <Box>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/cards" element={<CardList />} />
           <Route path="/unpack" element={<UnpackPage />} />
           <Route path="/construct" element={<ConstructPage />} />
         </Routes>

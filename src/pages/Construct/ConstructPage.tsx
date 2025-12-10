@@ -47,7 +47,7 @@ const ConstructPage = (): JSX.Element => {
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
-      <Container className="construct-page">
+      <Container className="construct-page" disableGutters>
         <Box className="construct-deck-grid">
           {/* Row 1, Col 1: Runes */}
           <Box className="construct-deck-runes-grid">

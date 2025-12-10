@@ -14,7 +14,7 @@ const HomePage = (): JSX.Element => {
   }, [handleResetState]);
 
   return (
-    <Container className="home-page">
+    <Container className="home-page" disableGutters>
       <Paper elevation={3} className="home-page-paper">
         <Box className="home-page-grid">
           <Box className="home-page-welcome">
