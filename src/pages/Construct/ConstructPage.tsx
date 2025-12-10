@@ -116,7 +116,7 @@ const ConstructPage = (): JSX.Element => {
         value={deckErrorMessage || ''}
         open={dialogErrorOpen}
         onClose={onCloseErrorDialog}
-        title={'Illegal Deck Error'}
+        title={'Illegal Deck'}
       />
     </Guardrail>
   );

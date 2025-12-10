@@ -77,7 +77,7 @@ export const selectDomainTypesInMainDeck = createSelector(
         deckEntries
           .map((deckEntry) => {
             const card = cardEntities[deckEntry.cardId];
-            return card ? card : null;
+            return card || null;
           })
           .filter((d) => d !== null)
           .filter((card) => MAIN_DECK_CARD_TYPES.includes(card.type))
@@ -96,7 +96,7 @@ export const selectDomainTypesInRuneDeck = createSelector(
         deckEntries
           .map((deckEntry) => {
             const card = cardEntities[deckEntry.cardId];
-            return card ? card : null;
+            return card || null;
           })
           .filter((d) => d !== null)
           .filter((card) => card.type === 'Rune')

@@ -56,7 +56,7 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
         }
       }
       const sortedEntries = Array.from(byId.entries()).sort(([idA], [idB]) =>
-        idA.localeCompare(idB),
+        idA.localeCompare(idB, undefined, { numeric: true }),
       );
 
       return sortedEntries

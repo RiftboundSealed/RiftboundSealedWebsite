@@ -4,7 +4,7 @@
 }
 
 .dialog-error__textbox .MuiInputBase-input {
-  font-family: 'Arial', monospace;
+  font-family: 'Arial', sans-serif;
   font-size: 0.9rem;
   white-space: pre-wrap;
   word-break: break-word;

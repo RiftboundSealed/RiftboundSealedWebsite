@@ -37,6 +37,7 @@ const DialogError: React.FC<DialogErrorProps> = ({
             maxRows={16}
             fullWidth
             variant="outlined"
+            error={true}
             slotProps={{
               htmlInput: { readOnly: true },
             }}

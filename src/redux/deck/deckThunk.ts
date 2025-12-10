@@ -42,6 +42,7 @@ export const tryAddCardToDeck =
 /**
  * Checks if the current deck is legal according to game rules.
  * If illegal, dispatches error messages to the deck state.
+ * Returns true if the deck is legal, false otherwise.
  */
 export const checkLegalDeck =
   () =>
@@ -71,7 +72,9 @@ export const checkLegalDeck =
     // Check if there is more than 1 legend
     const legendCount = selectCardTypeCountInDeck(state, 'Legend');
     if (legendCount > 1) {
-      errors.push('- You can only have up to 1 Legend in your deck.');
+      errors.push(
+        `- You can only have up to 1 Legend [Current: ${legendCount}] in your deck.`,
+      );
     }
 
     // Check if there are more than 3 battlefields
