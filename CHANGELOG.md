@@ -1,11 +1,14 @@
 # Template
 ## Breaking Change
 ## Add
+## Remove
+## Internal
+
+# 0.9.0
+## Add
 - Implemented `checkLegalDeck` thunk that validates deck composition against game rules (25 main deck cards, 12 runes, domain restrictions, legend/battlefield limits)
 - Enhanced export functionality to support both pool and deck export with sideboard, replacing the previous single-purpose card list export
 - Added visual feedback for deck validation errors through a new `DialogError` component and status indicators in the deck container
-## Remove
-## Internal
 
 # 0.8.0
 ## Add
