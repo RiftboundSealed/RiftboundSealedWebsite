@@ -3,7 +3,10 @@
 ## Add
 ## Remove
 ## Internal
-- Added a `riot.txt` for app verification and review by Riot. 
+
+# 0.10.2
+## Internal
+- Added a `riot.txt` for app verification and review by Riot.
 
 # 0.10.1
 ## Internal
