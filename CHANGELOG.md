@@ -3,6 +3,7 @@
 ## Add
 ## Remove
 ## Internal
+- Updated the color palette to establish a custom dark theme with brand-specific colors ("Riftbound blue" and "Golden bell").
 
 # 0.10.0
 ## Add

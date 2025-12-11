@@ -7,22 +7,27 @@ import ConstructPage from './pages/Construct/ConstructPage';
 import HomePage from './pages/Home/HomePage';
 import UnpackPage from './pages/Unpack/UnpackPage';
 
+const RIFTBOUND_BLUE = '#084a6d';
+const REGAL_BLUE = '#034f76';
+const GOLDEN_BELL = '#e38412';
+const DARKER_GOLDEN_BELL = '#c56a0f';
+
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#084a6d', // Riftbound blue - AppBar, buttons, etc.
+      main: RIFTBOUND_BLUE, // Riftbound blue - AppBar, Paper, etc.
     },
     secondary: {
-      main: '#e38412', // Golden bell - Buttons
+      main: GOLDEN_BELL, // Golden bell - Buttons
     },
 
     background: {
-      paper: '#034f76', // Body background - Regal blue
-      default: '#084a6d', // Paper background
+      paper: REGAL_BLUE, // Regal Blue - Body background
+      default: RIFTBOUND_BLUE,
     },
 
-    divider: '#e38412', // Golden bell used as default divider/border color
+    divider: GOLDEN_BELL, // Golden bell used as default divider/border color
   },
 
   // custom breakpoints
@@ -48,7 +53,7 @@ const theme = createTheme({
         root: {
           borderWidth: 1,
           borderStyle: 'solid',
-          borderColor: '#e38412',
+          borderColor: GOLDEN_BELL,
         },
       },
     },
@@ -63,10 +68,10 @@ const theme = createTheme({
 
         // contained buttons
         contained: {
-          backgroundColor: '#e38412',
+          backgroundColor: GOLDEN_BELL,
           color: '#000', // dark text on gold
           '&:hover': {
-            backgroundColor: '#c56a0f', // slightly darker golden bell
+            backgroundColor: DARKER_GOLDEN_BELL, // slightly darker golden bell
           },
           '&:disabled': {
             backgroundColor: 'rgba(227, 132, 18, 0.4)',
