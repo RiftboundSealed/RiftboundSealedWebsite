@@ -9,13 +9,20 @@ import UnpackPage from './pages/Unpack/UnpackPage';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1976d2',
+      main: '#084a6d', // Riftbound blue - AppBar, buttons, etc.
     },
     secondary: {
-      main: '#dc004e',
+      main: '#e38412', // Golden bell - Buttons
     },
+
+    background: {
+      paper: '#034f76', // Body background - Regal blue
+      default: '#084a6d', // Paper background
+    },
+
+    divider: '#e38412', // Golden bell used as default divider/border color
   },
 
   // custom breakpoints
@@ -34,6 +41,38 @@ const theme = createTheme({
     MuiContainer: {
       defaultProps: {
         maxWidth: 'xl', // <- use the 1600px breakpoint
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: '#e38412',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        // base styles shared by all variants
+        root: {
+          textTransform: 'none',
+          borderRadius: 8,
+          fontWeight: 600,
+        },
+
+        // contained buttons
+        contained: {
+          backgroundColor: '#e38412',
+          color: '#000', // dark text on gold
+          '&:hover': {
+            backgroundColor: '#c56a0f', // slightly darker golden bell
+          },
+          '&:disabled': {
+            backgroundColor: 'rgba(227, 132, 18, 0.4)',
+            color: 'rgba(0, 0, 0, 0.4)',
+          },
+        },
       },
     },
   },

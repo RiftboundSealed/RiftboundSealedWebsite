@@ -124,7 +124,9 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={onClose} variant="contained">
+            Close
+          </Button>
           <Button onClick={handleCopy} variant="contained">
             Copy
           </Button>
