@@ -10,11 +10,12 @@
   word-break: break-word;
   overflow-wrap: anywhere;
   overflow-x: hidden;
+  color: black;
 }
 
 /* Give the field a subtle error panel look */
 .dialog-error__textbox .MuiOutlinedInput-root {
-  background-color: #ffebee; /* light error red */
+  background-color: #cbadb1; /* light error red */
 }
 
 /* Default border in error color */

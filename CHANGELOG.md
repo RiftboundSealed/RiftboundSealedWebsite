@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.10.1
+## Internal
+- Updated the color palette to establish a custom dark theme with brand-specific colors ("Riftbound blue" and "Golden bell").
+
 # 0.10.0
 ## Add
 - Extracted AppBar implementation into a reusable `ApplicationBar` component with configurable props

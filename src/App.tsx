@@ -7,15 +7,27 @@ import ConstructPage from './pages/Construct/ConstructPage';
 import HomePage from './pages/Home/HomePage';
 import UnpackPage from './pages/Unpack/UnpackPage';
 
+const RIFTBOUND_BLUE = '#084a6d';
+const REGAL_BLUE = '#034f76';
+const GOLDEN_BELL = '#e38412';
+const DARKER_GOLDEN_BELL = '#c56a0f';
+
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1976d2',
+      main: RIFTBOUND_BLUE, // Riftbound blue - AppBar, Paper, etc.
     },
     secondary: {
-      main: '#dc004e',
+      main: GOLDEN_BELL, // Golden bell - Buttons
     },
+
+    background: {
+      paper: REGAL_BLUE, // Regal Blue - Body background
+      default: RIFTBOUND_BLUE,
+    },
+
+    divider: GOLDEN_BELL, // Golden bell used as default divider/border color
   },
 
   // custom breakpoints
@@ -34,6 +46,38 @@ const theme = createTheme({
     MuiContainer: {
       defaultProps: {
         maxWidth: 'xl', // <- use the 1600px breakpoint
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: GOLDEN_BELL,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        // base styles shared by all variants
+        root: {
+          textTransform: 'none',
+          borderRadius: 8,
+          fontWeight: 600,
+        },
+
+        // contained buttons
+        contained: {
+          backgroundColor: GOLDEN_BELL,
+          color: '#000', // dark text on gold
+          '&:hover': {
+            backgroundColor: DARKER_GOLDEN_BELL, // slightly darker golden bell
+          },
+          '&:disabled': {
+            backgroundColor: 'rgba(227, 132, 18, 0.4)',
+            color: 'rgba(0, 0, 0, 0.4)',
+          },
+        },
       },
     },
   },
