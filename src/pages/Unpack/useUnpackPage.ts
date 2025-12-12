@@ -24,7 +24,7 @@ const useUnpackPage = () => {
   const allCardsInPool = useAppSelector(selectAllCardsInPool);
 
   // addCardsToPool
-  const handleAddCardsToPool = (cards: CardDto[]) => {
+  const addCardsToPool = (cards: CardDto[]) => {
     dispatch(upsertCards(cards));
     dispatch(
       addPoolEntries(
@@ -37,7 +37,7 @@ const useUnpackPage = () => {
     );
   };
 
-  return { hasAccess, selectedSet, allCardsInPool, handleAddCardsToPool };
+  return { hasAccess, selectedSet, allCardsInPool, addCardsToPool };
 };
 
 export default useUnpackPage;

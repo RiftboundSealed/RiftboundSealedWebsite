@@ -8,11 +8,11 @@ import usePoolConstructContainer from './usePoolConstructContainer';
 
 const PoolConstructContainer = (): JSX.Element => {
   // State / Hooks
-  const { cardsRemainingInPool, handleAddToDeck } = usePoolConstructContainer();
+  const { cardsRemainingInPool, addCardToDeck } = usePoolConstructContainer();
 
-  // Handle functions
+  // Event Handlers
   const handleCardClick = (cardPanel: CardPanelData) => {
-    handleAddToDeck(cardPanel.cardId, cardPanel.id);
+    addCardToDeck(cardPanel.cardId, cardPanel.id);
   };
 
   return (
@@ -26,7 +26,7 @@ const PoolConstructContainer = (): JSX.Element => {
             name: card.name,
           }))}
           sortByCardId={true}
-          onCardClick={handleCardClick}
+          onClickCard={handleCardClick}
         />
       ) : (
         <Typography variant="h4" align="center">

@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.10.5
+## Internal
+- Renamed event handler naming conventions across components, containers, and pages to follow React naming conventions.
+
 # 0.10.4
 ## Internal
 - Renamed all reusable components (in `/components`) to have the material be the prefix.

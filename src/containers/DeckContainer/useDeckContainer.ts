@@ -10,14 +10,14 @@ const useDeckContainer = () => {
   const cardsInDeck = useAppSelector(selectAllCardsInDeck);
 
   // removeFromDeck handler
-  const handleRemoveFromDeck = (deckId: string, poolId: string | null) => {
+  const removeCardFromDeck = (deckId: string, poolId: string | null) => {
     dispatch(removeDeckEntry({ id: deckId }));
     if (poolId) {
       dispatch(removePoolEntryFromDeck({ id: poolId }));
     }
   };
 
-  return { cardsInDeck, handleRemoveFromDeck };
+  return { cardsInDeck, removeCardFromDeck };
 };
 
 export default useDeckContainer;

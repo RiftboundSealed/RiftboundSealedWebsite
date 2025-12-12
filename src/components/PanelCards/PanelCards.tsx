@@ -17,7 +17,7 @@ interface PanelCardsProps {
   maxHeight?: number;
   gap?: number;
   sortByCardId?: boolean;
-  onCardClick?: (card: CardPanelData) => void;
+  onClickCard?: (card: CardPanelData) => void;
 }
 
 const DEFAULT_CARD_WIDTH_PX = 175;
@@ -32,12 +32,17 @@ const PanelCards: React.FC<PanelCardsProps> = ({
   maxHeight = DEFAULT_CARD_PANEL_MAX_HEIGHT_PX,
   gap = DEFAULT_CARD_PANEL_GAP_PX,
   sortByCardId = false,
-  onCardClick,
+  onClickCard,
 }) => {
   // Sort cardImageUrls if sortByCardId is true
   const displayCards = sortByCardId
     ? [...cardImageUrls].sort((a, b) => a.cardId.localeCompare(b.cardId))
     : cardImageUrls;
+
+  // Event Handlers
+  const handleCardClick = (card: CardPanelData) => {
+    onClickCard?.(card);
+  };
 
   return (
     <Box
@@ -52,7 +57,7 @@ const PanelCards: React.FC<PanelCardsProps> = ({
         <div
           className="opened-panel-cards__cell"
           key={`opened-card-${index}-${card.id}`}
-          onClick={() => onCardClick?.(card)}
+          onClick={() => handleCardClick(card)}
           role="button"
           aria-label={card.name}
         >

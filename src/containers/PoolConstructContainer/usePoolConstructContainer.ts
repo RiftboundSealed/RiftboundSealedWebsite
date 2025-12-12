@@ -15,11 +15,11 @@ const usePoolConstructContainer = () => {
   const allCardsInPool = useAppSelector(selectAllCardsInPool);
 
   // addToDeck function
-  const handleAddToDeck = (cardId: string, poolId: string) => {
+  const addCardToDeck = (cardId: string, poolId: string) => {
     dispatch(tryAddCardToDeck(cardId, poolId));
   };
 
-  return { cardsRemainingInPool, allCardsInPool, handleAddToDeck };
+  return { cardsRemainingInPool, allCardsInPool, addCardToDeck };
 };
 
 export default usePoolConstructContainer;

@@ -6,12 +6,12 @@ import useHomePage from './useHomePage';
 import './HomePage.css';
 
 const HomePage = (): JSX.Element => {
-  const { handleResetState } = useHomePage();
+  const { resetState } = useHomePage();
 
   // Run only once when the page mounts
   useEffect(() => {
-    handleResetState();
-  }, [handleResetState]);
+    resetState();
+  }, [resetState]);
 
   return (
     <Container className="home-page" disableGutters>

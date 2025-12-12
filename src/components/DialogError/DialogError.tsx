@@ -5,7 +5,7 @@ interface DialogErrorProps {
   value: string;
   open: boolean;
   title?: string;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const DialogError: React.FC<DialogErrorProps> = ({
@@ -14,11 +14,16 @@ const DialogError: React.FC<DialogErrorProps> = ({
   title = 'Error',
   onClose,
 }) => {
+  // Event Handlers
+  const handleDialogClose = () => {
+    onClose?.();
+  };
+
   return (
     <>
       <Dialog
         open={open}
-        onClose={onClose}
+        onClose={handleDialogClose}
         aria-labelledby="dialog-error-title"
         fullWidth
         maxWidth="sm"
