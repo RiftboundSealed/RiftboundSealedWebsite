@@ -80,7 +80,7 @@ export const checkLegalDeck =
     const legendCount = selectCardTypeCountInDeck(state, 'Legend');
     if (legendCount > MAX_LEGEND_COUNT) {
       errors.push(
-        `- You can only have up to ${MAX_LEGEND_COUNT} Legend [Current: ${legendCount}] in your deck.`,
+        `- You can only have up to ${MAX_LEGEND_COUNT} Legend(s) [Current: ${legendCount}] in your deck.`,
       );
     }
 

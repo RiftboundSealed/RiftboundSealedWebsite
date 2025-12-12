@@ -8,7 +8,7 @@ import useDeckContainer from './useDeckContainer';
 import './DeckContainer.css';
 
 const DeckContainer = (): JSX.Element => {
-  // Dimensions
+  // Constants
   const CONTAINER_MAX_HEIGHT_PX = 600;
   const ROW_MAX_HEIGHT_PX = 36;
 
