@@ -9,11 +9,12 @@ import './SelectSetContainer.css';
 import useSelectSetContainer from './useSelectSetContainer';
 
 const SelectSetContainer = (): JSX.Element => {
+  // State
   const [sets, setSets] = useState<SetDto[]>([]);
   const [selectedSetId, setSelectedSetId] = useState<string | null>(null);
 
+  // Hooks
   const { handleBeginSealedDeck } = useSelectSetContainer();
-
   useEffect(() => {
     (async () => {
       try {
@@ -24,6 +25,13 @@ const SelectSetContainer = (): JSX.Element => {
       }
     })();
   }, []);
+
+  // Event Handlers
+  const onBeginSealedDeckClick = () => {
+    if (selectedSetId) {
+      handleBeginSealedDeck(selectedSetId);
+    }
+  };
 
   return (
     <>
@@ -41,7 +49,7 @@ const SelectSetContainer = (): JSX.Element => {
           component={RouterLink}
           to="/unpack"
           disabled={!selectedSetId}
-          onClick={() => handleBeginSealedDeck(selectedSetId)}
+          onClick={onBeginSealedDeckClick}
         >
           Begin Sealed Deck
         </Button>

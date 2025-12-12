@@ -28,8 +28,8 @@ const UnpackPage = (): JSX.Element => {
   const { hasAccess, selectedSet, allCardsInPool, handleAddCardsToPool } =
     useUnpackPage();
 
-  // Locals
-  const handlePackClick = async () => {
+  // Event Handlers
+  const onClickPack = async () => {
     try {
       if (numOfUnopenedPacks > 0 && selectedSet?.id) {
         setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
@@ -41,8 +41,8 @@ const UnpackPage = (): JSX.Element => {
       console.error('Error unpacking cards:', error);
     }
   };
-  const handleOpenExportDialog = () => setExportDialogOpen(true);
-  const handleCloseExportDialog = () => setExportDialogOpen(false);
+  const onClickOpenDialogExport = () => setExportDialogOpen(true);
+  const onClickCloseDialogExport = () => setExportDialogOpen(false);
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -66,7 +66,7 @@ const UnpackPage = (): JSX.Element => {
             <PanelUnopenedPacks
               unopenedPacksCount={numOfUnopenedPacks}
               packImageUrl={selectedSet?.packImageUrl}
-              onClick={handlePackClick}
+              onClick={onClickPack}
             />
           </Paper>
 
@@ -97,7 +97,7 @@ const UnpackPage = (): JSX.Element => {
                 variant="contained"
                 color="primary"
                 disabled={numOfUnopenedPacks > 0}
-                onClick={handleOpenExportDialog}
+                onClick={onClickOpenDialogExport}
               >
                 Export Pool
               </Button>
@@ -122,7 +122,7 @@ const UnpackPage = (): JSX.Element => {
       {/* Export Dialog */}
       <DialogExportCardsText
         open={exportDialogOpen}
-        onClose={handleCloseExportDialog}
+        onClose={onClickCloseDialogExport}
         cardsMainDeck={allCardsInPool.map((card) => ({
           id: card.id,
           name: card.name,

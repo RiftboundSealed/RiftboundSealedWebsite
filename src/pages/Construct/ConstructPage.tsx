@@ -28,12 +28,14 @@ const ConstructPage = (): JSX.Element => {
     isDeckLegal,
   } = useConstructPage();
 
-  // Locals
-  const onClickButtonExportPool = () => {
+  // Event Handlers
+  const onClickButtonExportPool = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.blur(); // Remove focus from button after click
     setExportType('pool');
     setExportCardsDialogOpen(true);
   };
-  const onClickButtonExportDeck = () => {
+  const onClickButtonExportDeck = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.blur(); // Remove focus from button after click
     const isLegal = isDeckLegal();
     if (isLegal) {
       setExportType('deck');

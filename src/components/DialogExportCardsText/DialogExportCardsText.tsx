@@ -32,12 +32,14 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
   title = 'Export Cards as Text',
   onClose,
 }) => {
+  // State
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>(
     'success',
   );
   const [snackbarMessage, setSnackbarMessage] = useState('Copied!');
 
+  // Locals
   // Build the export text:
   // - de-duplicate by id
   // - sort by id
@@ -71,7 +73,8 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
     }`;
   }, [cardsMainDeck, cardsSideboard]);
 
-  const handleCopy = async () => {
+  // Event Handlers
+  const onClickCopy = async () => {
     try {
       await navigator.clipboard.writeText(exportText);
       setSnackbarSeverity('success');
@@ -84,8 +87,7 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
       setSnackbarOpen(true);
     }
   };
-
-  const handleSnackbarClose = (
+  const onCloseSnackbar = (
     _event?: React.SyntheticEvent | Event,
     reason?: string,
   ) => {
@@ -127,7 +129,7 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
           <Button onClick={onClose} variant="contained">
             Close
           </Button>
-          <Button onClick={handleCopy} variant="contained">
+          <Button onClick={onClickCopy} variant="contained">
             Copy
           </Button>
         </DialogActions>
@@ -137,11 +139,11 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={2000}
-        onClose={handleSnackbarClose}
+        onClose={onCloseSnackbar}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
-          onClose={handleSnackbarClose}
+          onClose={onCloseSnackbar}
           severity={snackbarSeverity}
           variant="filled"
           sx={{ width: '100%' }}

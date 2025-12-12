@@ -5,12 +5,14 @@ import './ButtonRemove.css';
 
 type ButtonRemoveProps = {
   maxHeight?: number;
-  onRemoveFromDeckClick?: () => void;
+  onClick?: () => void;
 };
 
+const DEFAULT_BUTTON_MAX_HEIGHT = 36;
+
 const ButtonRemove: React.FC<ButtonRemoveProps> = ({
-  maxHeight = 36,
-  onRemoveFromDeckClick,
+  maxHeight = DEFAULT_BUTTON_MAX_HEIGHT,
+  onClick,
 }) => {
   return (
     <Button
@@ -18,7 +20,7 @@ const ButtonRemove: React.FC<ButtonRemoveProps> = ({
       color="error"
       variant="text"
       className="button-remove--button"
-      onClick={onRemoveFromDeckClick}
+      onClick={onClick}
       style={{ maxHeight: `${maxHeight}px` }}
     >
       <Typography variant="h3" className="button-remove--text">

@@ -15,11 +15,15 @@ const DeckContainer = (): JSX.Element => {
   // Hooks
   const { cardsInDeck, handleRemoveFromDeck } = useDeckContainer();
 
+  // Event Handlers
+  const onClickRemove = (deckId: string, poolId: string | null) => {
+    handleRemoveFromDeck(deckId, poolId);
+  };
+
   // Sort the cards
   const displayCards = [...cardsInDeck].sort((a, b) =>
     a.id.localeCompare(b.id),
   );
-
   // Filter by Legend, Unit, Spell, Gear, Battlefield, Runes
   const legendCards = displayCards.filter((card) => card.type === 'Legend');
   const championUnitCards = displayCards.filter(
@@ -110,11 +114,7 @@ const DeckContainer = (): JSX.Element => {
           >
             {/* Remove button */}
             <div className="deck-container__cell deck-container__cell--icon">
-              <ButtonRemove
-                onRemoveFromDeckClick={() =>
-                  handleRemoveFromDeck(deckIds[0], null)
-                }
-              />
+              <ButtonRemove onClick={() => onClickRemove(deckIds[0], null)} />
             </div>
 
             {/* Card name */}
@@ -156,9 +156,7 @@ const DeckContainer = (): JSX.Element => {
               {/* Remove button */}
               <div className="deck-container__cell deck-container__cell--icon">
                 <ButtonRemove
-                  onRemoveFromDeckClick={() =>
-                    handleRemoveFromDeck(card.deckId, card.poolId)
-                  }
+                  onClick={() => onClickRemove(card.deckId, card.poolId)}
                 />
               </div>
 
