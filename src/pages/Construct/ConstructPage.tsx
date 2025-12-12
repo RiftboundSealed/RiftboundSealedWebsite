@@ -2,7 +2,7 @@ import { Container, Box, Paper, Button } from '@mui/material';
 import { useState, type JSX } from 'react';
 
 import DialogError from '@/components/DialogError/DialogError';
-import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
+import DialogExportCardsText from '@/components/DialogExportCardsText/DialogExportCardsText';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import DeckContainer from '@/containers/DeckContainer/DeckContainer';
 import PoolConstructContainer from '@/containers/PoolConstructContainer/PoolConstructContainer';
@@ -85,7 +85,7 @@ const ConstructPage = (): JSX.Element => {
         </Box>
       </Container>
       {/* Export Dialog */}
-      <ExportCardsTextDialog
+      <DialogExportCardsText
         open={exportCardsDialogOpen}
         onClose={onCloseExportDialog}
         cardsMainDeck={

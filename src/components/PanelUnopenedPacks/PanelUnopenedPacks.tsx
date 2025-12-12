@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
-import './UnopenedPacksPanel.css';
+import './PanelUnopenedPacks.css';
 
-interface UnopenedPacksPanelProps {
+interface PanelUnopenedPacksProps {
   unopenedPacksCount: number;
   packImageUrl: string | null;
   onClick?: () => void;
@@ -14,7 +14,7 @@ const PACK_HEIGHT = 280;
 const PACK_OVERLAP_RATIO = 0.85; // each pack covers a percentage of the one to its left
 const PACK_VISIBLE_OFFSET = PACK_WIDTH * (1 - PACK_OVERLAP_RATIO); // remaining width visible
 
-const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
+const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
   unopenedPacksCount,
   packImageUrl,
   onClick,
@@ -25,8 +25,8 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
 
   return unopenedPacksCount > 0 ? (
     <div
-      className={`unopened-packs-panel ${
-        onClick ? 'unopened-packs-panel--clickable' : ''
+      className={`panel-unopened-packs ${
+        onClick ? 'panel-unopened-packs--clickable' : ''
       }`}
       style={{ width: stackWidth, height: PACK_HEIGHT }}
       onClick={onClick}
@@ -38,7 +38,7 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
           key={index}
           src={packImageUrl ?? undefined}
           alt="Unopened pack"
-          className="unopened-packs-panel__image"
+          className="panel-unopened-packs__image"
           style={{
             width: PACK_WIDTH,
             height: PACK_HEIGHT,
@@ -50,7 +50,7 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
       ))}
     </div>
   ) : (
-    <div className="unopened-packs-panel-empty">
+    <div className="panel-unopened-packs-empty">
       <Typography variant="h4" align="center">
         All packs opened!
       </Typography>
@@ -58,4 +58,4 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
   );
 };
 
-export default UnopenedPacksPanel;
+export default PanelUnopenedPacks;

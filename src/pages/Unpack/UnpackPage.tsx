@@ -2,10 +2,10 @@ import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import { useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
-import CardsPanel from '@/components/CardsPanel/CardsPanel';
-import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
+import DialogExportCardsText from '@/components/DialogExportCardsText/DialogExportCardsText';
 import Guardrail from '@/components/Guardrail/Guardrail';
-import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
+import PanelCards from '@/components/PanelCards/PanelCards';
+import PanelUnopenedPacks from '@/components/PanelUnopenedPacks/PanelUnopenedPacks';
 import { NUMBER_PACKS_TO_OPEN } from '@/consts/set';
 import PoolStaticContainer from '@/containers/PoolStaticContainer/PoolStaticContainer';
 import { unpackCards } from '@/services/cards/cardsGenerate';
@@ -63,7 +63,7 @@ const UnpackPage = (): JSX.Element => {
         >
           {/* Row 1, col 1: packs*/}
           <Paper className="unpack-section unpack-packs">
-            <UnopenedPacksPanel
+            <PanelUnopenedPacks
               unopenedPacksCount={numOfUnopenedPacks}
               packImageUrl={selectedSet?.packImageUrl}
               onClick={handlePackClick}
@@ -73,7 +73,7 @@ const UnpackPage = (): JSX.Element => {
           {/* Row 1, col 2: unveiled cards */}
           <Paper className="unpack-section unpack-opened-cards">
             {unpackedCards.length > 0 ? (
-              <CardsPanel
+              <PanelCards
                 cardImageUrls={unpackedCards.map((card) => ({
                   id: card.id,
                   cardId: card.id,
@@ -120,7 +120,7 @@ const UnpackPage = (): JSX.Element => {
         </Box>
       </Container>
       {/* Export Dialog */}
-      <ExportCardsTextDialog
+      <DialogExportCardsText
         open={exportDialogOpen}
         onClose={handleCloseExportDialog}
         cardsMainDeck={allCardsInPool.map((card) => ({

@@ -3,6 +3,7 @@
 ## Add
 ## Remove
 ## Internal
+- Renamed all reusable components (in `/components`) to have the material be the prefix. 
 
 # 0.10.3
 ## Internal

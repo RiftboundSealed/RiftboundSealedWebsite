@@ -1,4 +1,4 @@
-.set-radio-group {
+.radio-group-set {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;

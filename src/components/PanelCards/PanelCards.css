@@ -1,17 +1,17 @@
-.opened-cards-panel {
+.opened-panel-cards {
   display: grid;
   width: 100%;
   box-sizing: border-box;
   overflow-y: auto;
 }
 
-.opened-cards-panel__cell {
+.opened-panel-cards__cell {
   display: flex; /* flex to center the image */
   align-items: center; /* vertical center */
   justify-content: center; /* horizontal center */
 }
 
-.opened-cards-panel__image {
+.opened-panel-cards__image {
   object-fit: contain; /* keep aspect ratio, fit within box */
   display: block;
 }

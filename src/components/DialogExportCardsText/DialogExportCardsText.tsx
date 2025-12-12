@@ -10,14 +10,14 @@ import {
 } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 
-import './ExportCardsTextDialog.css';
+import './DialogExportCardsText.css';
 
 type CardData = {
   id: string;
   name: string;
 };
 
-interface ExportCardsTextDialogProps {
+interface DialogExportCardsTextProps {
   cardsMainDeck: CardData[];
   cardsSideboard?: CardData[];
   open: boolean;
@@ -25,7 +25,7 @@ interface ExportCardsTextDialogProps {
   onClose: () => void;
 }
 
-const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
+const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
   cardsMainDeck,
   cardsSideboard = [],
   open,
@@ -98,18 +98,18 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
       <Dialog
         open={open}
         onClose={onClose}
-        aria-labelledby="export-cards-dialog-title"
+        aria-labelledby="dialog-export-cards-title"
         fullWidth
         maxWidth="sm"
         slotProps={{
-          paper: { className: 'export-cards-dialog__paper' },
+          paper: { className: 'dialog-export-cards__paper' },
         }}
       >
-        <DialogTitle id="export-cards-dialog-title">{title}</DialogTitle>
+        <DialogTitle id="dialog-export-cards-title">{title}</DialogTitle>
 
         <DialogContent dividers>
           <TextField
-            className="export-cards-dialog__textbox"
+            className="dialog-export-cards__textbox"
             value={exportText}
             aria-label="Exported card list"
             multiline
@@ -153,4 +153,4 @@ const ExportCardsTextDialog: React.FC<ExportCardsTextDialogProps> = ({
   );
 };
 
-export default ExportCardsTextDialog;
+export default DialogExportCardsText;

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { type JSX } from 'react';
 
-import RemoveButton from '@/components/RemoveButton/RemoveButton';
+import ButtonRemove from '@/components/ButtonRemove/ButtonRemove';
 import { MAIN_DECK_SIZE, RUNE_DECK_SIZE } from '@/consts/deck';
 import useDeckContainer from './useDeckContainer';
 
@@ -110,7 +110,7 @@ const DeckContainer = (): JSX.Element => {
           >
             {/* Remove button */}
             <div className="deck-container__cell deck-container__cell--icon">
-              <RemoveButton
+              <ButtonRemove
                 onRemoveFromDeckClick={() =>
                   handleRemoveFromDeck(deckIds[0], null)
                 }
@@ -155,7 +155,7 @@ const DeckContainer = (): JSX.Element => {
             >
               {/* Remove button */}
               <div className="deck-container__cell deck-container__cell--icon">
-                <RemoveButton
+                <ButtonRemove
                   onRemoveFromDeckClick={() =>
                     handleRemoveFromDeck(card.deckId, card.poolId)
                   }
