@@ -6,6 +6,7 @@ import CardsPanel from '@/components/CardsPanel/CardsPanel';
 import ExportCardsTextDialog from '@/components/ExportCardsTextDialog/ExportCardsTextDialog';
 import Guardrail from '@/components/Guardrail/Guardrail';
 import UnopenedPacksPanel from '@/components/UnopenedPacksPanel/UnopenedPacksPanel';
+import { NUMBER_PACKS_TO_OPEN } from '@/consts/set';
 import PoolStaticContainer from '@/containers/PoolStaticContainer/PoolStaticContainer';
 import { unpackCards } from '@/services/cards/cardsGenerate';
 import type { CardDto } from '@/types/card';
@@ -15,13 +16,11 @@ import './UnpackPage.css';
 
 const UnpackPage = (): JSX.Element => {
   // Constants
-  const INITIAL_UNOPENED_PACKS_COUNT = 6;
-  const PACK_PANEL_HEIGHT = 450;
+  const PACK_PANEL_HEIGHT_PX = 450;
 
   // State
-  const [numOfUnopenedPacks, setNumOfUnopenedPacks] = useState<number>(
-    INITIAL_UNOPENED_PACKS_COUNT,
-  );
+  const [numOfUnopenedPacks, setNumOfUnopenedPacks] =
+    useState<number>(NUMBER_PACKS_TO_OPEN);
   const [unpackedCards, setUnpackedCards] = useState<CardDto[]>([]);
   const [exportDialogOpen, setExportDialogOpen] = useState<boolean>(false);
 
@@ -56,7 +55,7 @@ const UnpackPage = (): JSX.Element => {
             // 2) buttons (span both columns)
             // 3) pool of cards (span both columns)
             gridTemplateRows: `
-              minmax(${PACK_PANEL_HEIGHT}px, auto)
+              minmax(${PACK_PANEL_HEIGHT_PX}px, auto)
               minmax(80px, auto)
               minmax(0, auto)
             `,

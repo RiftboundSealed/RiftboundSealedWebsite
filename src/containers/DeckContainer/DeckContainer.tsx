@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { type JSX } from 'react';
 
 import RemoveButton from '@/components/RemoveButton/RemoveButton';
+import { MAIN_DECK_SIZE, RUNE_DECK_SIZE } from '@/consts/deck';
 import useDeckContainer from './useDeckContainer';
 
 import './DeckContainer.css';
@@ -10,8 +11,6 @@ const DeckContainer = (): JSX.Element => {
   // Constants
   const CONTAINER_MAX_HEIGHT_PX = 600;
   const ROW_MAX_HEIGHT_PX = 36;
-  const MAIN_DECK_SIZE = 25;
-  const RUNE_DECK_SIZE = 12;
 
   // Hooks
   const { cardsInDeck, handleRemoveFromDeck } = useDeckContainer();

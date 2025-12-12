@@ -20,12 +20,17 @@ interface CardsPanelProps {
   onCardClick?: (card: CardPanelData) => void;
 }
 
+const DEFAULT_CARD_WIDTH_PX = 175;
+const DEFAULT_CARD_HEIGHT_PX = 245;
+const DEFAULT_CARD_PANEL_MAX_HEIGHT_PX = 600;
+const DEFAULT_CARD_PANEL_GAP_PX = 8;
+
 const CardsPanel: React.FC<CardsPanelProps> = ({
   cardImageUrls,
-  cardWidth = 175,
-  cardHeight = 245,
-  maxHeight = 600,
-  gap = 8,
+  cardWidth = DEFAULT_CARD_WIDTH_PX,
+  cardHeight = DEFAULT_CARD_HEIGHT_PX,
+  maxHeight = DEFAULT_CARD_PANEL_MAX_HEIGHT_PX,
+  gap = DEFAULT_CARD_PANEL_GAP_PX,
   sortByCardId = false,
   onCardClick,
 }) => {

@@ -1,6 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit';
 
 import { MAIN_DECK_CARD_TYPES } from '@/consts/card';
+import {
+  MAX_BATTLEFIELD_COUNT,
+  MAIN_DECK_SIZE,
+  RUNE_DECK_SIZE,
+  MAX_DOMAIN_TYPES,
+  MAX_LEGEND_COUNT,
+} from '@/consts/deck';
 import { selectCardEntryById } from '@/redux/cards/cardsSelectors';
 import {
   selectCardTypeCountInDeck,
@@ -50,59 +57,62 @@ export const checkLegalDeck =
     const state = getState();
     const errors: string[] = [];
 
-    // Check if the deck has exactly 25 main deck cards (excluding Runes)
+    // Check if the deck has exactly the required main deck cards (excluding Runes)
     const mainDeckCount = MAIN_DECK_CARD_TYPES.reduce(
       (acc, type) => acc + selectCardTypeCountInDeck(state, type),
       0,
     );
-    if (mainDeckCount !== 25) {
+    if (mainDeckCount !== MAIN_DECK_SIZE) {
       errors.push(
-        `- Main deck must have exactly 25 [Current: ${mainDeckCount}] cards (excluding Runes).`,
+        `- Main deck must have exactly ${MAIN_DECK_SIZE} [Current: ${mainDeckCount}] cards (excluding Runes).`,
       );
     }
 
     // Check if the rune deck has exactly 12 runes
     const runeCount = selectCardTypeCountInDeck(state, 'Rune');
-    if (runeCount !== 12) {
+    if (runeCount !== RUNE_DECK_SIZE) {
       errors.push(
-        `- Rune deck must have exactly 12 cards [Current: ${runeCount}].`,
+        `- Rune deck must have exactly ${RUNE_DECK_SIZE} cards [Current: ${runeCount}].`,
       );
     }
 
     // Check if there is more than 1 legend
     const legendCount = selectCardTypeCountInDeck(state, 'Legend');
-    if (legendCount > 1) {
+    if (legendCount > MAX_LEGEND_COUNT) {
       errors.push(
-        `- You can only have up to 1 Legend [Current: ${legendCount}] in your deck.`,
+        `- You can only have up to ${MAX_LEGEND_COUNT} Legend(s) [Current: ${legendCount}] in your deck.`,
       );
     }
 
     // Check if there are more than 3 battlefields
     const battlefieldCount = selectCardTypeCountInDeck(state, 'Battlefield');
-    if (battlefieldCount > 3) {
+    if (battlefieldCount > MAX_BATTLEFIELD_COUNT) {
       errors.push(
-        `- You can only have up to 3 Battlefields [Current: ${battlefieldCount}] in your deck.`,
+        `- You can only have up to ${MAX_BATTLEFIELD_COUNT} Battlefields [Current: ${battlefieldCount}] in your deck.`,
       );
     }
 
     // Check that the main deck has up to 3 domain types
     const domainIdentities = selectDomainTypesInMainDeck(state);
-    if (domainIdentities.length > 3) {
+    if (domainIdentities.length > MAX_DOMAIN_TYPES) {
       errors.push(
-        `- Main deck can only have up to 3 domains [Current: ${domainIdentities.join(', ')}].`,
+        `- Main deck can only have up to ${MAX_DOMAIN_TYPES} domains [Current: ${domainIdentities.join(', ')}].`,
       );
     }
 
     // Check that the rune deck has up to 3 domain types
     const runeDomains = selectDomainTypesInRuneDeck(state);
-    if (runeDomains.length > 3) {
+    if (runeDomains.length > MAX_DOMAIN_TYPES) {
       errors.push(
-        `- Rune deck can only have up to 3 domains [Current: ${runeDomains.join(', ')}].`,
+        `- Rune deck can only have up to ${MAX_DOMAIN_TYPES} domains [Current: ${runeDomains.join(', ')}].`,
       );
     }
 
     // Check to make sure that the rune deck domains are a subset of the main deck domain identities
-    if (domainIdentities.length <= 3 && runeDomains.length <= 3) {
+    if (
+      domainIdentities.length <= MAX_DOMAIN_TYPES &&
+      runeDomains.length <= MAX_DOMAIN_TYPES
+    ) {
       const isSubset = runeDomains.every((domain) =>
         domainIdentities.includes(domain),
       );
@@ -115,7 +125,7 @@ export const checkLegalDeck =
 
     // If a legend was selected, make sure the two colors are a subset of the main deck domain identities
     const legendCards = selectLegendsInDeck(state);
-    if (domainIdentities.length <= 3 && legendCards.length > 0) {
+    if (domainIdentities.length <= MAX_DOMAIN_TYPES && legendCards.length > 0) {
       legendCards.forEach((legend) => {
         if (!legend) return;
         const legendDomains = legend.domain;
@@ -132,7 +142,10 @@ export const checkLegalDeck =
 
     // Make sure that all signature spells correspond to the domain identities
     const signatureSpells = selectSignatureSpellsInDeck(state);
-    if (domainIdentities.length <= 3 && signatureSpells.length > 0) {
+    if (
+      domainIdentities.length <= MAX_DOMAIN_TYPES &&
+      signatureSpells.length > 0
+    ) {
       signatureSpells.forEach((spell) => {
         if (!spell) return;
         const spellDomains = spell.domain;
