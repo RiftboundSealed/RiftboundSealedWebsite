@@ -1,17 +1,17 @@
-.unopened-packs-panel {
+.panel-unopened-packs {
   position: relative;
   display: block;
   margin: 0 auto; /* center the entire panel horizontally */
 }
 
-.unopened-packs-panel--clickable {
+.panel-unopened-packs--clickable {
   cursor: pointer;
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
-.unopened-packs-panel__image {
+.panel-unopened-packs__image {
   position: absolute;
   object-fit: cover;
   border-radius: 8px;

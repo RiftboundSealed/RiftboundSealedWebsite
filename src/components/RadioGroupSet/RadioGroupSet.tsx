@@ -6,16 +6,16 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-import './SetRadioGroup.css';
+import './RadioGroupSet.css';
 import type { SetDto } from '@/types/set';
 
-interface SetRadioGroupProps {
+interface RadioGroupSetProps {
   sets: SetDto[];
   value: string | null; // currently selected set id
   onChange: (setId: string) => void; // notify parent
 }
 
-const SetRadioGroup: React.FC<SetRadioGroupProps> = ({
+const RadioGroupSet: React.FC<RadioGroupSetProps> = ({
   sets,
   value,
   onChange,
@@ -34,7 +34,7 @@ const SetRadioGroup: React.FC<SetRadioGroupProps> = ({
         name="set-selection"
         value={value ?? ''}
         onChange={handleChange}
-        className="set-radio-group"
+        className="radio-group-set"
       >
         {sets.map((set) => {
           const isSelected = value === set.id;
@@ -78,4 +78,4 @@ const SetRadioGroup: React.FC<SetRadioGroupProps> = ({
   );
 };
 
-export default SetRadioGroup;
+export default RadioGroupSet;

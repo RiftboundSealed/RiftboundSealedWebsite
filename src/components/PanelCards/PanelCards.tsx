@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
 
-import './CardsPanel.css';
+import './PanelCards.css';
 
 export interface CardPanelData {
   id: string; // Most likely the pool ID, but can be any ID
@@ -10,7 +10,7 @@ export interface CardPanelData {
   name: string;
 }
 
-interface CardsPanelProps {
+interface PanelCardsProps {
   cardImageUrls: CardPanelData[];
   cardWidth?: number;
   cardHeight?: number;
@@ -25,7 +25,7 @@ const DEFAULT_CARD_HEIGHT_PX = 245;
 const DEFAULT_CARD_PANEL_MAX_HEIGHT_PX = 600;
 const DEFAULT_CARD_PANEL_GAP_PX = 8;
 
-const CardsPanel: React.FC<CardsPanelProps> = ({
+const PanelCards: React.FC<PanelCardsProps> = ({
   cardImageUrls,
   cardWidth = DEFAULT_CARD_WIDTH_PX,
   cardHeight = DEFAULT_CARD_HEIGHT_PX,
@@ -41,7 +41,7 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
 
   return (
     <Box
-      className="opened-cards-panel"
+      className="opened-panel-cards"
       style={{
         gap: `${gap}px`,
         gridTemplateColumns: `repeat(auto-fill, minmax(${cardWidth}px, auto))`,
@@ -50,7 +50,7 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
     >
       {displayCards.map((card, index) => (
         <div
-          className="opened-cards-panel__cell"
+          className="opened-panel-cards__cell"
           key={`opened-card-${index}-${card.id}`}
           onClick={() => onCardClick?.(card)}
           role="button"
@@ -60,7 +60,7 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
             style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
             src={card.imageUrl}
             alt={card.name}
-            className="opened-cards-panel__image"
+            className="opened-panel-cards__image"
           />
         </div>
       ))}
@@ -68,4 +68,4 @@ const CardsPanel: React.FC<CardsPanelProps> = ({
   );
 };
 
-export default CardsPanel;
+export default PanelCards;

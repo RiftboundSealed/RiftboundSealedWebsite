@@ -1,8 +1,8 @@
-.remove-button--button {
+.button-remove--button {
   background-color: transparent;
   box-shadow: none;
 }
 
-.remove-button--text {
+.button-remove--text {
   padding-bottom: 6px;
 }

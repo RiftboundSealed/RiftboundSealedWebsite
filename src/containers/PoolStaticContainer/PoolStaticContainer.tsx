@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { type JSX } from 'react';
 
-import CardsPanel from '@/components/CardsPanel/CardsPanel';
+import PanelCards from '@/components/PanelCards/PanelCards';
 import usePoolStaticContainer from './usePoolStaticContainer';
 
 const PoolStaticContainer = (): JSX.Element => {
@@ -13,7 +13,7 @@ const PoolStaticContainer = (): JSX.Element => {
   return (
     <>
       {allCardsInPool.length > 0 ? (
-        <CardsPanel
+        <PanelCards
           cardImageUrls={allCardsInPool.map((card) => ({
             id: card.poolId,
             cardId: card.id,

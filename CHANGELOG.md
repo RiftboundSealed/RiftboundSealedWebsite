@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.10.4
+## Internal
+- Renamed all reusable components (in `/components`) to have the material be the prefix.
+
 # 0.10.3
 ## Internal
 - Shifted constants to a separate folder for organizational purposes.

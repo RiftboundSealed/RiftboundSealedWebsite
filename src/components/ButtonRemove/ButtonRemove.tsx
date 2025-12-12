@@ -1,14 +1,14 @@
 import { Button, Typography } from '@mui/material';
 import type React from 'react';
 
-import './RemoveButton.css';
+import './ButtonRemove.css';
 
-type RemoveButtonProps = {
+type ButtonRemoveProps = {
   maxHeight?: number;
   onRemoveFromDeckClick?: () => void;
 };
 
-const RemoveButton: React.FC<RemoveButtonProps> = ({
+const ButtonRemove: React.FC<ButtonRemoveProps> = ({
   maxHeight = 36,
   onRemoveFromDeckClick,
 }) => {
@@ -17,15 +17,15 @@ const RemoveButton: React.FC<RemoveButtonProps> = ({
       size="small"
       color="error"
       variant="text"
-      className="remove-button--button"
+      className="button-remove--button"
       onClick={onRemoveFromDeckClick}
       style={{ maxHeight: `${maxHeight}px` }}
     >
-      <Typography variant="h3" className="remove-button--text">
+      <Typography variant="h3" className="button-remove--text">
         -
       </Typography>
     </Button>
   );
 };
 
-export default RemoveButton;
+export default ButtonRemove;

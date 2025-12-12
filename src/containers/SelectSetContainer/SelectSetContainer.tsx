@@ -2,7 +2,7 @@ import { Box, Button } from '@mui/material';
 import { useEffect, useState, type JSX } from 'react';
 import { Link as RouterLink } from 'react-router';
 
-import SetRadioGroup from '@/components/SetRadioGroup/SetRadioGroup';
+import RadioGroupSet from '@/components/RadioGroupSet/RadioGroupSet';
 import { fetchSetsData } from '@/services/sets/setsApi';
 import type { SetDto } from '@/types/set';
 import './SelectSetContainer.css';
@@ -28,7 +28,7 @@ const SelectSetContainer = (): JSX.Element => {
   return (
     <>
       <Box className="select-set-counter-section">
-        <SetRadioGroup
+        <RadioGroupSet
           sets={sets}
           value={selectedSetId}
           onChange={setSelectedSetId}
