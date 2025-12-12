@@ -7,14 +7,14 @@ import { clearSets } from '@/redux/sets/setsSlice';
 const useHomePage = () => {
   const dispatch = useAppDispatch();
 
-  const handleResetState = () => {
+  const resetState = () => {
     dispatch(clearSets());
     dispatch(clearCards());
     dispatch(clearPool());
     dispatch(clearDeck());
   };
 
-  return { handleResetState };
+  return { resetState };
 };
 
 export default useHomePage;

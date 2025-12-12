@@ -19,8 +19,13 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
   packImageUrl,
   onClick,
 }) => {
-  const count = Math.max(0, unopenedPacksCount);
+  // Event handlers
+  const handleClick = () => {
+    onClick?.();
+  };
 
+  // Locals
+  const count = Math.max(0, unopenedPacksCount);
   const stackWidth = PACK_WIDTH + Math.max(count - 1, 0) * PACK_VISIBLE_OFFSET;
 
   return unopenedPacksCount > 0 ? (
@@ -29,7 +34,7 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
         onClick ? 'panel-unopened-packs--clickable' : ''
       }`}
       style={{ width: stackWidth, height: PACK_HEIGHT }}
-      onClick={onClick}
+      onClick={handleClick}
       role={'button'}
       tabIndex={0}
     >

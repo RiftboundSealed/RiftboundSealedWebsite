@@ -13,16 +13,21 @@ import { Link as RouterLink } from 'react-router';
 interface AppBarProps {
   title: string;
   tabValue: number;
-  onTabChange: (_event: React.SyntheticEvent, newValue: number) => void;
+  onChangeTab?: (_event: React.SyntheticEvent, newValue: number) => void;
   maxWidth?: ContainerProps['maxWidth'];
 }
 
 const ApplicationBar: React.FC<AppBarProps> = ({
   title,
   tabValue,
-  onTabChange,
+  onChangeTab,
   maxWidth = 'xl',
 }) => {
+  // Event handler
+  const handleChangeTab = (_event: React.SyntheticEvent, newValue: number) => {
+    onChangeTab?.(_event, newValue);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth={maxWidth} disableGutters>
@@ -32,7 +37,7 @@ const ApplicationBar: React.FC<AppBarProps> = ({
           </Typography>
           <Tabs
             value={tabValue}
-            onChange={onTabChange}
+            onChange={handleChangeTab}
             textColor="inherit"
             indicatorColor="secondary"
           >

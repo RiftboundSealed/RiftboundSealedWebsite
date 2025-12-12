@@ -12,8 +12,8 @@ const useRuneContainer = () => {
   // runeCards
   const runeCardsData = useAppSelector(selectRuneCards);
 
-  // handleAddRuneCardsToState
-  const handleAddRuneCardsToState = useCallback(async () => {
+  // addRuneCardsToState
+  const addRuneCardsToState = useCallback(async () => {
     const cardsData = await fetchCardsData();
     const runeCards = cardsData.filter(
       (card) => card.type === 'Rune' && !card.isAlternateArt,
@@ -21,12 +21,12 @@ const useRuneContainer = () => {
     dispatch(upsertCards(runeCards));
   }, [dispatch]);
 
-  // handleAddRuneToDeck
-  const handleAddRuneToDeck = (cardId: string) => {
+  // addRuneToDeck
+  const addRuneToDeck = (cardId: string) => {
     dispatch(tryAddCardToDeck(cardId, null));
   };
 
-  return { runeCardsData, handleAddRuneCardsToState, handleAddRuneToDeck };
+  return { runeCardsData, addRuneCardsToState, addRuneToDeck };
 };
 
 export default useRuneContainer;

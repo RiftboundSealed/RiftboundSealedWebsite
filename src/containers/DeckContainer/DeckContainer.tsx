@@ -13,11 +13,11 @@ const DeckContainer = (): JSX.Element => {
   const ROW_MAX_HEIGHT_PX = 36;
 
   // Hooks
-  const { cardsInDeck, handleRemoveFromDeck } = useDeckContainer();
+  const { cardsInDeck, removeCardFromDeck } = useDeckContainer();
 
   // Event Handlers
-  const onClickRemove = (deckId: string, poolId: string | null) => {
-    handleRemoveFromDeck(deckId, poolId);
+  const handleRemoveClick = (deckId: string, poolId: string | null) => {
+    removeCardFromDeck(deckId, poolId);
   };
 
   // Sort the cards
@@ -114,7 +114,9 @@ const DeckContainer = (): JSX.Element => {
           >
             {/* Remove button */}
             <div className="deck-container__cell deck-container__cell--icon">
-              <ButtonRemove onClick={() => onClickRemove(deckIds[0], null)} />
+              <ButtonRemove
+                onClick={() => handleRemoveClick(deckIds[0], null)}
+              />
             </div>
 
             {/* Card name */}
@@ -156,7 +158,7 @@ const DeckContainer = (): JSX.Element => {
               {/* Remove button */}
               <div className="deck-container__cell deck-container__cell--icon">
                 <ButtonRemove
-                  onClick={() => onClickRemove(card.deckId, card.poolId)}
+                  onClick={() => handleRemoveClick(card.deckId, card.poolId)}
                 />
               </div>
 

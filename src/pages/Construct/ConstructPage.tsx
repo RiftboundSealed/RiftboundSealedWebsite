@@ -29,12 +29,16 @@ const ConstructPage = (): JSX.Element => {
   } = useConstructPage();
 
   // Event Handlers
-  const onClickButtonExportPool = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleExportPoolButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.currentTarget.blur(); // Remove focus from button after click
     setExportType('pool');
     setExportCardsDialogOpen(true);
   };
-  const onClickButtonExportDeck = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleExportDeckButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.currentTarget.blur(); // Remove focus from button after click
     const isLegal = isDeckLegal();
     if (isLegal) {
@@ -44,8 +48,8 @@ const ConstructPage = (): JSX.Element => {
       setDialogErrorOpen(true);
     }
   };
-  const onCloseExportDialog = () => setExportCardsDialogOpen(false);
-  const onCloseErrorDialog = () => setDialogErrorOpen(false);
+  const handleExportDialogClose = () => setExportCardsDialogOpen(false);
+  const handleErrorDialogClose = () => setDialogErrorOpen(false);
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -61,14 +65,14 @@ const ConstructPage = (): JSX.Element => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={onClickButtonExportPool}
+                onClick={handleExportPoolButtonClick}
               >
                 Export Pool
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={onClickButtonExportDeck}
+                onClick={handleExportDeckButtonClick}
               >
                 Export Deck
               </Button>
@@ -89,7 +93,7 @@ const ConstructPage = (): JSX.Element => {
       {/* Export Dialog */}
       <DialogExportCardsText
         open={exportCardsDialogOpen}
-        onClose={onCloseExportDialog}
+        onClose={handleExportDialogClose}
         cardsMainDeck={
           exportType === 'pool'
             ? allCardsInPool.map((card) => ({
@@ -117,7 +121,7 @@ const ConstructPage = (): JSX.Element => {
       <DialogError
         value={deckErrorMessage || ''}
         open={dialogErrorOpen}
-        onClose={onCloseErrorDialog}
+        onClose={handleErrorDialogClose}
         title={'Illegal Deck'}
       />
     </Guardrail>

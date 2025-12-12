@@ -5,7 +5,8 @@ import { fetchSetDataById } from '@/services/sets/setsApi';
 const useSelectSetContainer = () => {
   const dispatch = useAppDispatch();
 
-  const handleBeginSealedDeck = async (selectedSetId: string | null) => {
+  // setSealedDeck
+  const setSealedDeck = async (selectedSetId: string | null) => {
     if (!selectedSetId) return;
     const set = await fetchSetDataById(selectedSetId);
     if (set) {
@@ -15,7 +16,7 @@ const useSelectSetContainer = () => {
     }
   };
 
-  return { handleBeginSealedDeck };
+  return { setSealedDeck };
 };
 
 export default useSelectSetContainer;

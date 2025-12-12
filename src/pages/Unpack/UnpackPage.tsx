@@ -25,24 +25,24 @@ const UnpackPage = (): JSX.Element => {
   const [exportDialogOpen, setExportDialogOpen] = useState<boolean>(false);
 
   // Hooks
-  const { hasAccess, selectedSet, allCardsInPool, handleAddCardsToPool } =
+  const { hasAccess, selectedSet, allCardsInPool, addCardsToPool } =
     useUnpackPage();
 
   // Event Handlers
-  const onClickPack = async () => {
+  const handlePackClick = async () => {
     try {
       if (numOfUnopenedPacks > 0 && selectedSet?.id) {
         setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
         const cardsUnpacked = await unpackCards(selectedSet?.id);
         setUnpackedCards(cardsUnpacked);
-        handleAddCardsToPool(cardsUnpacked);
+        addCardsToPool(cardsUnpacked);
       }
     } catch (error) {
       console.error('Error unpacking cards:', error);
     }
   };
-  const onClickOpenDialogExport = () => setExportDialogOpen(true);
-  const onClickCloseDialogExport = () => setExportDialogOpen(false);
+  const handleDialogExportOpen = () => setExportDialogOpen(true);
+  const handleDialogExportClose = () => setExportDialogOpen(false);
 
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
@@ -66,7 +66,7 @@ const UnpackPage = (): JSX.Element => {
             <PanelUnopenedPacks
               unopenedPacksCount={numOfUnopenedPacks}
               packImageUrl={selectedSet?.packImageUrl}
-              onClick={onClickPack}
+              onClick={handlePackClick}
             />
           </Paper>
 
@@ -97,7 +97,7 @@ const UnpackPage = (): JSX.Element => {
                 variant="contained"
                 color="primary"
                 disabled={numOfUnopenedPacks > 0}
-                onClick={onClickOpenDialogExport}
+                onClick={handleDialogExportOpen}
               >
                 Export Pool
               </Button>
@@ -122,7 +122,7 @@ const UnpackPage = (): JSX.Element => {
       {/* Export Dialog */}
       <DialogExportCardsText
         open={exportDialogOpen}
-        onClose={onClickCloseDialogExport}
+        onClose={handleDialogExportClose}
         cardsMainDeck={allCardsInPool.map((card) => ({
           id: card.id,
           name: card.name,

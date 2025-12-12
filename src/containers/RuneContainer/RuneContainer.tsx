@@ -19,11 +19,17 @@ interface RuneConfig {
 
 const RuneContainer = (): JSX.Element => {
   // Hooks
-  const { runeCardsData, handleAddRuneCardsToState, handleAddRuneToDeck } =
+  const { runeCardsData, addRuneCardsToState, addRuneToDeck } =
     useRuneContainer();
+  // Fetch rune cards on mount
   useEffect(() => {
-    void handleAddRuneCardsToState();
-  }, [handleAddRuneCardsToState]);
+    void addRuneCardsToState();
+  }, [addRuneCardsToState]);
+
+  // Event handlers
+  const handleAddRuneToDeck = (cardId: string) => {
+    addRuneToDeck(cardId);
+  };
 
   // Locals
   const makeRuneImage = (rune: RuneConfig) => (

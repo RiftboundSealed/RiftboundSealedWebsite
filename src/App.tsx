@@ -95,7 +95,7 @@ const App = () => {
       <ApplicationBar
         title="Riftbound Sealed"
         tabValue={tabValue}
-        onTabChange={handleTabChange}
+        onChangeTab={handleTabChange}
       />
       <Box>
         <Routes>

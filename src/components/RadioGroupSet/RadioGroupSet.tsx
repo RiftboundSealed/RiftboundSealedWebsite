@@ -12,7 +12,7 @@ import type { SetDto } from '@/types/set';
 interface RadioGroupSetProps {
   sets: SetDto[];
   value: string | null; // currently selected set id
-  onChange: (setId: string) => void; // notify parent
+  onChange?: (setId: string) => void; // notify parent
 }
 
 const RadioGroupSet: React.FC<RadioGroupSetProps> = ({
@@ -20,11 +20,12 @@ const RadioGroupSet: React.FC<RadioGroupSetProps> = ({
   value,
   onChange,
 }) => {
+  // Event Handler
   const handleChange = (
     _event: React.ChangeEvent<HTMLInputElement>,
     newValue: string,
   ) => {
-    onChange(newValue);
+    onChange?.(newValue);
   };
 
   return (

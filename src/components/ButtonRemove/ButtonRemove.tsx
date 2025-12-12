@@ -14,13 +14,18 @@ const ButtonRemove: React.FC<ButtonRemoveProps> = ({
   maxHeight = DEFAULT_BUTTON_MAX_HEIGHT,
   onClick,
 }) => {
+  // Event handler
+  const handleClick = () => {
+    onClick?.();
+  };
+
   return (
     <Button
       size="small"
       color="error"
       variant="text"
       className="button-remove--button"
-      onClick={onClick}
+      onClick={handleClick}
       style={{ maxHeight: `${maxHeight}px` }}
     >
       <Typography variant="h3" className="button-remove--text">

@@ -39,6 +39,11 @@ const PanelCards: React.FC<PanelCardsProps> = ({
     ? [...cardImageUrls].sort((a, b) => a.cardId.localeCompare(b.cardId))
     : cardImageUrls;
 
+  // Event Handlers
+  const handleCardClick = (card: CardPanelData) => {
+    onClickCard?.(card);
+  };
+
   return (
     <Box
       className="opened-panel-cards"
@@ -52,7 +57,7 @@ const PanelCards: React.FC<PanelCardsProps> = ({
         <div
           className="opened-panel-cards__cell"
           key={`opened-card-${index}-${card.id}`}
-          onClick={() => onClickCard?.(card)}
+          onClick={() => handleCardClick(card)}
           role="button"
           aria-label={card.name}
         >

@@ -22,7 +22,7 @@ interface DialogExportCardsTextProps {
   cardsSideboard?: CardData[];
   open: boolean;
   title?: string;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
@@ -74,7 +74,7 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
   }, [cardsMainDeck, cardsSideboard]);
 
   // Event Handlers
-  const onClickCopy = async () => {
+  const handleCopyClick = async () => {
     try {
       await navigator.clipboard.writeText(exportText);
       setSnackbarSeverity('success');
@@ -87,7 +87,10 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
       setSnackbarOpen(true);
     }
   };
-  const onCloseSnackbar = (
+  const handleDialogClose = () => {
+    onClose?.();
+  };
+  const handleSnackbarClose = (
     _event?: React.SyntheticEvent | Event,
     reason?: string,
   ) => {
@@ -99,7 +102,7 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
     <>
       <Dialog
         open={open}
-        onClose={onClose}
+        onClose={handleDialogClose}
         aria-labelledby="dialog-export-cards-title"
         fullWidth
         maxWidth="sm"
@@ -129,7 +132,7 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
           <Button onClick={onClose} variant="contained">
             Close
           </Button>
-          <Button onClick={onClickCopy} variant="contained">
+          <Button onClick={handleCopyClick} variant="contained">
             Copy
           </Button>
         </DialogActions>
@@ -139,11 +142,11 @@ const DialogExportCardsText: React.FC<DialogExportCardsTextProps> = ({
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={2000}
-        onClose={onCloseSnackbar}
+        onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
-          onClose={onCloseSnackbar}
+          onClose={handleSnackbarClose}
           severity={snackbarSeverity}
           variant="filled"
           sx={{ width: '100%' }}
