@@ -3,6 +3,9 @@
 ## Add
 ## Remove
 ## Internal
+
+# 0.10.5
+## Internal
 - Renamed event handler naming conventions across components, containers, and pages to follow React naming conventions.
 
 # 0.10.4
