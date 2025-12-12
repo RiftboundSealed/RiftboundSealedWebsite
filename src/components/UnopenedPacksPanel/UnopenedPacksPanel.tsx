@@ -11,8 +11,8 @@ interface UnopenedPacksPanelProps {
 
 const PACK_WIDTH = 200;
 const PACK_HEIGHT = 280;
-const OVERLAP_RATIO = 0.85; // each pack covers a percentage of the one to its left
-const VISIBLE_OFFSET = PACK_WIDTH * (1 - OVERLAP_RATIO); // remaining width visible
+const PACK_OVERLAP_RATIO = 0.85; // each pack covers a percentage of the one to its left
+const PACK_VISIBLE_OFFSET = PACK_WIDTH * (1 - PACK_OVERLAP_RATIO); // remaining width visible
 
 const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
   unopenedPacksCount,
@@ -21,7 +21,7 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
 }) => {
   const count = Math.max(0, unopenedPacksCount);
 
-  const stackWidth = PACK_WIDTH + Math.max(count - 1, 0) * VISIBLE_OFFSET;
+  const stackWidth = PACK_WIDTH + Math.max(count - 1, 0) * PACK_VISIBLE_OFFSET;
 
   return unopenedPacksCount > 0 ? (
     <div
@@ -42,7 +42,7 @@ const UnopenedPacksPanel: React.FC<UnopenedPacksPanelProps> = ({
           style={{
             width: PACK_WIDTH,
             height: PACK_HEIGHT,
-            left: index * VISIBLE_OFFSET,
+            left: index * PACK_VISIBLE_OFFSET,
             top: 0,
             zIndex: index + 1, // rightmost pack appears on top
           }}
