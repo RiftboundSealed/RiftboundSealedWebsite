@@ -3,6 +3,9 @@
 ## Add
 ## Remove
 ## Internal
+
+# 0.10.3
+## Internal
 - Shifted constants to a separate folder for organizational purposes.
 
 # 0.10.2
