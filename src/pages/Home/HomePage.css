@@ -5,3 +5,10 @@
 .home-page-grid {
   padding: 16px;
 }
+
+.home-page-welcome {
+  text-align: center; /* centers the Typography text */
+  display: flex; /* optional: nicer vertical spacing */
+  flex-direction: column;
+  align-items: center; /* centers the block contents */
+}

@@ -10,6 +10,8 @@ import {
 import React from 'react';
 import { Link as RouterLink } from 'react-router';
 
+import './ApplicationBar.css';
+
 interface AppBarProps {
   title: string;
   tabValue: number;
@@ -29,8 +31,8 @@ const ApplicationBar: React.FC<AppBarProps> = ({
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth={maxWidth} disableGutters>
+    <AppBar position="static" className="application-bar">
+      <Container maxWidth={maxWidth}>
         <Toolbar disableGutters>
           <Typography variant="h6" component="div" sx={{ mr: 4 }}>
             {title}

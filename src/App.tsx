@@ -1,8 +1,15 @@
-import { CssBaseline, ThemeProvider, createTheme, Box } from '@mui/material';
+import {
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+  Box,
+  Container,
+} from '@mui/material';
 import React from 'react';
 import { Routes, Route } from 'react-router';
 
 import ApplicationBar from '@/components/ApplicationBar/ApplicationBar';
+import Footer from '@/components/Footer/Footer';
 import ConstructPage from './pages/Construct/ConstructPage';
 import HomePage from './pages/Home/HomePage';
 import UnpackPage from './pages/Unpack/UnpackPage';
@@ -92,17 +99,24 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ApplicationBar
-        title="Riftbound Sealed"
-        tabValue={tabValue}
-        onChangeTab={handleTabChange}
-      />
-      <Box>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/unpack" element={<UnpackPage />} />
-          <Route path="/construct" element={<ConstructPage />} />
-        </Routes>
+      <Box
+        sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+      >
+        <ApplicationBar
+          title="Riftbound Sealed"
+          tabValue={tabValue}
+          onChangeTab={handleTabChange}
+        />
+        <Box component="main">
+          <Container sx={{ py: 2 }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/unpack" element={<UnpackPage />} />
+              <Route path="/construct" element={<ConstructPage />} />
+            </Routes>
+          </Container>
+        </Box>
+        <Footer />
       </Box>
     </ThemeProvider>
   );

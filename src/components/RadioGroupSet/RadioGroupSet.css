@@ -9,11 +9,15 @@
   margin: 0;
 }
 
-/* Optional: hide the little circular radio
+/* Unchecked radio icon color */
 .set-option-radio {
-  display: none;
+  color: rgba(255, 255, 255, 0.75) !important;
 }
-*/
+
+/* Checked radio icon color */
+.set-option-radio.Mui-checked {
+  color: #fff !important;
+}
 
 /* The card that holds image + text */
 .set-option-card {
@@ -43,8 +47,8 @@
 
 /* Selected state — based on extra class from TSX */
 .set-option-root--selected .set-option-card {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.6);
+  border-color: #e38412;
+  box-shadow: 0 0 0 2px rgba(227, 132, 18, 0.6);
   transform: translateY(-2px);
 }
 

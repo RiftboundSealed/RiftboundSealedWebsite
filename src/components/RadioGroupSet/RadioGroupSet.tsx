@@ -46,7 +46,7 @@ const RadioGroupSet: React.FC<RadioGroupSetProps> = ({
               className={`set-option-root ${
                 isSelected ? 'set-option-root--selected' : ''
               }`}
-              control={<Radio className="set-option-radio" />}
+              control={<Radio className="set-option-radio" disableRipple />}
               labelPlacement="top"
               label={
                 <Box className="set-option-card">

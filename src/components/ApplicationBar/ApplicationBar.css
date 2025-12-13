@@ -1,0 +1,8 @@
+.application-bar {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+
+  /* keep bottom border (gold) */
+  border-bottom: 1px solid #e38412 !important;
+}
