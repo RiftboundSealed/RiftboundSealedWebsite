@@ -1,0 +1,14 @@
+.app-footer {
+  margin-top: auto; /* pushes footer to bottom when page is short */
+  padding: 16px 0;
+  border-top: 1px solid #e38412; /* golden bell */
+}
+
+.app-footer__text {
+  text-align: center;
+  opacity: 0.9;
+}
+
+.app-footer__text + .app-footer__text {
+  margin-top: 6px;
+}
