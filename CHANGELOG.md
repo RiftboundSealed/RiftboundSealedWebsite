@@ -1,8 +1,11 @@
 # Template
 ## Breaking Change
 ## Add
+- New `Footer` component with legal disclaimer and contact information
 ## Remove
 ## Internal
+- Restructured app layout with flexbox to enable sticky footer behavior
+- Enhanced radio button styling, updated application bar and other components with golden bell accent color borders
 
 # 0.10.5
 ## Internal

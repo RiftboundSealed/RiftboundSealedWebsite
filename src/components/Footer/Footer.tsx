@@ -16,7 +16,8 @@ const Footer: React.FC = () => {
         </Typography>
 
         <Typography variant="body2" className="app-footer__text">
-          Feedback / Questions: Reach out to @doowan on Discord • © {year}
+          Project is still a work in progress. For feedback/questions, reach out
+          to @doowan on Discord • © {year}
         </Typography>
       </Container>
     </Box>
