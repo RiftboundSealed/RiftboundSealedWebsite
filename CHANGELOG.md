@@ -3,6 +3,9 @@
 ## Add
 ## Remove
 ## Internal
+
+# 0.11.1
+## Internal
 - Created centralized environment variable management with validation in `src/consts/env.ts`
 - Migrated rune images and favicons from local assets to CDN-hosted resources
 
