@@ -1,12 +1,6 @@
 import { useEffect, type JSX } from 'react';
 
-import BodyRuneImage from '@/assets/Body.webp';
-import CalmRuneImage from '@/assets/Calm.webp';
-import ChaosRuneImage from '@/assets/Chaos.webp';
-import FuryRuneImage from '@/assets/Fury.webp';
-import MindRuneImage from '@/assets/Mind.webp';
-import OrderRuneImage from '@/assets/Order.webp';
-import type { Domain } from '@/types/card';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 import useRuneContainer from './useRuneContainer';
 
 import './RuneContainer.css';
@@ -42,28 +36,10 @@ const RuneContainer = (): JSX.Element => {
       <img src={rune.src} alt={rune.label} className="rune-container__image" />
     </button>
   );
-  const determineImage = (domain: Domain): string => {
-    switch (domain) {
-      case 'Fury':
-        return FuryRuneImage;
-      case 'Calm':
-        return CalmRuneImage;
-      case 'Mind':
-        return MindRuneImage;
-      case 'Body':
-        return BodyRuneImage;
-      case 'Chaos':
-        return ChaosRuneImage;
-      case 'Order':
-        return OrderRuneImage;
-      default:
-        return '';
-    }
-  };
   const runes: RuneConfig[] = runeCardsData.map((card) => ({
     id: card.id,
     label: card.name,
-    src: determineImage(card.domain[0] ?? 'Fury'),
+    src: `${VITE_CDN_BASE_URL}/runes/${card.domain[0] ?? 'Fury'}.webp`,
   }));
 
   return (
