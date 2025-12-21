@@ -50,16 +50,23 @@ Preview the production build:
 npm run preview
 ```
 
+### Environment Variables
+
+Create a new `.env` file and add it to the codebase directory.
+```
+VITE_CDN_BASE_URL=https://riftbound-assets.nyc3.cdn.digitaloceanspaces.com
+```
+
 ## Architecture Overview
 
 ### Components
 Presentational components that focus on UI rendering. They are typically stateless and receive data via props.
 
 ### Containers
-Smart components that connect to Redux state and handle business logic. They compose presentational components.
+Smart components that connect to Redux state and handle business logic. They compose of presentational components.
 
 ### Pages
-Highest level component that is mapped to a specific route.
+Highest level component that is mapped to a specific route. It will handle additional business logic and mainly compose of the containers.
 
 ### Redux Structure
 - **store.ts**: Redux store setup that illustrates the core state.

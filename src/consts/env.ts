@@ -2,7 +2,7 @@ const getEnv = (key: string) => {
   const value = import.meta.env[key as keyof ImportMetaEnv];
 
   if (typeof value !== 'string' || value.length === 0) {
-    throw new Error(`environment variable ${key} not found`);
+    throw new Error(`Environment variable ${key} not found`);
   }
 
   return value;
