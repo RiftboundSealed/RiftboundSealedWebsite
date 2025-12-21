@@ -35,7 +35,8 @@
       "@/containers/*": ["containers/*"],
       "@/redux/*": ["redux/*"],
       "@/services/*": ["services/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/util/*": ["util/*"]
     }
   },
   "include": ["src"]
