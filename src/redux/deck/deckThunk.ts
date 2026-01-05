@@ -14,7 +14,7 @@ import {
   selectDomainTypesInMainDeck,
   selectDomainTypesInRuneDeck,
   selectLegendsInDeck,
-  selectSignatureSpellsInDeck,
+  selectSignatureCardsInDeck,
 } from '@/redux/deck/deckSelectors';
 import {
   addDeckErrorMessage,
@@ -140,21 +140,21 @@ export const checkLegalDeck =
       });
     }
 
-    // Make sure that all signature spells correspond to the domain identities
-    const signatureSpells = selectSignatureSpellsInDeck(state);
+    // Make sure that all signature cards correspond to the domain identities
+    const signatureCards = selectSignatureCardsInDeck(state);
     if (
       domainIdentities.length <= MAX_DOMAIN_TYPES &&
-      signatureSpells.length > 0
+      signatureCards.length > 0
     ) {
-      signatureSpells.forEach((spell) => {
-        if (!spell) return;
-        const spellDomains = spell.domain;
-        const isSubset = spellDomains.every((domain) =>
+      signatureCards.forEach((card) => {
+        if (!card) return;
+        const cardDomains = card.domain;
+        const isSubset = cardDomains.every((domain) =>
           domainIdentities.includes(domain),
         );
         if (!isSubset) {
           errors.push(
-            `- Signature spell "${spell.name}" domains [${spellDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentities.join(', ')}].`,
+            `- Signature card "${card.name}" domains [${cardDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentities.join(', ')}].`,
           );
         }
       });

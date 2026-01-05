@@ -40,10 +40,13 @@ export const selectLegendsInDeck = createSelector(
   (cardsInDeck) => cardsInDeck.filter((card) => card.type === 'Legend'),
 );
 
-export const selectSignatureSpellsInDeck = createSelector(
+export const selectSignatureCardsInDeck = createSelector(
   [selectAllCardsInDeck],
   (cardsInDeck) =>
-    cardsInDeck.filter((card) => card.type === 'Signature Spell'),
+    cardsInDeck.filter(
+      (card) =>
+        card.type === 'Signature Spell' || card.type === 'Signature Gear',
+    ),
 );
 
 export const selectCardByDeckId = (state: RootState, deckId: string) => {

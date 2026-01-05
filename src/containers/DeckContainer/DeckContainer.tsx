@@ -33,7 +33,9 @@ const DeckContainer = (): JSX.Element => {
   const spellCards = displayCards.filter(
     (card) => card.type === 'Spell' || card.type === 'Signature Spell',
   );
-  const gearCards = displayCards.filter((card) => card.type === 'Gear');
+  const gearCards = displayCards.filter(
+    (card) => card.type === 'Gear' || card.type === 'Signature Gear',
+  );
   const battlefieldCards = displayCards.filter(
     (card) => card.type === 'Battlefield',
   );

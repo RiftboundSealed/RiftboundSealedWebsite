@@ -5,5 +5,6 @@ export const MAIN_DECK_CARD_TYPES: CardType[] = [
   'Champion Unit',
   'Spell',
   'Signature Spell',
+  'Signature Gear',
   'Gear',
 ];

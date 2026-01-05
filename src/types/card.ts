@@ -8,6 +8,7 @@ export type CardType =
   | 'Battlefield'
   | 'Rune'
   | 'Signature Spell'
+  | 'Signature Gear'
   | 'Token';
 export type Domain = 'Fury' | 'Calm' | 'Mind' | 'Body' | 'Order' | 'Chaos';
 

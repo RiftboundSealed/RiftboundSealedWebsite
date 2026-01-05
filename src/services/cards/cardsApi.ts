@@ -80,14 +80,21 @@ export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
       metadata,
     } = card;
 
-    const isMainDeckCard =
-      classification.type === 'Unit' ||
-      classification.type === 'Spell' ||
-      classification.type === 'Gear' ||
-      classification.type === 'Signature Spell';
-    const isUnit = classification.type === 'Unit';
-    const isChampionUnit = classification.supertype === 'Champion Unit';
-    const isToken = classification.supertype === 'Token';
+    const cardType = ((): CardType => {
+      if (classification.supertype === 'Champion Unit') return 'Champion Unit';
+      if (classification.supertype === 'Token') return 'Token';
+      if (
+        classification.type === 'Spell' &&
+        classification.supertype === 'Signature'
+      )
+        return 'Signature Spell';
+      if (
+        classification.type === 'Spell' &&
+        classification.supertype === 'Gear'
+      )
+        return 'Signature Gear';
+      return (classification.type as CardType) || 'Unknown';
+    })();
 
     return {
       id: id,
@@ -96,11 +103,7 @@ export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
       set: set.set_id,
       name: name,
       description: text.plain,
-      type: (isChampionUnit
-        ? 'Champion Unit'
-        : isToken
-          ? 'Token'
-          : classification.type) as CardType,
+      type: cardType,
       rarity:
         metadata.overnumbered || metadata.alternate_art
           ? 'Showcase'
@@ -108,9 +111,9 @@ export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
       domain: classification.domain
         ? classification.domain.map((d) => d as Domain)
         : [],
-      energy: isMainDeckCard ? attributes.energy : null,
-      power: isMainDeckCard ? attributes.power : null,
-      might: isUnit ? attributes.might : null,
+      energy: attributes.energy,
+      power: attributes.power,
+      might: attributes.might,
       keywords: [],
       tags: tags,
       flavorText: null,
