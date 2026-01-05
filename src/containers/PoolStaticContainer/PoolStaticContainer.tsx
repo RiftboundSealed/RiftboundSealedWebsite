@@ -20,7 +20,6 @@ const PoolStaticContainer = (): JSX.Element => {
     cardCode: card.code,
     imageUrl: `${VITE_CDN_BASE_URL}/cards/${card.code}.webp`,
     name: card.name,
-    isBattlefield: card.type === 'Battlefield',
   }));
 
   return (

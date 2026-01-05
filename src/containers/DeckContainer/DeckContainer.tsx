@@ -22,7 +22,7 @@ const DeckContainer = (): JSX.Element => {
 
   // Sort the cards
   const displayCards = [...cardsInDeck].sort((a, b) =>
-    a.code!.localeCompare(b.code!),
+    (a.code ?? '').localeCompare(b.code ?? ''),
   );
   // Filter by Legend, Unit, Spell, Gear, Battlefield, Runes
   const legendCards = displayCards.filter((card) => card.type === 'Legend');
@@ -169,7 +169,7 @@ const DeckContainer = (): JSX.Element => {
                 variant="body1"
                 className="deck-container__cell deck-container__cell--name"
               >
-                {card.type === 'Legend'
+                {card.type === 'Legend' && card.tags?.length
                   ? `${card.tags[0]}, ${card.name}`
                   : (card.name ?? 'CARD ERROR')}
               </Typography>

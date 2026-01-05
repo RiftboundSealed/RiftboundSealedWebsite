@@ -34,9 +34,9 @@ const UnpackPage = (): JSX.Element => {
   // Event Handlers
   const handlePackClick = async () => {
     try {
-      if (numOfUnopenedPacks > 0 && selectedSet?.id) {
+      if (numOfUnopenedPacks > 0 && selectedSet.id) {
         setNumOfUnopenedPacks((prev) => Math.max(0, prev - 1));
-        const cardsUnpacked = await unpackCards(selectedSet?.id);
+        const cardsUnpacked = await unpackCards(selectedSet.id);
         setUnpackedCards(cardsUnpacked);
         addCardsToPool(cardsUnpacked);
       }
@@ -54,7 +54,6 @@ const UnpackPage = (): JSX.Element => {
     cardCode: card.code,
     imageUrl: `${VITE_CDN_BASE_URL}/cards/${card.code}.webp`,
     name: card.name,
-    isBattlefield: card.type === 'Battlefield',
   }));
 
   return (

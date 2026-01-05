@@ -14,7 +14,7 @@ export type Domain = 'Fury' | 'Calm' | 'Mind' | 'Body' | 'Order' | 'Chaos';
 
 export type CardDto = {
   readonly id: string;
-  readonly code: string | null;
+  readonly code: string | null; // When this field is null, that means parsing the public code failed
   readonly collectorNumber: number | null;
   readonly set: string | null;
   readonly name: string;

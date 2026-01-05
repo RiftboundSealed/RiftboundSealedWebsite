@@ -9,7 +9,6 @@ export interface CardPanelData {
   cardCode: string | null;
   imageUrl: string;
   name: string;
-  isBattlefield: boolean;
 }
 
 interface PanelCardsProps {

@@ -13,7 +13,7 @@ type MockCard = {
   id: string;
   riftbound_id: string;
   tcgplayer_id: string | null;
-  public_code: string | null;
+  public_code: string;
   collector_number: number | null;
   attributes: {
     energy: number | null;
@@ -89,16 +89,21 @@ export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
       )
         return 'Signature Spell';
       if (
-        classification.type === 'Spell' &&
-        classification.supertype === 'Gear'
+        classification.type === 'Gear' &&
+        classification.supertype === 'Signature'
       )
         return 'Signature Gear';
       return (classification.type as CardType) || 'Unknown';
     })();
 
+    const publicCodeParsed = parsePublicCode(public_code);
+    if (!publicCodeParsed) {
+      console.warn(`Card "${name}" has invalid public_code: ${public_code}`);
+    }
+
     return {
       id: id,
-      code: parsePublicCode(public_code) || null,
+      code: publicCodeParsed,
       collectorNumber: collector_number,
       set: set.set_id,
       name: name,
@@ -125,12 +130,15 @@ export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
   });
 };
 
-const parsePublicCode = (publicCode: string | null): string | null => {
+const parsePublicCode = (publicCode: string): string | null => {
   const splits = publicCode?.split('/') ?? [];
   if (splits.length === 0 || splits.length > 2) return null;
 
   const cardId = splits[0];
   // Card ids with "*" indicate a signature, though in CDN IDs, we will use "s".
+  if (!cardId) {
+    return null;
+  }
   const finalCodeId = cardId?.replace('*', 's') || null;
 
   return finalCodeId;
