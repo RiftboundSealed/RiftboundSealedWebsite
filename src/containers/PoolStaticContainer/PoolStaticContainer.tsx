@@ -1,7 +1,10 @@
 import { Typography } from '@mui/material';
 import { type JSX } from 'react';
 
-import PanelCards from '@/components/PanelCards/PanelCards';
+import PanelCards, {
+  type CardPanelData,
+} from '@/components/PanelCards/PanelCards';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 import usePoolStaticContainer from './usePoolStaticContainer';
 
 const PoolStaticContainer = (): JSX.Element => {
@@ -10,18 +13,20 @@ const PoolStaticContainer = (): JSX.Element => {
   // Hooks
   const { allCardsInPool } = usePoolStaticContainer();
 
+  // Locals
+  const cardImagePanels: CardPanelData[] = allCardsInPool.map((card) => ({
+    poolId: card.poolId,
+    cardId: card.id,
+    cardCode: card.code,
+    imageUrl: `${VITE_CDN_BASE_URL}/cards/${card.code}.webp`,
+    name: card.name,
+    isBattlefield: card.type === 'Battlefield',
+  }));
+
   return (
     <>
       {allCardsInPool.length > 0 ? (
-        <PanelCards
-          cardImageUrls={allCardsInPool.map((card) => ({
-            id: card.poolId,
-            cardId: card.id,
-            imageUrl: card.thumbnailUrl,
-            name: card.name,
-          }))}
-          sortByCardId={true}
-        />
+        <PanelCards cardImageUrls={cardImagePanels} sortByCardCode={true} />
       ) : (
         <Typography variant="h4" align="center">
           No cards in pool

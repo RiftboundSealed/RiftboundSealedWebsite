@@ -4,8 +4,11 @@ import { Link as RouterLink } from 'react-router';
 
 import DialogExportCardsText from '@/components/DialogExportCardsText/DialogExportCardsText';
 import Guardrail from '@/components/Guardrail/Guardrail';
-import PanelCards from '@/components/PanelCards/PanelCards';
+import PanelCards, {
+  type CardPanelData,
+} from '@/components/PanelCards/PanelCards';
 import PanelUnopenedPacks from '@/components/PanelUnopenedPacks/PanelUnopenedPacks';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 import { NUMBER_PACKS_TO_OPEN } from '@/consts/set';
 import PoolStaticContainer from '@/containers/PoolStaticContainer/PoolStaticContainer';
 import { unpackCards } from '@/services/cards/cardsGenerate';
@@ -44,6 +47,16 @@ const UnpackPage = (): JSX.Element => {
   const handleDialogExportOpen = () => setExportDialogOpen(true);
   const handleDialogExportClose = () => setExportDialogOpen(false);
 
+  // Locals
+  const unpackedCardImages: CardPanelData[] = unpackedCards.map((card) => ({
+    poolId: null,
+    cardId: card.id,
+    cardCode: card.code,
+    imageUrl: `${VITE_CDN_BASE_URL}/cards/${card.code}.webp`,
+    name: card.name,
+    isBattlefield: card.type === 'Battlefield',
+  }));
+
   return (
     <Guardrail canAccess={hasAccess} redirectTo="/">
       <Container className="unpack-page" disableGutters>
@@ -65,7 +78,7 @@ const UnpackPage = (): JSX.Element => {
           <Paper className="unpack-section unpack-packs">
             <PanelUnopenedPacks
               unopenedPacksCount={numOfUnopenedPacks}
-              packImageUrl={selectedSet?.packImageUrl}
+              packImageUrl={`${VITE_CDN_BASE_URL}/sets/pack/${selectedSet?.id}.webp`}
               onClick={handlePackClick}
             />
           </Paper>
@@ -74,12 +87,7 @@ const UnpackPage = (): JSX.Element => {
           <Paper className="unpack-section unpack-opened-cards">
             {unpackedCards.length > 0 ? (
               <PanelCards
-                cardImageUrls={unpackedCards.map((card) => ({
-                  id: card.id,
-                  cardId: card.id,
-                  imageUrl: card.thumbnailUrl,
-                  name: card.name,
-                }))}
+                cardImageUrls={unpackedCardImages}
                 cardWidth={150}
                 cardHeight={210}
               />

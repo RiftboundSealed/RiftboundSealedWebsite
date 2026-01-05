@@ -1,8 +1,10 @@
 [
   {
-    "id": "origins",
-    "name": "Origins",
-    "setImageUrl": "https://uvsgames.com/wp-content/uploads/2025/09/Riftbound_Keyart_SocialShare__1_.jpg",
-    "packImageUrl": "https://raw.githubusercontent.com/alliisonlowe/riftbound-assets/refs/heads/main/cards/products/origins_ahri_pack.png"
+    "id": "OGN",
+    "name": "Origins"
+  },
+  {
+    "id": "SFD",
+    "name": "Spiritforged"
   }
 ]

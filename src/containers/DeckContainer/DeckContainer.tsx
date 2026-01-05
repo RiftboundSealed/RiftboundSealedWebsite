@@ -22,7 +22,7 @@ const DeckContainer = (): JSX.Element => {
 
   // Sort the cards
   const displayCards = [...cardsInDeck].sort((a, b) =>
-    a.id.localeCompare(b.id),
+    a.code!.localeCompare(b.code!),
   );
   // Filter by Legend, Unit, Spell, Gear, Battlefield, Runes
   const legendCards = displayCards.filter((card) => card.type === 'Legend');
@@ -167,7 +167,9 @@ const DeckContainer = (): JSX.Element => {
                 variant="body1"
                 className="deck-container__cell deck-container__cell--name"
               >
-                {card.name ?? 'CARD ERROR'}
+                {card.type === 'Legend'
+                  ? `${card.tags[0]}, ${card.name}`
+                  : (card.name ?? 'CARD ERROR')}
               </Typography>
 
               {/* Energy cost */}

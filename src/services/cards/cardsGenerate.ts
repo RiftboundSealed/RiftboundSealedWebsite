@@ -1,6 +1,6 @@
 import random from 'random';
 
-import { fetchCardsData } from '@/services/cards/cardsApi';
+import { fetchCardsBySet } from '@/services/cards/cardsApi';
 import type { CardDto, Rarity } from '@/types/card';
 
 type PackHitType =
@@ -18,7 +18,7 @@ type PackHitType =
  * @param setId - The ID of the set to unpack cards from
  */
 export const unpackCards = async (setId: string): Promise<CardDto[]> => {
-  const cards = await fetchCardsData();
+  const cards = await fetchCardsBySet(setId);
 
   /**
    * Determines what special hit (if any) the pack will contain

@@ -4,6 +4,7 @@ import { type JSX } from 'react';
 import PanelCards, {
   type CardPanelData,
 } from '@/components/PanelCards/PanelCards';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 import usePoolConstructContainer from './usePoolConstructContainer';
 
 const PoolConstructContainer = (): JSX.Element => {
@@ -12,20 +13,25 @@ const PoolConstructContainer = (): JSX.Element => {
 
   // Event Handlers
   const handleCardClick = (cardPanel: CardPanelData) => {
-    addCardToDeck(cardPanel.cardId, cardPanel.id);
+    addCardToDeck(cardPanel.cardId, cardPanel.poolId!);
   };
+
+  // Locals
+  const cardImagePanels: CardPanelData[] = cardsRemainingInPool.map((card) => ({
+    poolId: card.poolId,
+    cardId: card.id,
+    cardCode: card.code,
+    imageUrl: `${VITE_CDN_BASE_URL}/cards/${card.code}.webp`,
+    name: card.name,
+    isBattlefield: card.type === 'Battlefield',
+  }));
 
   return (
     <>
       {cardsRemainingInPool.length > 0 ? (
         <PanelCards
-          cardImageUrls={cardsRemainingInPool.map((card) => ({
-            id: card.poolId,
-            cardId: card.id,
-            imageUrl: card.thumbnailUrl,
-            name: card.name,
-          }))}
-          sortByCardId={true}
+          cardImageUrls={cardImagePanels}
+          sortByCardCode={true}
           onClickCard={handleCardClick}
         />
       ) : (
