@@ -1,10 +1,14 @@
 # Template
 ## Breaking Change
 ## Add
+## Remove
+## Internal
+
+# 0.12.0
+## Add
 - Removed hardcoded image URLs from type definitions and replaced with dynamic CDN URL construction
 - Updated mock data structure to match Riftcodex format with support for OGN, OGS, and SFD sets
 - Included logic for 'Signature Gear' cards
-## Remove
 ## Internal
 - Refactored card fetching to be set-based with new parsing logic for public codes
 
