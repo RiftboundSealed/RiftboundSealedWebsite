@@ -69,7 +69,6 @@ const PanelCards: React.FC<PanelCardsProps> = ({
             style={{
               width: `${cardWidth}px`,
               height: `${cardHeight}px`,
-              transform: `rotate(${card.isBattlefield ? 90 : 0}deg)`,
             }}
             src={card.imageUrl}
             alt={card.name}
