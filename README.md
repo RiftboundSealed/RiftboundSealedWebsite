@@ -71,10 +71,10 @@ Highest level component that is mapped to a specific route. It will handle addit
 ### Redux Structure
 - **store.ts**: Redux store setup that illustrates the core state.
 - **hooks.ts**: Exports typed versions of React Redux's `useDispatch` and `useSelector` hooks for use throughout the app with proper TypeScript typing.
-- ***/**: Feature-based folders following the 'ducks' pattern, each containing a slice (state, actions, and reducers), selectors, and optionally thunks for that feature.
+- **\*/\*\***: Feature-based folders following the 'ducks' pattern, each containing a slice (state, actions, and reducers), selectors, and optionally thunks for that feature.
 
 ### Mock Data
-Sample data used during development to simulate API responses and test UI components.
+Placeholder data derived from Riftcodex. Data from here will be used until access to the Riot API is approved.
 
 ### Types
 Centralized TypeScript type definitions ensuring type safety across the application.
@@ -91,7 +91,7 @@ Centralized TypeScript type definitions ensuring type safety across the applicat
 
 ### Jira
 
-The active JIRA board for planning is under [RIFTS](https://aegisesports.atlassian.net/jira/software/projects/RIFTS/boards/34/backlog). Ask Doowan for permission to access.
+The active JIRA board for planning is under [RIFTS](https://dooowan.atlassian.net/jira/software/projects/RIFTS/boards/34/backlog). Ask Doowan for permission to access.
 
 ### Pushing Code
 
