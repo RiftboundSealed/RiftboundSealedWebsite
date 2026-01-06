@@ -3,6 +3,8 @@
 ## Add
 ## Remove
 ## Internal
+- Updated website branding and metadata across multiple files to improve the site's presentation and social media sharing capabilities
+- Replaced text-based title in `ApplicationBar` with a clickable logo
 
 # 0.12.1
 ## Internal
