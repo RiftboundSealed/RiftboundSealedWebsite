@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { MAIN_DECK_CARD_TYPES } from '@/consts/card';
+import { MAIN_DECK_CARD_TYPE_CHECKS } from '@/consts/card';
 import {
   selectCardEntities,
   selectCardEntryById,
@@ -72,9 +72,13 @@ export const selectCardTypeCountInDeck = createSelector(
     }, 0),
 );
 
-export const selectDomainTypesInMainDeck = createSelector(
-  [selectAllDeckEntries, selectCardEntities],
-  (deckEntries, cardEntities) => {
+export const selectDomainIdentitiesInMainDeck = createSelector(
+  [
+    selectAllDeckEntries,
+    selectCardEntities,
+    (_state: RootState, withSignature: boolean) => withSignature,
+  ],
+  (deckEntries, cardEntities, withSignature) => {
     return Array.from(
       new Set<Domain>(
         deckEntries
@@ -83,7 +87,13 @@ export const selectDomainTypesInMainDeck = createSelector(
             return card || null;
           })
           .filter((d) => d !== null)
-          .filter((card) => MAIN_DECK_CARD_TYPES.includes(card.type))
+          .filter((card) => MAIN_DECK_CARD_TYPE_CHECKS.includes(card.type))
+          .filter((card) =>
+            withSignature
+              ? true
+              : card.type !== 'Signature Spell' &&
+                card.type !== 'Signature Gear',
+          )
           .map((card) => card.domain)
           .flat(),
       ),
@@ -91,7 +101,7 @@ export const selectDomainTypesInMainDeck = createSelector(
   },
 );
 
-export const selectDomainTypesInRuneDeck = createSelector(
+export const selectDomainIdentitiesInRuneDeck = createSelector(
   [selectAllDeckEntries, selectCardEntities],
   (deckEntries, cardEntities) => {
     return Array.from(
