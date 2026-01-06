@@ -11,6 +11,7 @@
 - Included logic for 'Signature Gear' cards
 ## Internal
 - Refactored card fetching to be set-based with new parsing logic for public codes
+- Fixed domain identity checks for legends and signature cards
 
 # 0.11.1
 ## Internal
