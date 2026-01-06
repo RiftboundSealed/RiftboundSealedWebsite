@@ -3,6 +3,9 @@
 ## Add
 ## Remove
 ## Internal
+
+# 0.12.1
+## Internal
 - Updated README to reflect new data update
 
 # 0.12.0
