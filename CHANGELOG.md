@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.12.1
+## Internal
+- Updated README to reflect new data update
+
 # 0.12.0
 ## Add
 - Removed hardcoded image URLs from type definitions and replaced with dynamic CDN URL construction
