@@ -1,26 +1,25 @@
 import {
   AppBar,
   Toolbar,
-  Typography,
   Tabs,
   Tab,
   Container,
   type ContainerProps,
+  Box,
 } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import './ApplicationBar.css';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 
 interface AppBarProps {
-  title: string;
   tabValue: number;
   onChangeTab?: (_event: React.SyntheticEvent, newValue: number) => void;
   maxWidth?: ContainerProps['maxWidth'];
 }
 
 const ApplicationBar: React.FC<AppBarProps> = ({
-  title,
   tabValue,
   onChangeTab,
   maxWidth = 'xl',
@@ -34,9 +33,29 @@ const ApplicationBar: React.FC<AppBarProps> = ({
     <AppBar position="static" className="application-bar">
       <Container maxWidth={maxWidth}>
         <Toolbar disableGutters>
-          <Typography variant="h6" component="div" sx={{ mr: 4 }}>
-            {title}
-          </Typography>
+          {/* Logo (clickable -> home) */}
+          <Box
+            component={RouterLink}
+            to="/"
+            aria-label="Go to home"
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              mr: 2,
+              textDecoration: 'none',
+            }}
+          >
+            <Box
+              component="img"
+              src={`${VITE_CDN_BASE_URL}/favicon/favicon.svg`}
+              alt="Riftbound Sealed"
+              sx={{
+                width: 40,
+                height: 40,
+                display: 'block',
+              }}
+            />
+          </Box>
           <Tabs
             value={tabValue}
             onChange={handleChangeTab}

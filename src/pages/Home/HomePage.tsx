@@ -19,12 +19,12 @@ const HomePage = (): JSX.Element => {
         <Box className="home-page-grid">
           <Box className="home-page-welcome">
             <Typography variant="h2" component="h1" gutterBottom>
-              Riftbound Sealed Website
+              Riftbound Sealed
             </Typography>
 
             <Typography variant="body1" component="p" gutterBottom>
-              A website that simulates the deck registration and construction
-              experience for players to practice the sealed deck format.
+              Simulate and practice for your sealed deck competitions! Choose
+              your set below to get started.
             </Typography>
           </Box>
           <Box className="home-page-select-set-container">
