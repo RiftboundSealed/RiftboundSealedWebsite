@@ -102,11 +102,7 @@ const App = () => {
       <Box
         sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
-        <ApplicationBar
-          title="Riftbound Sealed"
-          tabValue={tabValue}
-          onChangeTab={handleTabChange}
-        />
+        <ApplicationBar tabValue={tabValue} onChangeTab={handleTabChange} />
         <Box component="main">
           <Container sx={{ py: 2 }}>
             <Routes>
