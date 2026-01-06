@@ -4,6 +4,15 @@
 ## Remove
 ## Internal
 
+# 0.12.0
+## Add
+- Removed hardcoded image URLs from type definitions and replaced with dynamic CDN URL construction
+- Updated mock data structure to match Riftcodex format with support for OGN, OGS, and SFD sets
+- Included logic for 'Signature Gear' cards
+## Internal
+- Refactored card fetching to be set-based with new parsing logic for public codes
+- Fixed domain identity checks for legends and signature cards
+
 # 0.11.1
 ## Internal
 - Created centralized environment variable management with validation in `src/consts/env.ts`

@@ -8,13 +8,15 @@ export type CardType =
   | 'Battlefield'
   | 'Rune'
   | 'Signature Spell'
+  | 'Signature Gear'
   | 'Token';
 export type Domain = 'Fury' | 'Calm' | 'Mind' | 'Body' | 'Order' | 'Chaos';
 
 export type CardDto = {
   readonly id: string;
+  readonly code: string | null; // When this field is null, that means parsing the public code failed
   readonly collectorNumber: number | null;
-  readonly set: string;
+  readonly set: string | null;
   readonly name: string;
   readonly description: string | null;
   readonly type: CardType;
@@ -26,9 +28,7 @@ export type CardDto = {
   readonly keywords: string[];
   readonly tags: string[];
   readonly flavorText: string | null;
-  readonly artist: string;
-  readonly thumbnailUrl: string;
-  readonly fullUrl: string;
+  readonly artist: string | null;
   readonly isAlternateArt: boolean;
   readonly isOvernumber: boolean;
   readonly isSignature: boolean;

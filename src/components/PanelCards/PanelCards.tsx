@@ -4,8 +4,9 @@ import React from 'react';
 import './PanelCards.css';
 
 export interface CardPanelData {
-  id: string; // Most likely the pool ID, but can be any ID
+  poolId: string | null;
   cardId: string;
+  cardCode: string | null;
   imageUrl: string;
   name: string;
 }
@@ -16,7 +17,7 @@ interface PanelCardsProps {
   cardHeight?: number;
   maxHeight?: number;
   gap?: number;
-  sortByCardId?: boolean;
+  sortByCardCode?: boolean;
   onClickCard?: (card: CardPanelData) => void;
 }
 
@@ -31,12 +32,14 @@ const PanelCards: React.FC<PanelCardsProps> = ({
   cardHeight = DEFAULT_CARD_HEIGHT_PX,
   maxHeight = DEFAULT_CARD_PANEL_MAX_HEIGHT_PX,
   gap = DEFAULT_CARD_PANEL_GAP_PX,
-  sortByCardId = false,
+  sortByCardCode = false,
   onClickCard,
 }) => {
-  // Sort cardImageUrls if sortByCardId is true
-  const displayCards = sortByCardId
-    ? [...cardImageUrls].sort((a, b) => a.cardId.localeCompare(b.cardId))
+  // Sort cardImageUrls if sortByCardCode is true
+  const displayCards = sortByCardCode
+    ? [...cardImageUrls].sort((a, b) =>
+        (a.cardCode ?? '').localeCompare(b.cardCode ?? ''),
+      )
     : cardImageUrls;
 
   // Event Handlers
@@ -56,13 +59,16 @@ const PanelCards: React.FC<PanelCardsProps> = ({
       {displayCards.map((card, index) => (
         <div
           className="opened-panel-cards__cell"
-          key={`opened-card-${index}-${card.id}`}
+          key={`opened-card-${index}-${card.poolId}`}
           onClick={() => handleCardClick(card)}
           role="button"
           aria-label={card.name}
         >
           <img
-            style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
+            style={{
+              width: `${cardWidth}px`,
+              height: `${cardHeight}px`,
+            }}
             src={card.imageUrl}
             alt={card.name}
             className="opened-panel-cards__image"

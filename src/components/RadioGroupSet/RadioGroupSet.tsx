@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 import './RadioGroupSet.css';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 import type { SetDto } from '@/types/set';
 
 interface RadioGroupSetProps {
@@ -55,7 +56,7 @@ const RadioGroupSet: React.FC<RadioGroupSetProps> = ({
                       component="img"
                       width={360}
                       height={180}
-                      src={set.setImageUrl}
+                      src={`${VITE_CDN_BASE_URL}/sets/display/${set.id}.webp`}
                       alt={set.name}
                       className="set-option-card__image"
                     />

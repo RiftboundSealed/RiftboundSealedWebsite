@@ -3,40 +3,55 @@
  */
 
 import type { CardDto, CardType, Domain, Rarity } from '@/types/card';
-import mockCards from '../../mockData/cards.json';
+import mockCardsOGN from '../../mockData/cards-OGN.json';
+import mockCardsOGS from '../../mockData/cards-OGS.json';
+import mockCardsSFD from '../../mockData/cards-SFD.json';
 
-/**
- * Type definition for mock card data structure
- * Will be removed once real API is integrated
- */
+/** Mock data that is coming from Riftcodex */
 type MockCard = {
-  id: string;
-  number: string | null;
-  code: string | null;
   name: string;
-  images: {
-    small: string;
-    large: string;
+  id: string;
+  riftbound_id: string;
+  tcgplayer_id: string | null;
+  public_code: string;
+  collector_number: number | null;
+  attributes: {
+    energy: number | null;
+    might: number | null;
+    power: number | null;
+  };
+  classification: {
+    type: string | null;
+    supertype: string | null;
+    rarity: string | null;
+    domain: string[];
+  };
+  text: {
+    rich: string | null;
+    plain: string | null;
   };
   set: {
-    id: string;
-    name: string;
-    releaseDate: string;
+    set_id: string | null;
+    label: string | null;
   };
-  tcgplayer: {
-    id: number;
-    url: string;
+  media: {
+    image_url: string;
+    artist: string | null;
+    accessibility_text: string | null;
   };
-  cleanName: string;
-  rarity: string;
-  cardType: string;
-  domain: string | null;
-  energyCost: string | null;
-  powerCost: string | null;
-  might: string | null;
-  description: string | null;
-  flavorText: string | null;
-  modifiedOn: string;
+  tags: string[];
+  orientation: string | null;
+  metadata: {
+    alternate_art: boolean;
+    overnumbered: boolean;
+    signature: boolean;
+  };
+};
+
+const MOCK_CARDS_BY_SET: Record<string, MockCard[]> = {
+  OGN: mockCardsOGN as MockCard[],
+  OGS: mockCardsOGS as MockCard[],
+  SFD: mockCardsSFD as MockCard[],
 };
 
 /**
@@ -44,44 +59,87 @@ type MockCard = {
  * In the future, this function will fetch data from an API.
  * Considering the cards to be fetched by set.
  */
-export const fetchCardsData = async (): Promise<CardDto[]> => {
-  return mockCards.map((card: MockCard) => {
-    const isMainDeckCard =
-      card.cardType === 'Unit' ||
-      card.cardType === 'Champion Unit' ||
-      card.cardType === 'Spell' ||
-      card.cardType === 'Gear' ||
-      card.cardType === 'Signature Spell';
+export const fetchCardsBySet = async (setId: string): Promise<CardDto[]> => {
+  const mockCards = MOCK_CARDS_BY_SET[setId] || [];
+  if (mockCards.length === 0) {
+    console.error(`No cards found for set ID: ${setId}`);
+  }
 
-    const isUnit =
-      card.cardType === 'Unit' || card.cardType === 'Champion Unit';
+  return mockCards.map((card: MockCard) => {
+    const {
+      name,
+      id,
+      public_code,
+      collector_number,
+      attributes,
+      classification,
+      text,
+      set,
+      media,
+      tags,
+      metadata,
+    } = card;
+
+    const cardType = ((): CardType => {
+      if (classification.supertype === 'Champion Unit') return 'Champion Unit';
+      if (classification.supertype === 'Token') return 'Token';
+      if (
+        classification.type === 'Spell' &&
+        classification.supertype === 'Signature'
+      )
+        return 'Signature Spell';
+      if (
+        classification.type === 'Gear' &&
+        classification.supertype === 'Signature'
+      )
+        return 'Signature Gear';
+      return (classification.type as CardType) || 'Unknown';
+    })();
+
+    const publicCodeParsed = parsePublicCode(public_code);
+    if (!publicCodeParsed) {
+      console.warn(`Card "${name}" has invalid public_code: ${public_code}`);
+    }
 
     return {
-      id: card.id,
-      collectorNumber: card.number
-        ? parseInt(card.number.split('/')[0].slice(0, 3))
-        : null, // can assume first 3 chars before '/' are the collector number
-      set: card.set.id,
-      name: card.name,
-      description: card.description,
-      type: card.cardType as CardType,
+      id: id,
+      code: publicCodeParsed,
+      collectorNumber: collector_number,
+      set: set.set_id,
+      name: name,
+      description: text.plain,
+      type: cardType,
       rarity:
-        card.rarity === 'Overnumbered' || card.rarity === 'Alternate Art'
+        metadata.overnumbered || metadata.alternate_art
           ? 'Showcase'
-          : (card.rarity as Rarity),
-      domain: card.domain ? card.domain.split(';').map((d) => d as Domain) : [],
-      energy: isMainDeckCard ? parseInt(card.energyCost || '0') : null,
-      power: isMainDeckCard ? parseInt(card.powerCost || '0') : null,
-      might: isUnit ? parseInt(card.might || '0') : null,
+          : (classification.rarity as Rarity),
+      domain: classification.domain
+        ? classification.domain.map((d) => d as Domain)
+        : [],
+      energy: attributes.energy,
+      power: attributes.power,
+      might: attributes.might,
       keywords: [],
-      tags: [],
-      flavorText: card.flavorText,
-      artist: 'Mock Artist',
-      thumbnailUrl: card.images.small,
-      fullUrl: card.images.large,
-      isAlternateArt: card.number?.includes('a') || false,
-      isOvernumber: card.rarity === 'Overnumbered' || false,
-      isSignature: card.number?.includes('*') || false,
+      tags: tags,
+      flavorText: null,
+      artist: media.artist,
+      isAlternateArt: metadata.alternate_art,
+      isOvernumber: metadata.overnumbered || metadata.signature,
+      isSignature: metadata.signature,
     };
   });
+};
+
+const parsePublicCode = (publicCode: string): string | null => {
+  const splits = publicCode?.split('/') ?? [];
+  if (splits.length === 0 || splits.length > 2) return null;
+
+  const cardId = splits[0];
+  // Card ids with "*" indicate a signature, though in CDN IDs, we will use "s".
+  if (!cardId) {
+    return null;
+  }
+  const finalCodeId = cardId?.replace('*', 's') || null;
+
+  return finalCodeId;
 };

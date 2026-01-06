@@ -1,6 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 
-import { MAIN_DECK_CARD_TYPES } from '@/consts/card';
+import { MAIN_DECK_CARD_TYPE_CHECKS } from '@/consts/card';
 import {
   MAX_BATTLEFIELD_COUNT,
   MAIN_DECK_SIZE,
@@ -11,10 +11,10 @@ import {
 import { selectCardEntryById } from '@/redux/cards/cardsSelectors';
 import {
   selectCardTypeCountInDeck,
-  selectDomainTypesInMainDeck,
-  selectDomainTypesInRuneDeck,
+  selectDomainIdentitiesInMainDeck,
+  selectDomainIdentitiesInRuneDeck,
   selectLegendsInDeck,
-  selectSignatureSpellsInDeck,
+  selectSignatureCardsInDeck,
 } from '@/redux/deck/deckSelectors';
 import {
   addDeckErrorMessage,
@@ -58,7 +58,7 @@ export const checkLegalDeck =
     const errors: string[] = [];
 
     // Check if the deck has exactly the required main deck cards (excluding Runes)
-    const mainDeckCount = MAIN_DECK_CARD_TYPES.reduce(
+    const mainDeckCount = MAIN_DECK_CARD_TYPE_CHECKS.reduce(
       (acc, type) => acc + selectCardTypeCountInDeck(state, type),
       0,
     );
@@ -93,15 +93,18 @@ export const checkLegalDeck =
     }
 
     // Check that the main deck has up to 3 domain types
-    const domainIdentities = selectDomainTypesInMainDeck(state);
-    if (domainIdentities.length > MAX_DOMAIN_TYPES) {
+    const domainIdentitiesWithoutSignatures = selectDomainIdentitiesInMainDeck(
+      state,
+      false,
+    );
+    if (domainIdentitiesWithoutSignatures.length > MAX_DOMAIN_TYPES) {
       errors.push(
-        `- Main deck can only have up to ${MAX_DOMAIN_TYPES} domains [Current: ${domainIdentities.join(', ')}].`,
+        `- Main deck can only have up to ${MAX_DOMAIN_TYPES} domains [Current: ${domainIdentitiesWithoutSignatures.join(', ')}].`,
       );
     }
 
     // Check that the rune deck has up to 3 domain types
-    const runeDomains = selectDomainTypesInRuneDeck(state);
+    const runeDomains = selectDomainIdentitiesInRuneDeck(state);
     if (runeDomains.length > MAX_DOMAIN_TYPES) {
       errors.push(
         `- Rune deck can only have up to ${MAX_DOMAIN_TYPES} domains [Current: ${runeDomains.join(', ')}].`,
@@ -110,51 +113,48 @@ export const checkLegalDeck =
 
     // Check to make sure that the rune deck domains are a subset of the main deck domain identities
     if (
-      domainIdentities.length <= MAX_DOMAIN_TYPES &&
+      domainIdentitiesWithoutSignatures.length <= MAX_DOMAIN_TYPES &&
       runeDomains.length <= MAX_DOMAIN_TYPES
     ) {
       const isSubset = runeDomains.every((domain) =>
-        domainIdentities.includes(domain),
+        domainIdentitiesWithoutSignatures.includes(domain),
       );
       if (!isSubset) {
         errors.push(
-          `- Rune deck domains [${runeDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentities.join(', ')}].`,
+          `- Rune deck domains [${runeDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentitiesWithoutSignatures.join(', ')}].`,
         );
       }
     }
 
     // If a legend was selected, make sure the two colors are a subset of the main deck domain identities
     const legendCards = selectLegendsInDeck(state);
-    if (domainIdentities.length <= MAX_DOMAIN_TYPES && legendCards.length > 0) {
+    if (legendCards.length > 0) {
       legendCards.forEach((legend) => {
         if (!legend) return;
         const legendDomains = legend.domain;
         const isSubset = legendDomains.every((domain) =>
-          domainIdentities.includes(domain),
+          domainIdentitiesWithoutSignatures.includes(domain),
         );
         if (!isSubset) {
           errors.push(
-            `- Legend "${legend.name}" domains [${legendDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentities.join(', ')}].`,
+            `- Legend "${legend.name}" domains [${legendDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentitiesWithoutSignatures.join(', ')}].`,
           );
         }
       });
     }
 
-    // Make sure that all signature spells correspond to the domain identities
-    const signatureSpells = selectSignatureSpellsInDeck(state);
-    if (
-      domainIdentities.length <= MAX_DOMAIN_TYPES &&
-      signatureSpells.length > 0
-    ) {
-      signatureSpells.forEach((spell) => {
-        if (!spell) return;
-        const spellDomains = spell.domain;
-        const isSubset = spellDomains.every((domain) =>
-          domainIdentities.includes(domain),
+    // Make sure that all signature cards correspond to the domain identities
+    const signatureCards = selectSignatureCardsInDeck(state);
+    if (signatureCards.length > 0) {
+      signatureCards.forEach((card) => {
+        if (!card) return;
+        const cardDomains = card.domain;
+        const isSubset = cardDomains.every((domain) =>
+          domainIdentitiesWithoutSignatures.includes(domain),
         );
         if (!isSubset) {
           errors.push(
-            `- Signature spell "${spell.name}" domains [${spellDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentities.join(', ')}].`,
+            `- Signature card "${card.name}" domains [${cardDomains.join(', ')}] must be a subset of the main deck domain identities [${domainIdentitiesWithoutSignatures.join(', ')}].`,
           );
         }
       });

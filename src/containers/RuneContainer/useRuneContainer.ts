@@ -4,7 +4,7 @@ import { selectRuneCards } from '@/redux/cards/cardsSelectors';
 import { upsertCards } from '@/redux/cards/cardsSlice';
 import { tryAddCardToDeck } from '@/redux/deck/deckThunk';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { fetchCardsData } from '@/services/cards/cardsApi';
+import { fetchCardsBySet } from '@/services/cards/cardsApi';
 
 const useRuneContainer = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ const useRuneContainer = () => {
 
   // addRuneCardsToState
   const addRuneCardsToState = useCallback(async () => {
-    const cardsData = await fetchCardsData();
+    const cardsData = await fetchCardsBySet('OGN');
     const runeCards = cardsData.filter(
       (card) => card.type === 'Rune' && !card.isAlternateArt,
     );
