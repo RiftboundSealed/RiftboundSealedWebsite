@@ -53,7 +53,6 @@ const ApplicationBar: React.FC<AppBarProps> = ({ maxWidth = 'xl' }) => {
               to="/"
               size="small"
               variant="text"
-              aria-current="page"
               className="app-bar-nav-btn"
             >
               HOME
