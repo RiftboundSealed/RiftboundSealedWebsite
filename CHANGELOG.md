@@ -8,6 +8,7 @@
 ## Internal
 - Updated website branding and metadata across multiple files to improve the site's presentation and social media sharing capabilities
 - Replaced text-based title in `ApplicationBar` with a clickable logo
+- Turned tabs in `ApplicationBar` into a panel of navigation buttons
 
 # 0.12.1
 ## Internal
