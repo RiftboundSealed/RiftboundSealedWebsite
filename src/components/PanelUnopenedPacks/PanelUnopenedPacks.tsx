@@ -13,7 +13,7 @@ const PACK_WIDTH = 200;
 const PACK_HEIGHT = 280;
 
 // "preferred" overlap (used when there is plenty of room)
-const DEFAULT_OVERLAP_RATIO = 0.97;
+const DEFAULT_OVERLAP_RATIO = 0.95;
 const DEFAULT_VISIBLE_OFFSET = PACK_WIDTH * (1 - DEFAULT_OVERLAP_RATIO);
 
 const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
@@ -42,9 +42,9 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
   const handleClick = () => onClick?.();
   const count = Math.max(0, unopenedPacksCount);
 
-  const { visibleOffset, overlapRatio, stackWidth } = useMemo(() => {
+  const { visibleOffset, stackWidth } = useMemo(() => {
     if (count <= 1) {
-      return { visibleOffset: 0, overlapRatio: 1, stackWidth: PACK_WIDTH };
+      return { visibleOffset: 0, stackWidth: PACK_WIDTH };
     }
 
     // If we don't know width yet, fall back to default overlap
@@ -94,8 +94,7 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
         onClick={handleClick}
         role="button"
         tabIndex={0}
-        aria-label={`Open a pack (${unopenedPacksCount} remaining)`}
-        data-overlap-ratio={overlapRatio}
+        aria-label={`(${unopenedPacksCount} unopened packs remaining)`}
       >
         {Array.from({ length: count }, (_, index) => (
           <img

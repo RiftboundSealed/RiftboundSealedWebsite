@@ -3,6 +3,7 @@
 ## Add
 ## Remove
 ## Internal
+- Replaced static pack overlap calculation with dynamic approach; simplified CSS grid layout by removing rigid pixel-based constraints
 
 # 0.12.2
 ## Internal
