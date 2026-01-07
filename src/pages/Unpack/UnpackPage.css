@@ -6,17 +6,10 @@
 
 .unpack-grid {
   display: grid;
-  /* Two columns, with packs being 25% and opened cards being 75% */
+  /* Two columns */
   grid-template-columns:
-    minmax(320px, auto) /* col 1: packs */
-    minmax(1140px, auto); /* col 2: opened cards */
-
-  /* Three rows: each with a minimum */
-  grid-template-rows:
-    minmax(880px, auto) /* row 1: packs + opened */
-    minmax(80px, auto) /* row 2: buttons */
-    minmax(0, auto); /* row 3: pool */
-
+    minmax(20%, auto) /* col 1: packs */
+    minmax(75%, auto); /* col 2: opened cards */
   gap: 16px; /* was 2 * 8px */
 }
 
