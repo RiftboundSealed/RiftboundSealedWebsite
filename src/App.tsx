@@ -91,18 +91,13 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const [tabValue, setTabValue] = React.useState(0);
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
         sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
-        <ApplicationBar tabValue={tabValue} onChangeTab={handleTabChange} />
+        <ApplicationBar />
         <Box component="main">
           <Container sx={{ py: 2 }}>
             <Routes>

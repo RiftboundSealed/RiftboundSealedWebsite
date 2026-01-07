@@ -1,11 +1,11 @@
 import {
   AppBar,
   Toolbar,
-  Tabs,
-  Tab,
   Container,
   type ContainerProps,
   Box,
+  Button,
+  Stack,
 } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink } from 'react-router';
@@ -14,21 +14,10 @@ import './ApplicationBar.css';
 import { VITE_CDN_BASE_URL } from '@/consts/env';
 
 interface AppBarProps {
-  tabValue: number;
-  onChangeTab?: (_event: React.SyntheticEvent, newValue: number) => void;
   maxWidth?: ContainerProps['maxWidth'];
 }
 
-const ApplicationBar: React.FC<AppBarProps> = ({
-  tabValue,
-  onChangeTab,
-  maxWidth = 'xl',
-}) => {
-  // Event handler
-  const handleChangeTab = (_event: React.SyntheticEvent, newValue: number) => {
-    onChangeTab?.(_event, newValue);
-  };
-
+const ApplicationBar: React.FC<AppBarProps> = ({ maxWidth = 'xl' }) => {
   return (
     <AppBar position="static" className="application-bar">
       <Container maxWidth={maxWidth}>
@@ -56,20 +45,20 @@ const ApplicationBar: React.FC<AppBarProps> = ({
               }}
             />
           </Box>
-          <Tabs
-            value={tabValue}
-            onChange={handleChangeTab}
-            textColor="inherit"
-            indicatorColor="secondary"
-          >
-            <Tab
-              label="Home"
+          {/* Navigation buttons */}
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Button
+              key="home"
               component={RouterLink}
               to="/"
-              value={0}
-              aria-label="Navigate to home page"
-            />
-          </Tabs>
+              size="small"
+              variant={'text'}
+              aria-current={'page'}
+              className={'app-bar-nav-btn'}
+            >
+              HOME
+            </Button>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>
