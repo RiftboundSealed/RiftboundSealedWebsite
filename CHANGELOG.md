@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.12.3
+## Internal
+- Replaced static pack overlap calculation with dynamic approach; simplified CSS grid layout by removing rigid pixel-based constraints
+
 # 0.12.2
 ## Internal
 - Updated website branding and metadata across multiple files to improve the site's presentation and social media sharing capabilities

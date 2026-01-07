@@ -1,6 +1,11 @@
+.panel-unopened-packs-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .panel-unopened-packs {
   position: relative;
-  display: block;
   margin: 0 auto; /* center the entire panel horizontally */
 }
 

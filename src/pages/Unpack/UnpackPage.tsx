@@ -77,7 +77,7 @@ const UnpackPage = (): JSX.Element => {
           <Paper className="unpack-section unpack-packs">
             <PanelUnopenedPacks
               unopenedPacksCount={numOfUnopenedPacks}
-              packImageUrl={`${VITE_CDN_BASE_URL}/sets/pack/${selectedSet?.id}.webp`}
+              packImageUrl={`${VITE_CDN_BASE_URL}/sets/pack/${selectedSet?.id}.png`}
               onClick={handlePackClick}
             />
           </Paper>
