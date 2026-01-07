@@ -1,56 +1,63 @@
 import {
   AppBar,
   Toolbar,
-  Typography,
-  Tabs,
-  Tab,
   Container,
   type ContainerProps,
+  Box,
+  Button,
+  Stack,
 } from '@mui/material';
 import React from 'react';
 import { Link as RouterLink } from 'react-router';
 
 import './ApplicationBar.css';
+import { VITE_CDN_BASE_URL } from '@/consts/env';
 
 interface AppBarProps {
-  title: string;
-  tabValue: number;
-  onChangeTab?: (_event: React.SyntheticEvent, newValue: number) => void;
   maxWidth?: ContainerProps['maxWidth'];
 }
 
-const ApplicationBar: React.FC<AppBarProps> = ({
-  title,
-  tabValue,
-  onChangeTab,
-  maxWidth = 'xl',
-}) => {
-  // Event handler
-  const handleChangeTab = (_event: React.SyntheticEvent, newValue: number) => {
-    onChangeTab?.(_event, newValue);
-  };
-
+const ApplicationBar: React.FC<AppBarProps> = ({ maxWidth = 'xl' }) => {
   return (
     <AppBar position="static" className="application-bar">
       <Container maxWidth={maxWidth}>
         <Toolbar disableGutters>
-          <Typography variant="h6" component="div" sx={{ mr: 4 }}>
-            {title}
-          </Typography>
-          <Tabs
-            value={tabValue}
-            onChange={handleChangeTab}
-            textColor="inherit"
-            indicatorColor="secondary"
+          {/* Logo (clickable -> home) */}
+          <Box
+            component={RouterLink}
+            to="/"
+            aria-label="Go to home"
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              mr: 2,
+              textDecoration: 'none',
+            }}
           >
-            <Tab
-              label="Home"
+            <Box
+              component="img"
+              src={`${VITE_CDN_BASE_URL}/favicon/favicon.svg`}
+              alt="Riftbound Sealed"
+              sx={{
+                width: 40,
+                height: 40,
+                display: 'block',
+              }}
+            />
+          </Box>
+          {/* Navigation buttons */}
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Button
+              key="home"
               component={RouterLink}
               to="/"
-              value={0}
-              aria-label="Navigate to home page"
-            />
-          </Tabs>
+              size="small"
+              variant="text"
+              className="app-bar-nav-btn"
+            >
+              HOME
+            </Button>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>

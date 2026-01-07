@@ -6,3 +6,30 @@
   /* keep bottom border (gold) */
   border-bottom: 1px solid #e38412 !important;
 }
+
+.application-bar .app-bar-nav-btn {
+  position: relative;
+  color: white;
+  font-weight: 500;
+  opacity: 1;
+}
+
+/* the underline bar */
+.application-bar .app-bar-nav-btn::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 3px;
+  border-radius: 2px;
+  background: #e38412; /* golden bell */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms ease-in-out;
+}
+
+/* show on hover */
+.application-bar .app-bar-nav-btn:hover::after {
+  transform: scaleX(1);
+}
