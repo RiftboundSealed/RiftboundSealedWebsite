@@ -21,9 +21,11 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
   packImageUrl,
   onClick,
 }) => {
+  // State
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [availableWidth, setAvailableWidth] = useState<number>(0);
 
+  // Hooks
   useLayoutEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -93,7 +95,7 @@ const PanelUnopenedPacks: React.FC<PanelUnopenedPacksProps> = ({
         role="button"
         tabIndex={0}
         aria-label={`Open a pack (${unopenedPacksCount} remaining)`}
-        data-overlap-ratio={overlapRatio} // optional: handy for debugging
+        data-overlap-ratio={overlapRatio}
       >
         {Array.from({ length: count }, (_, index) => (
           <img
