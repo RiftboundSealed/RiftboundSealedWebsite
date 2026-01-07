@@ -52,9 +52,9 @@ const ApplicationBar: React.FC<AppBarProps> = ({ maxWidth = 'xl' }) => {
               component={RouterLink}
               to="/"
               size="small"
-              variant={'text'}
-              aria-current={'page'}
-              className={'app-bar-nav-btn'}
+              variant="text"
+              aria-current="page"
+              className="app-bar-nav-btn"
             >
               HOME
             </Button>

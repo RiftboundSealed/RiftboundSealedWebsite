@@ -5,7 +5,6 @@ import {
   Box,
   Container,
 } from '@mui/material';
-import React from 'react';
 import { Routes, Route } from 'react-router';
 
 import ApplicationBar from '@/components/ApplicationBar/ApplicationBar';
