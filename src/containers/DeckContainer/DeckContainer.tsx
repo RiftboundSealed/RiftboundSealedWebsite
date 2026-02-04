@@ -78,11 +78,7 @@ const DeckContainer = (): JSX.Element => {
       {/* Row: Main deck status */}
       <div
         className={`deck-container__row deck-container__row--status ${
-          mainDeckCount === MAIN_DECK_SIZE
-            ? 'deck-container__row--ok'
-            : mainDeckCount > MAIN_DECK_SIZE
-              ? 'deck-container__row--error'
-              : ''
+          mainDeckCount > MAIN_DECK_SIZE ? 'deck-container__row--ok' : ''
         }`}
       >
         <Typography variant="h5">

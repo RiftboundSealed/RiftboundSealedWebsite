@@ -4,6 +4,10 @@
 ## Remove
 ## Internal
 
+# 0.13.0
+## Add
+- January 2026 update: Deck can be at least 25 cards now.
+
 # 0.12.3
 ## Internal
 - Replaced static pack overlap calculation with dynamic approach; simplified CSS grid layout by removing rigid pixel-based constraints

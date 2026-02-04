@@ -62,9 +62,9 @@ export const checkLegalDeck =
       (acc, type) => acc + selectCardTypeCountInDeck(state, type),
       0,
     );
-    if (mainDeckCount !== MAIN_DECK_SIZE) {
+    if (mainDeckCount < MAIN_DECK_SIZE) {
       errors.push(
-        `- Main deck must have exactly ${MAIN_DECK_SIZE} [Current: ${mainDeckCount}] cards (excluding Runes).`,
+        `- Main deck must have at least ${MAIN_DECK_SIZE} [Current: ${mainDeckCount}] cards (excluding Runes).`,
       );
     }
 
