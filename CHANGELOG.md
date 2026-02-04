@@ -1,6 +1,7 @@
 # Template
 ## Breaking Change
 ## Add
+- January 2026 update: Deck can be at least 25 cards now.
 ## Remove
 ## Internal
 
